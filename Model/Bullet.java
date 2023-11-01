@@ -1,6 +1,6 @@
 package Model;
 
-public class Bullet {
+public class Bullet implements Moveable{
 
     private double size;
     private double dir;
@@ -9,6 +9,10 @@ public class Bullet {
 
         this.size = size;
         this.dir = dir;
+    }
+
+    public void move() {
+
     }
 
 }
