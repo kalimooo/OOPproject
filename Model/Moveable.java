@@ -5,5 +5,5 @@ package Model;
  * Anything that moves should implement this
  */
 public interface Moveable {
-    public void move();
+    public void move(double deltaTime);
 }
