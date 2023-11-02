@@ -1,6 +1,6 @@
 package Model;
 
-public class Bullet implements Collidable, Moveable{
+public class Bullet extends Sprite implements Collidable, Moveable{
 
     
     private double size;
@@ -12,7 +12,7 @@ public class Bullet implements Collidable, Moveable{
         this.dir = dir;
     }
 
-    public void move() {
+    public void move(double deltaTime) {
 
     }
 
