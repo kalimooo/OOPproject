@@ -1,7 +1,8 @@
 package Model;
 
-public class Bullet implements Moveable{
+public class Bullet implements Collidable, Moveable{
 
+    
     private double size;
     private double dir;
 
