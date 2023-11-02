@@ -23,4 +23,7 @@ public class Bullet extends Sprite implements Collidable, Moveable{
         this.y += dy;
     }
 
+    public boolean collides(Sprite sprite) {
+        return false;
+    }
 }
