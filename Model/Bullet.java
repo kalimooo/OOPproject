@@ -18,7 +18,7 @@ public class Bullet extends Sprite implements Collidable, Moveable{
         return true;
     }
 
-    public void move(double deltaTime) {
+    public void move() {
         this.x += dx;
         this.y += dy;
     }
