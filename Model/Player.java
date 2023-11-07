@@ -1,20 +1,41 @@
 package Model;
+import java.awt.Rectangle;
 
-public class Player extends Sprite implements Collidable, Moveable {
-
+public class Player implements Collidable, Moveable {
+    private int x, y;
     private double dx, dy;
 
+    private Sprite sprite;
+
+    protected final static int DEFAULT_X = 0;
+    protected final static int DEFAULT_Y = 0;
+
     public Player(int x, int y, String imageName) {
-        super(x, y, imageName);
+        this.x = x;
+        this.y = y;
+        this.sprite = new Sprite(imageName);
     }
 
     public Player(String imageName) {
-        super(imageName);
+        this(DEFAULT_X, DEFAULT_Y, imageName);
         
     }
     
     public void move() {
         x += dx;
         y += dy;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(this.x, this.y, this.sprite.getWidth(), this.sprite.getHeight());
     }
 }
