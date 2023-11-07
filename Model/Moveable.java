@@ -2,8 +2,8 @@ package Model;
 
 /*
  * Interface for anything moveable
- * Anything that moves should implement this
  */
 public interface Moveable {
+    // Is called every game cycle
     public void move();
 }
