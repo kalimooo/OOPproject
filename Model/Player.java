@@ -1,7 +1,7 @@
 package Model;
 import java.awt.Rectangle;
 
-public class Player implements Collidable, Moveable {
+public class Player implements Collidable, Moveable, Drawable {
     private int x, y;
     private double dx, dy;
 
@@ -21,10 +21,16 @@ public class Player implements Collidable, Moveable {
         
     }
     
+    
+
+    @Override
     public void move() {
         x += dx;
         y += dy;
     }
+
+
+    // --------------------- Getters -----------------------
 
     public int getX() {
         return this.x;
