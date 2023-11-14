@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 import java.awt.Rectangle;
 
 public class Player implements Collidable, Moveable, Drawable {
@@ -7,8 +7,8 @@ public class Player implements Collidable, Moveable, Drawable {
 
     private Sprite sprite;
 
-    protected final static int DEFAULT_X = 0;
-    protected final static int DEFAULT_Y = 0;
+    private final static int DEFAULT_X = 0;
+    private final static int DEFAULT_Y = 0;
 
     public Player(int x, int y, String imageName) {
         this.x = x;

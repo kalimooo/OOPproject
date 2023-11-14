@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 
 /*
  * Interface for anything drawable

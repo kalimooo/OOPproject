@@ -1,3 +1,5 @@
+package src.Controller;
+
 class gameController {
     // remove comments and change to correct gameModel and gameView-name 
     // private gameModel model; 
