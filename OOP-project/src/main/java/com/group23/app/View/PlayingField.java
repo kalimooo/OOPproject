@@ -11,10 +11,8 @@ import javax.swing.JPanel;
 
 public class PlayingField extends JPanel{
      
-    //static final int fieldWidth = GameWindow.SCREEN_WIDTH;
-    //static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
-    static final int fieldWidth = 800;
-    static final int fieldHeight = 500;
+    static final int fieldWidth = GameWindow.SCREEN_WIDTH;
+    static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
     
     static JLabel playerChar;
     static ArrayList<Laser> lasers = new ArrayList<Laser>();
