@@ -43,7 +43,7 @@ public class TitleField extends JPanel{
         add(header);
         add(prompt);
 
-        this.bgImg = new ImageIcon("Images/WindowIcon.jpg").getImage();
+        this.bgImg = new ImageIcon("OOP-project/src/main/java/com/group23/app/View/Images/Images/WindowIcon.jpg").getImage();
         Dimension size = new Dimension(bgImg.getWidth(null), bgImg.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
