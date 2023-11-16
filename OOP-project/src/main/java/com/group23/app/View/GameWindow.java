@@ -23,6 +23,9 @@ public class GameWindow extends JFrame implements KeyListener{
 
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
+        contentPane.add(Tutorial.getTutorial());
+
+
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -42,6 +45,12 @@ public class GameWindow extends JFrame implements KeyListener{
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             this.contentPane.remove(TitleField.titleField);
+            this.contentPane.remove(Tutorial.tutorial);
+            this.repaint();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            this.contentPane.remove(TitleField.titleField);
+            this.contentPane.remove(PlayingField.playingField);
             this.repaint();
         }
     }
