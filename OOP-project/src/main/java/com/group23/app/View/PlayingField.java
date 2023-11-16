@@ -26,7 +26,7 @@ public class PlayingField extends JPanel{
 
 
         playerChar = new JLabel();
-        playerChar.setIcon(GameWindow.loadImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png"));
+        playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",50,50));
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
         add(playerChar);
 
@@ -46,6 +46,10 @@ public class PlayingField extends JPanel{
             return new PlayingField();
         }
         return PlayingField.playingField;
+    }
+
+    public void move() {
+        playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
     }
 
     @Override
