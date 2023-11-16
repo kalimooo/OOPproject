@@ -18,7 +18,7 @@ public class GameWindow extends JFrame implements KeyListener{
     static final int SCREEN_HEIGHT = 500;
     ContentPane contentPane = ContentPane.getContentPane();
 
-    GameWindow() {
+    public GameWindow() {
         super("Game");
 
         contentPane.add(TitleField.getTitleField());
