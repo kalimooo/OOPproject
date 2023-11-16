@@ -26,6 +26,7 @@ public class GameWindow extends JFrame implements KeyListener{
 
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
+        contentPane.add(BgImage.getBgImage());
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -42,7 +43,6 @@ public class GameWindow extends JFrame implements KeyListener{
         while (true) {
             if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
                 PlayingField.getPlayingField().move();
-                gameWindow.repaint();
                 timeForLastUpdate = System.nanoTime();
             }
         }
@@ -53,6 +53,7 @@ public class GameWindow extends JFrame implements KeyListener{
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             this.contentPane.remove(TitleField.titleField);
             this.repaint();
+            PlayingField.isVisible = true;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (!KeysFired.arrowRight) {
@@ -111,7 +112,7 @@ public class GameWindow extends JFrame implements KeyListener{
             e.printStackTrace();
             return null;
         }
-        Image scaledImg = image.getScaledInstance(preferredSizeY, preferredSizeX, Image.SCALE_SMOOTH);
+        Image scaledImg = image.getScaledInstance(preferredSizeX, preferredSizeY, Image.SCALE_SMOOTH);
         return new ImageIcon(scaledImg);
     }
 

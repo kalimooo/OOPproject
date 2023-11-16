@@ -18,6 +18,8 @@ public class PlayingField extends JPanel{
     
     static JLabel playerChar;
     static ArrayList<Laser> lasers = new ArrayList<Laser>();
+    static boolean isVisible = false;
+    static JLabel bgImage;
 
     static PlayingField playingField;
 
@@ -30,13 +32,18 @@ public class PlayingField extends JPanel{
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
         add(playerChar);
 
+        bgImage = new JLabel();
+        bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
+        bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
+        add(bgImage);
+
         lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
 
         for (Laser laser : lasers) {
             add(laser);
         }
 
-        setBackground(Color.BLACK);
+        setBackground(new Color(0, 0, 0, 0));
         setBounds(0,0, fieldWidth, fieldHeight);
         PlayingField.playingField = this;
     }
@@ -49,7 +56,11 @@ public class PlayingField extends JPanel{
     }
 
     public void move() {
-        playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
+        if (isVisible) {
+            playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
+            this.revalidate();
+            this.repaint();
+        }
     }
 
     @Override
@@ -61,6 +72,5 @@ public class PlayingField extends JPanel{
             g2.setStroke(new BasicStroke(7));
             g2.drawLine(laser.getEX() - 80, laser.getEY() - 80, laser.getEX(), laser.getEY());
         }
-        g2.drawImage(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png",fieldWidth,fieldHeight).getImage(), 0, 0, null);
     }
 }
