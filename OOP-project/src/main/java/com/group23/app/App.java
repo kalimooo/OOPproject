@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.group23.app.Model.Drawable;
+import com.group23.app.Model.Model;
 import com.group23.app.Model.Collidable;
 import com.group23.app.Model.Moveable;
 
@@ -17,12 +18,7 @@ public class App
     public static void main( String[] args )
     {
         GameWindow gameWindow = new GameWindow();
-
-        List<Drawable> drawableObjects = new ArrayList<>();
-
-        // TODO these lists should be inside model and instantiated here
-        List<Collidable> collidableObjects = new ArrayList<>();
-        List<Moveable> moveableObjects = new ArrayList<>();
+        Model model = new Model();
 
         gameLoop();
     }

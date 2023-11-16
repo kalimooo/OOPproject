@@ -3,6 +3,9 @@ package com.group23.app.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Facade class representing the model in its entirety
+ */
 public class Model {
     private List<Moveable> moveableObjects;
     private List<Drawable> drawableObjects;
@@ -11,7 +14,7 @@ public class Model {
     private Player player;
 
     public Model() {
-        moveableObjects = new ArrayList<>();
+        moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
         collidableObjects = new ArrayList<>();
 
