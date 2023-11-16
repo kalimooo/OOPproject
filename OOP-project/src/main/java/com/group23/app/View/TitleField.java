@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Font;
 import java.awt.Graphics;
-
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -43,7 +41,7 @@ public class TitleField extends JPanel{
         add(header);
         add(prompt);
 
-        this.bgImg = new ImageIcon("OOP-project/src/main/java/com/group23/app/View/Images/Images/WindowIcon.jpg").getImage();
+        this.bgImg = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/WindowIcon.jpg", fieldWidth, fieldWidth).getImage();
         Dimension size = new Dimension(bgImg.getWidth(null), bgImg.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
@@ -65,4 +63,5 @@ public class TitleField extends JPanel{
         super.paintComponent(g);
         g.drawImage(bgImg, 0, 0, null);
     }
+    
 }
