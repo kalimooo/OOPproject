@@ -57,5 +57,6 @@ public class PlayingField extends JPanel{
             g2.setStroke(new BasicStroke(7));
             g2.drawLine(laser.getEX() - 80, laser.getEY() - 80, laser.getEX(), laser.getEY());
         }
+        g2.drawImage(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png",fieldWidth,fieldHeight).getImage(), 0, 0, null);
     }
 }
