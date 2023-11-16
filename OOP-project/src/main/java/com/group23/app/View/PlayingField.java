@@ -48,6 +48,10 @@ public class PlayingField extends JPanel{
         return PlayingField.playingField;
     }
 
+    public void move() {
+        playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

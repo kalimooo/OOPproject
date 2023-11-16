@@ -16,6 +16,9 @@ public class GameWindow extends JFrame implements KeyListener{
     
     static final int SCREEN_WIDTH = 800;
     static final int SCREEN_HEIGHT = 500;
+    static final int UPDATE_SPEED = 2000000;
+    static int dx,dy = 0;
+    static long timeForLastUpdate = System.nanoTime();
     ContentPane contentPane = ContentPane.getContentPane();
 
     GameWindow() {
@@ -36,6 +39,13 @@ public class GameWindow extends JFrame implements KeyListener{
 
     public static void main(String[] args) {
         GameWindow gameWindow = new GameWindow();
+        while (true) {
+            if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
+                PlayingField.getPlayingField().move();
+                gameWindow.repaint();
+                timeForLastUpdate = System.nanoTime();
+            }
+        }
     }
 
     @Override
@@ -44,10 +54,49 @@ public class GameWindow extends JFrame implements KeyListener{
             this.contentPane.remove(TitleField.titleField);
             this.repaint();
         }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            if (!KeysFired.arrowRight) {
+                dx += 1;
+                KeysFired.arrowRight = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            if (!KeysFired.arrowLeft) {
+                dx -= 1;
+                KeysFired.arrowLeft = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            if (!KeysFired.arrowUp) {
+                dy -= 1;
+                KeysFired.arrowUp = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            if (!KeysFired.arrowDown) {
+                dy += 1;
+                KeysFired.arrowDown = true;
+            }
+        }
     }
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            dx -= 1;
+            KeysFired.arrowRight = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            dx += 1; 
+            KeysFired.arrowLeft = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            dy += 1;
+            KeysFired.arrowUp = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            dy -= 1;
+            KeysFired.arrowDown = false;
+        }
     }
     @Override
     public void keyTyped(KeyEvent e) {

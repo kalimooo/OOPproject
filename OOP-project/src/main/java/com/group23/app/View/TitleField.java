@@ -41,7 +41,7 @@ public class TitleField extends JPanel{
         add(header);
         add(prompt);
 
-        this.bgImg = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/WindowIcon.jpg", fieldWidth, fieldWidth).getImage();
+        this.bgImg = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/AlternativeBG2.jpg", fieldWidth, fieldWidth).getImage();
         Dimension size = new Dimension(bgImg.getWidth(null), bgImg.getHeight(null));
         setPreferredSize(size);
         setMinimumSize(size);
