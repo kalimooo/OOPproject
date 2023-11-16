@@ -29,6 +29,8 @@ public class Tutorial extends JFrame implements KeyListener{
 
     JLabel title = new JLabel("Tutorial");
 
+    JLabel WASD_image = new JLabel();
+
     public Tutorial(){
         super("Game");
 
@@ -46,6 +48,10 @@ public class Tutorial extends JFrame implements KeyListener{
         title.setVerticalAlignment(SwingConstants.TOP);
         title.setBounds(0,0, SCREEN_WIDTH, SCREEN_HEIGHT/4);
 
+        WASD_image.setIcon(Tutorial.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/WASD.png", 87, 50));
+        WASD_image.setBounds(SCREEN_WIDTH/2 - 30, SCREEN_HEIGHT - 350, WASD_image.getIcon().getIconWidth(), WASD_image.getIcon().getIconHeight());
+
+        tutorialPane.add(WASD_image);
         tutorialPane.add(title);
         tutorialPane.add(text);
 
@@ -79,6 +85,26 @@ public class Tutorial extends JFrame implements KeyListener{
 
 public static void main(String[] args) {
     Tutorial tutorial = new Tutorial();
+}
+
+static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
+    BufferedImage image;
+    try {
+        image = ImageIO.read(new File(path));
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+    Image scaledImg = image.getScaledInstance(preferredSizeX, preferredSizeY, Image.SCALE_SMOOTH);
+    return new ImageIcon(scaledImg);
+}
+
+static public ImageIcon loadImage(String path) {
+    Image image = new ImageIcon(path).getImage();
+    BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+    Graphics g = bi.createGraphics();
+    g.drawImage(image, 0, 0, 50, 50, null);
+    return new ImageIcon(bi);
 }
 
     
