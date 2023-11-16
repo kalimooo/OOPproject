@@ -34,6 +34,11 @@ public class Player implements Collidable, Moveable, Drawable {
         y += dy;
     }
 
+    public void setSpeed(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
+
 
     // --------------------- Getters -----------------------
 

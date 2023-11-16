@@ -18,8 +18,13 @@ public class Model {
         player = new Player(null);
     }
 
-    public void updateModel() {
+    public void updatePlayerSpeed(double dx, double dy) {
+        player.setSpeed(dx, dy);
+    }
 
+    public void updateModel() {
+        moveObjects();
+        handleCollisions();
     }
 
     private void moveObjects() {
@@ -28,11 +33,15 @@ public class Model {
         }
     }
 
-    private void handleCollision() {
+    private void handleCollisions() {
         for (Collidable object : collidableObjects) {
             if (object.collides(player)) {
                 object.handleCollision();
             }
         }
+    }
+
+    public List<Drawable> getDrawableObjects() {
+        return this.drawableObjects;
     }
 }
