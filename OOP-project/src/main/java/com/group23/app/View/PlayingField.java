@@ -28,20 +28,21 @@ public class PlayingField extends JPanel{
 
 
         playerChar = new JLabel();
-        playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",50,50));
+        playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
         add(playerChar);
+
+        lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
+        for (Laser laser : lasers) {
+            add(laser);
+        }
 
         bgImage = new JLabel();
         bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
         bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
         add(bgImage);
 
-        lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
-
-        for (Laser laser : lasers) {
-            add(laser);
-        }
+        
 
         setBackground(new Color(0, 0, 0, 0));
         setBounds(0,0, fieldWidth, fieldHeight);

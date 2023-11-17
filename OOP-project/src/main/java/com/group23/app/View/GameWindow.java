@@ -55,25 +55,25 @@ public class GameWindow extends JFrame implements KeyListener{
             this.repaint();
             PlayingField.isVisible = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             if (!KeysFired.arrowRight) {
                 dx += 1;
                 KeysFired.arrowRight = true;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             if (!KeysFired.arrowLeft) {
                 dx -= 1;
                 KeysFired.arrowLeft = true;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             if (!KeysFired.arrowUp) {
                 dy -= 1;
                 KeysFired.arrowUp = true;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             if (!KeysFired.arrowDown) {
                 dy += 1;
                 KeysFired.arrowDown = true;
@@ -82,19 +82,19 @@ public class GameWindow extends JFrame implements KeyListener{
     }
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (e.getKeyCode() == KeyEvent.VK_D) {
             dx -= 1;
             KeysFired.arrowRight = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (e.getKeyCode() == KeyEvent.VK_A) {
             dx += 1; 
             KeysFired.arrowLeft = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             dy += 1;
             KeysFired.arrowUp = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (e.getKeyCode() == KeyEvent.VK_S) {
             dy -= 1;
             KeysFired.arrowDown = false;
         }
