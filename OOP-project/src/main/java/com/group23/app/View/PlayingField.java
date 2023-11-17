@@ -16,6 +16,8 @@ public class PlayingField extends JPanel{
     
     static JLabel playerChar;
     static ArrayList<Laser> lasers = new ArrayList<Laser>();
+    static boolean isVisible = false;
+    static JLabel bgImage;
 
     static PlayingField playingField;
 
@@ -24,17 +26,23 @@ public class PlayingField extends JPanel{
 
 
         playerChar = new JLabel();
-        playerChar.setIcon(GameWindow.loadImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png"));
+        playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
         add(playerChar);
 
         lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
-
         for (Laser laser : lasers) {
             add(laser);
         }
 
-        setBackground(Color.BLACK);
+        bgImage = new JLabel();
+        bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
+        bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
+        add(bgImage);
+
+        
+
+        setBackground(new Color(0, 0, 0, 0));
         setBounds(0,0, fieldWidth, fieldHeight);
         PlayingField.playingField = this;
     }
@@ -44,6 +52,14 @@ public class PlayingField extends JPanel{
             return new PlayingField();
         }
         return PlayingField.playingField;
+    }
+
+    public void move() {
+        if (isVisible) {
+            playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
+            this.revalidate();
+            this.repaint();
+        }
     }
 
     @Override
