@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
+import com.group23.app.Model.Entity;
+
 public class Sprite extends JLabel{
     
     private String laserBasePath = "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/";
