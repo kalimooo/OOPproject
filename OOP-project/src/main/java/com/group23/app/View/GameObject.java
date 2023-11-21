@@ -12,7 +12,11 @@ public class GameObject extends JLabel{
 
     public GameObject(Collidable modelObject) {
         this.modelObject = modelObject;
-        if (modelObject.getClass().getName() == "Projectile") {
+        if (modelObject.getClass().getName() == "Player") {
+            setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/9Bresize.png", modelObject.getWidth(), modelObject.getHeight()));
+            setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
+        }
+        else {
             setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", modelObject.getWidth(), modelObject.getHeight()));
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
