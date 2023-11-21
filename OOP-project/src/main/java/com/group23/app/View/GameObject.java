@@ -8,7 +8,7 @@ import com.group23.app.Model.Collidable;
 // The point of the class is to act as a view version of the model objects "Projectile" and "Player"
 public class GameObject extends JLabel{
     
-    private Collidable modelObject; // Collideable is to be replaced with an abstraction of a modelobject
+    private Entity modelObject; // Collideable is to be replaced with an abstraction of a modelobject
 
     public GameObject(Collidable modelObject) {
         this.modelObject = modelObject;
