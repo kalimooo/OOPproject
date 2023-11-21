@@ -1,7 +1,7 @@
 package com.group23.app.Model;
 import java.awt.Rectangle;
 
-public class Projectile extends Entity implements Collidable, Moveable, Drawable {
+public class Projectile extends Entity implements Collidable, Moveable{
     //private int x, y;
     private double dx, dy;
 
@@ -50,7 +50,10 @@ public class Projectile extends Entity implements Collidable, Moveable, Drawable
     }
 
     @Override
-    public void draw() {/*TODO: Implement draw method*/}
+    public void setSpeed(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
 
 
     /*public boolean collides(Sprite sprite) {

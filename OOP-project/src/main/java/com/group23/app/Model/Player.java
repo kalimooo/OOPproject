@@ -1,7 +1,7 @@
 package com.group23.app.Model;
 import java.awt.Rectangle;
 
-public class Player extends Entity implements Collidable, Moveable, Drawable {
+public class Player extends Entity implements Collidable, Moveable {
     //private int x, y;
     private double dx, dy;
 
@@ -19,9 +19,6 @@ public class Player extends Entity implements Collidable, Moveable, Drawable {
     //     this(DEFAULT_X, DEFAULT_Y, imageName);
         
     // }
-
-    @Override
-    public void draw(){ }
 
     @Override
     public void move() {
