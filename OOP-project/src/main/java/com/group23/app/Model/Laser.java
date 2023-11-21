@@ -13,6 +13,21 @@ public class Laser implements Collidable, Moveable, Drawable {
     private final static int DEFAULT_Y = 0;
 
     public Laser(int x, int y, double dx, double dy) {
+
+        if (x |= 0 y =| 0){
+            switch (Math.random()) {
+                case 0{
+                    this.x = x;
+                    this.y = 0;
+                    break;
+                }
+            
+                default{
+                    this.x = x;
+                    this.y = 0;
+                }
+            }
+        }
         this.x = x;
         this.y = y;
 
