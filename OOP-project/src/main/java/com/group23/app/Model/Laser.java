@@ -1,24 +1,28 @@
 package com.group23.app.Model;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Laser implements Collidable, Moveable, Drawable {
     private int x, y;
     private double dx, dy;
+    private int centerX, centerY = SCREEN_WIDTH/2, SCREEN_HEIGHT/2;
 
-    private Sprite sprite;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
-    public Laser(int x, int y, String imagePath) {
+    public Laser(int x, int y, double dx, double dy) {
         this.x = x;
         this.y = y;
-        this.sprite = new Sprite(imagePath);
+
+        ArrayList<Double> speed = generateSpeed(x,y);
+
+        this.dx = speed.get(0);
+        this.dy = speed.get(1);
     }
 
-    public Laser(String imagePath) {
-        this(DEFAULT_X, DEFAULT_Y, imagePath);        
-    }
+
 
     // TODO has to check with edge of sprite instead of center of body
     public boolean isOutOfBounds(int boundX, int boundY) {
@@ -53,6 +57,26 @@ public class Laser implements Collidable, Moveable, Drawable {
     @Override
     public void draw(){
 
+    }
+
+    private ArrayList<Double> generateSpeed(int x, int y){
+
+        double dx = (x - centerX);
+        double dy = (y - centerY);
+
+        dx = dx +randomDirFactor();
+        dy = dy +randomDirFactor();
+
+        ArrayList<Double> reArrayList = new ArrayList<Double>();
+
+        reArrayList.add(dx);
+        reArrayList.add(dy);
+
+        return reArrayList;
+    }
+
+    private double randomDirFactor(){
+        return Math.random();
     }
 
 
