@@ -3,7 +3,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Laser implements Collidable, Moveable, Drawable {
+public class Laser implements Collidable, Moveable {
     private int x, y;
     private double dx, dy;
     private int centerX, centerY = SCREEN_WIDTH/2, SCREEN_HEIGHT/2;
@@ -67,11 +67,6 @@ public class Laser implements Collidable, Moveable, Drawable {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(this.x, this.y, this.sprite.getWidth(), this.sprite.getHeight());
-    }
-
-    @Override
-    public void draw(){
-
     }
 
     private ArrayList<Double> generateSpeed(int x, int y){
