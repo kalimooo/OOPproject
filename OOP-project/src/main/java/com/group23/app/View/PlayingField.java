@@ -25,13 +25,9 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
 
-
-
         for (Sprite sprite : sprites) {
             add(sprite);
         }
-
-
         playerChar = new JLabel();
         playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());

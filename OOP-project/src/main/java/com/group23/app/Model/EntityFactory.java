@@ -2,8 +2,11 @@ package com.group23.app.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityFactory {
+
+    private Random random = new Random();
     
 
     static public List<Entity> getEntities(int nmrOfLasers) {

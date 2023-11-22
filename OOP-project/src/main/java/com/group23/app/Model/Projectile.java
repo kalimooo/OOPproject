@@ -3,18 +3,15 @@ import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Projectile extends Entity implements Collidable, Moveable{
-    //private int x, y;
+
     private double dx, dy;
     private Color color;
-
-    //private Sprite sprite;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
     public Projectile(int x, int y, int width, int height) {
         super(x, y, width, height);
-        //this.sprite = new Sprite(imagePath);
     }
 
     // public Projectile(String imagePath) {

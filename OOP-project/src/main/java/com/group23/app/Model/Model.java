@@ -9,7 +9,6 @@ import java.util.List;
 public class Model {
     private List<Moveable> moveableObjects;
     private List<Drawable> drawableObjects;
-    private List<Collidable> collidableObjects;
     private static List<Entity> entities = new ArrayList<Entity>();
     private int nmrOfLasers = 1;
 
@@ -18,10 +17,9 @@ public class Model {
     public Model() {
         moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
-        collidableObjects = new ArrayList<>();
         entities = EntityFactory.getEntities(nmrOfLasers);
 
-        player = new Player(null);
+        //player = new Player(null);
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -40,9 +38,10 @@ public class Model {
     }
 
     private void handleCollisions() {
-        for (Collidable object : collidableObjects) {
+        for (Entity object : entities) {
             if (object.collides(player)) {
-                object.handleCollision();
+                // TODO handle the collision
+                //object.handleCollision();
             }
         }
     }
