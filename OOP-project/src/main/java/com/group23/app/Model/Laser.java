@@ -6,30 +6,40 @@ import java.util.ArrayList;
 public class Laser implements Collidable, Moveable {
     private int x, y;
     private double dx, dy;
-    private int centerX, centerY = SCREEN_WIDTH/2, SCREEN_HEIGHT/2;
+
+    final static int SCREEN_WIDTH = 800;
+    final static int SCREEN_HEIGHT = 500;
+
+    private int centerX = SCREEN_WIDTH/2;
+    private int centerY = SCREEN_HEIGHT/2;
 
 
-    private final static int DEFAULT_X = 0;
-    private final static int DEFAULT_Y = 0;
+    public Laser(int x, int y) {
 
-    public Laser(int x, int y, double dx, double dy) {
+            // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
+            int side = (int) (Math.random() * 4);
 
-        if (x |= 0 y =| 0){
-            switch (Math.random()) {
-                case 0{
-                    this.x = x;
-                    this.y = 0;
+            // Slumpmässiga koordinater på den valda sidan av ramen
+            int randomX = 0, randomY = 0;
+    
+            switch (side) {
+                case 0: // Topp
+                    randomX = (int) (Math.random() * SCREEN_WIDTH); // Tar random x-värde
+                    randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
                     break;
-                }
-            
-                default{
-                    this.x = x;
-                    this.y = 0;
-                }
+                case 1: // Höger
+                    randomX = SCREEN_WIDTH; // Låser x så vi tittar längst bort på skärmen
+                    randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                    break;
+                case 2: // Botten
+                    randomX = (int) (Math.random() * SCREEN_WIDTH);
+                    randomY = SCREEN_HEIGHT; // Låser y så vi alltid kollar längst ner
+                    break;
+                case 3: // Vänster
+                    randomX = 0;
+                    randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                    break;
             }
-        }
-        this.x = x;
-        this.y = y;
 
         ArrayList<Double> speed = generateSpeed(x,y);
 
@@ -62,6 +72,12 @@ public class Laser implements Collidable, Moveable {
 
     public int getY() {
         return this.y;
+    }
+    
+    @Override
+    public setSpeed(double dx, double dy){
+        this.dx = dx;
+        this.dy = dy;
     }
 
     @Override
