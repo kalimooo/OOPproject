@@ -7,7 +7,7 @@ import java.awt.Point;
 public class Laser extends Entity implements Moveable {
     private double dx, dy;
 
-    public Color laserColor = getColor();
+    public Color laserColor = generateColor();
 
     final static int SCREEN_WIDTH = 800;
     final static int SCREEN_HEIGHT = 500;
@@ -75,7 +75,7 @@ public class Laser extends Entity implements Moveable {
         return Math.random();
     }
 
-  private Color getColor() {
+  private Color generateColor() {
       /*#4deeea    (77,238,234)
         #74ee15    (116,238,21)
         #ffe700    (255,231,0)
@@ -93,6 +93,10 @@ public class Laser extends Entity implements Moveable {
         
         Color randomColor = Color.decode(colors.get(random));
         return randomColor;
+    }
+
+    public Color getColor() {
+        return this.laserColor;
     }
 
     private static Point generateXYPoint(){

@@ -5,8 +5,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 import com.group23.app.Model.Entity;
+import com.group23.app.Model.Laser;
 import com.group23.app.Model.Player;
-import com.group23.app.Model.Projectile;
 
 public class Sprite extends JLabel{
     
@@ -15,8 +15,8 @@ public class Sprite extends JLabel{
     public Sprite(Entity modelObject) {
 
         // Logic for painting a Projectile
-        if (modelObject instanceof Projectile) {
-            Projectile object = (Projectile) modelObject;
+        if (modelObject instanceof Laser) {
+            Laser object = (Laser) modelObject;
             Color color = object.getColor();
             if (color.equals(Color.blue)) {
                 setIcon(GameWindow.loadScaledImage(laserBasePath + "Blue.png", modelObject.getWidth(), modelObject.getHeight()));
