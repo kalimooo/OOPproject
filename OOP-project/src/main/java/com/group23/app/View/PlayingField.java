@@ -1,6 +1,5 @@
 package com.group23.app.View;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -25,6 +24,7 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
 
+        sprites = SpriteFactory.getSprites();
         for (Sprite sprite : sprites) {
             add(sprite);
         }
@@ -38,9 +38,6 @@ public class PlayingField extends JPanel{
         bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
         add(bgImage);
 
-        
-
-        setBackground(new Color(0, 0, 0, 0));
         setBounds(0,0, fieldWidth, fieldHeight);
         PlayingField.playingField = this;
     }
@@ -50,14 +47,6 @@ public class PlayingField extends JPanel{
             return new PlayingField();
         }
         return PlayingField.playingField;
-    }
-
-    public void move() {
-        if (isVisible) {
-            playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
-            this.revalidate();
-            this.repaint();
-        }
     }
 
     public void update() {
