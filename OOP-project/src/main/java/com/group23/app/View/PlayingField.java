@@ -24,7 +24,7 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
 
-        
+
 
         for (Sprite sprite : sprites) {
             add(sprite);
@@ -35,11 +35,6 @@ public class PlayingField extends JPanel{
         playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
         playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
         add(playerChar);
-
-        lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
-        for (Laser laser : lasers) {
-            add(laser);
-        }
 
         bgImage = new JLabel();
         bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
@@ -72,10 +67,5 @@ public class PlayingField extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        for (Laser laser : lasers) {
-            g2.setColor(laser.getColor());
-            g2.setStroke(new BasicStroke(7));
-            g2.drawLine(laser.getEX() - 80, laser.getEY() - 80, laser.getEX(), laser.getEY());
-        }
     }
 }

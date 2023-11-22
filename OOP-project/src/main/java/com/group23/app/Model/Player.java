@@ -15,10 +15,10 @@ public class Player extends Entity implements Collidable, Moveable {
         //this.sprite = new Sprite(imageName);
     }
 
-    // public Player(String imageName) {
-    //     this(DEFAULT_X, DEFAULT_Y, imageName);
+    public Player(int width, int height) {
+        this(DEFAULT_X, DEFAULT_Y, width, height);
         
-    // }
+    }
 
     @Override
     public void move() {
