@@ -15,7 +15,7 @@ public class PlayingField extends JPanel{
     static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
     
     static JLabel playerChar;
-    static ArrayList<Laser> lasers = new ArrayList<Laser>();
+    static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     static boolean isVisible = false;
     static JLabel bgImage;
 
@@ -23,6 +23,12 @@ public class PlayingField extends JPanel{
 
     private PlayingField() {
         super(null);
+
+        
+
+        for (Sprite sprite : sprites) {
+            add(sprite);
+        }
 
 
         playerChar = new JLabel();

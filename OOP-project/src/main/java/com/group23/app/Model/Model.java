@@ -10,6 +10,7 @@ public class Model {
     private List<Moveable> moveableObjects;
     private List<Drawable> drawableObjects;
     private List<Collidable> collidableObjects;
+    private static List<Entity> entities = new ArrayList<Entity>();
 
     private Player player;
 
@@ -46,5 +47,9 @@ public class Model {
 
     public List<Drawable> getDrawableObjects() {
         return this.drawableObjects;
+    }
+
+    static public List<Entity> getEntities() {
+        return entities;
     }
 }
