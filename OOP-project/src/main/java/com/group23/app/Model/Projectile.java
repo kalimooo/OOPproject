@@ -51,6 +51,10 @@ public class Projectile extends Entity implements Collidable, Moveable{
         return new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
     }
 
+    public Color getColor() {
+        return color;
+    }
+
     @Override
     public void setSpeed(double dx, double dy) {
         this.dx = dx;

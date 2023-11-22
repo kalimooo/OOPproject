@@ -11,6 +11,7 @@ public class Model {
     private List<Drawable> drawableObjects;
     private List<Collidable> collidableObjects;
     private static List<Entity> entities = new ArrayList<Entity>();
+    private int nmrOfLasers = 1;
 
     private Player player;
 
@@ -18,6 +19,7 @@ public class Model {
         moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
         collidableObjects = new ArrayList<>();
+        entities = EntityFactory.getEntities(nmrOfLasers);
 
         player = new Player(null);
     }

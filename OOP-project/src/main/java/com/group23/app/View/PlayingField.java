@@ -1,13 +1,14 @@
 package com.group23.app.View;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.group23.app.Model.Entity;
+import com.group23.app.Model.Model;
 
 public class PlayingField extends JPanel{
      
@@ -63,9 +64,16 @@ public class PlayingField extends JPanel{
         }
     }
 
+    public void update() {
+        this.removeAll();
+        for (Entity entity : Model.getEntities()) {
+            add(new Sprite(entity));
+        }
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
     }
 }

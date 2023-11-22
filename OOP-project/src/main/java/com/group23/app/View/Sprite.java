@@ -17,6 +17,7 @@ public class Sprite extends JLabel{
         // Logic for painting a Projectile
         if (modelObject instanceof Projectile) {
             Projectile object = (Projectile) modelObject;
+            Color color = object.getColor();
             if (color.equals(Color.blue)) {
                 setIcon(GameWindow.loadScaledImage(laserBasePath + "Blue.png", modelObject.getWidth(), modelObject.getHeight()));
             } else if (color.equals(Color.red)) {
