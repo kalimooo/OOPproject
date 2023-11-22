@@ -1,9 +1,11 @@
 package com.group23.app.Model;
+import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Projectile extends Entity implements Collidable, Moveable{
     //private int x, y;
     private double dx, dy;
+    private Color color;
 
     //private Sprite sprite;
 
