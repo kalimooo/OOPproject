@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import com.group23.app.Controller.KeysFired;
+
 public class GameWindow extends JFrame implements KeyListener{
     
     static final int SCREEN_WIDTH = 800;

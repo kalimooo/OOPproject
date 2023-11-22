@@ -1,4 +1,4 @@
-package com.group23.app.View;
+package com.group23.app.Controller;
 
 
 // A class whose only use is to keep track of the keys that have recently been pressed

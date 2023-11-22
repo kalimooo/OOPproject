@@ -2,9 +2,9 @@ package com.group23.app.Model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Point;
 
-public class Laser implements Moveable {
-    private int x, y;
+public class Laser extends Entity implements Moveable {
     private double dx, dy;
 
     public Color laserColor = getColor();
@@ -17,32 +17,11 @@ public class Laser implements Moveable {
 
 
     public Laser() {
-
-            // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
-            int side = (int) (Math.random() * 4);
-
-            // Slumpmässiga koordinater på den valda sidan av ramen
-            int randomX = 0, randomY = 0;
+        super(0, 0, 60, 60);
+        Point point = generateXYPoint();
+        this.x = point.x;
+        this.y = point.y;
     
-            switch (side) {
-                case 0: // Topp
-                    randomX = (int) (Math.random() * SCREEN_WIDTH); // Tar random x-värde
-                    randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
-                    break;
-                case 1: // Höger
-                    randomX = SCREEN_WIDTH; // Låser x så vi tittar längst bort på skärmen
-                    randomY = (int) (Math.random() * SCREEN_HEIGHT);
-                    break;
-                case 2: // Botten
-                    randomX = (int) (Math.random() * SCREEN_WIDTH);
-                    randomY = SCREEN_HEIGHT; // Låser y så vi alltid kollar längst ner
-                    break;
-                case 3: // Vänster
-                    randomX = 0;
-                    randomY = (int) (Math.random() * SCREEN_HEIGHT);
-                    break;
-            }
-
         ArrayList<Double> speed = generateSpeed(x,y);
 
         this.dx = speed.get(0);
@@ -114,6 +93,35 @@ public class Laser implements Moveable {
         
         Color randomColor = Color.decode(colors.get(random));
         return randomColor;
+    }
+
+    private static Point generateXYPoint(){
+         // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
+        int side = (int) (Math.random() * 4);
+
+        // Slumpmässiga koordinater på den valda sidan av ramen
+        int randomX = 0, randomY = 0;
+
+        switch (side) {
+            case 0: // Topp
+                randomX = (int) (Math.random() * SCREEN_WIDTH); // Tar random x-värde
+                randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
+                break;
+            case 1: // Höger
+                randomX = SCREEN_WIDTH; // Låser x så vi tittar längst bort på skärmen
+                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                break;
+            case 2: // Botten
+                randomX = (int) (Math.random() * SCREEN_WIDTH);
+                randomY = SCREEN_HEIGHT; // Låser y så vi alltid kollar längst ner
+                break;
+            case 3: // Vänster
+                randomX = 0;
+                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                break;
+        }
+
+        return new Point(randomX, randomY);
     }
 
 
