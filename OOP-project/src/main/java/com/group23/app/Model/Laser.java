@@ -1,11 +1,13 @@
 package com.group23.app.Model;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Laser implements Collidable, Moveable {
+public class Laser implements Moveable {
     private int x, y;
     private double dx, dy;
+
+    public Color laserColor = getColor();
 
     final static int SCREEN_WIDTH = 800;
     final static int SCREEN_HEIGHT = 500;
@@ -14,7 +16,7 @@ public class Laser implements Collidable, Moveable {
     private int centerY = SCREEN_HEIGHT/2;
 
 
-    public Laser(int x, int y) {
+    public Laser() {
 
             // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
             int side = (int) (Math.random() * 4);
@@ -73,17 +75,6 @@ public class Laser implements Collidable, Moveable {
     public int getY() {
         return this.y;
     }
-    
-    @Override
-    public setSpeed(double dx, double dy){
-        this.dx = dx;
-        this.dy = dy;
-    }
-
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(this.x, this.y, this.sprite.getWidth(), this.sprite.getHeight());
-    }
 
     private ArrayList<Double> generateSpeed(int x, int y){
 
@@ -104,6 +95,35 @@ public class Laser implements Collidable, Moveable {
     private double randomDirFactor(){
         return Math.random();
     }
+
+  private Color getColor() {
+      /*#4deeea    (77,238,234)
+        #74ee15    (116,238,21)
+        #ffe700    (255,231,0)
+        #f000ff    (240,0,255) 
+        #fc1723    (252,23,35)
+        */
+
+        int random = (int) (Math.random() * 5);
+        List<String> colors = new ArrayList<String>();
+        colors.add("#4deeea");
+        colors.add("#74ee15");
+        colors.add("#ffe700");
+        colors.add("#f000ff");
+        colors.add("#fc1723");
+        
+        Color randomColor = Color.decode(colors.get(random));
+        return randomColor;
+    }
+
+
+
+@Override
+public void setSpeed(double dx, double dy) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setSpeed'");
+}
+
 
 
     /*public boolean collides(Sprite sprite) {
