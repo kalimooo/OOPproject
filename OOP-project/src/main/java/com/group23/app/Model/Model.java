@@ -18,8 +18,6 @@ public class Model {
         moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
         entities = EntityFactory.getEntities(nmrOfLasers);
-
-        //player = new Player(null);
     }
 
     public void updatePlayerSpeed(double dx, double dy) {

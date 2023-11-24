@@ -1,14 +1,9 @@
 package com.group23.app.View;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.group23.app.Model.Entity;
-import com.group23.app.Model.Model;
 
 public class PlayingField extends JPanel{
      
@@ -16,7 +11,6 @@ public class PlayingField extends JPanel{
     static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
     
     static JLabel playerChar;
-    static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     static boolean isVisible = false;
     static JLabel bgImage;
 
@@ -25,7 +19,7 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
 
-        for (Sprite sprite : sprites) {
+        for (Sprite sprite : SpriteFactory.getSprites()) {
             add(sprite);
         }
         playerChar = new JLabel();
@@ -38,9 +32,6 @@ public class PlayingField extends JPanel{
         bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
         add(bgImage);
 
-        
-
-        setBackground(new Color(0, 0, 0, 0));
         setBounds(0,0, fieldWidth, fieldHeight);
         PlayingField.playingField = this;
     }
@@ -52,18 +43,10 @@ public class PlayingField extends JPanel{
         return PlayingField.playingField;
     }
 
-    public void move() {
-        if (isVisible) {
-            playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
-            this.revalidate();
-            this.repaint();
-        }
-    }
-
     public void update() {
         this.removeAll();
-        for (Entity entity : Model.getEntities()) {
-            add(new Sprite(entity));
+        for (Sprite sprite : SpriteFactory.getSprites()) {
+            add(sprite);
         }
         repaint();
     }
