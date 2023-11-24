@@ -1,13 +1,9 @@
 package com.group23.app.View;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.group23.app.Model.Entity;
-import com.group23.app.Model.Model;
 
 public class PlayingField extends JPanel{
      
@@ -15,7 +11,6 @@ public class PlayingField extends JPanel{
     static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
     
     static JLabel playerChar;
-    static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     static boolean isVisible = false;
     static JLabel bgImage;
 
@@ -24,8 +19,7 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
 
-        sprites = SpriteFactory.getSprites();
-        for (Sprite sprite : sprites) {
+        for (Sprite sprite : SpriteFactory.getSprites()) {
             add(sprite);
         }
         playerChar = new JLabel();
@@ -51,8 +45,8 @@ public class PlayingField extends JPanel{
 
     public void update() {
         this.removeAll();
-        for (Entity entity : Model.getEntities()) {
-            add(new Sprite(entity));
+        for (Sprite sprite : SpriteFactory.getSprites()) {
+            add(sprite);
         }
         repaint();
     }
