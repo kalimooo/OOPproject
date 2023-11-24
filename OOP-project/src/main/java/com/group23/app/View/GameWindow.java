@@ -11,8 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.group23.app.Controller.KeysFired;
-
 public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
