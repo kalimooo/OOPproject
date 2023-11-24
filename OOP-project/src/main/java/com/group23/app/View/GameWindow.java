@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.group23.app.Controller.KeysFired;
+
 public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
@@ -44,11 +46,16 @@ public class GameWindow extends JFrame{
             if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
                 if (gameBegun) {
                 PlayingField.getPlayingField().repaint();                    
+                if(!KeysFired.arrowDown) {
+                    dy -= MOVEMENT_SPEED;
+                    KeysFired.arrowDown = true;
+                }
+        }
                 }
                 timeForLastUpdate = System.nanoTime();
             }
         }
-    }
+    
 
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
         BufferedImage image;
