@@ -39,17 +39,26 @@ public class LaserTest {
         assertEquals(true, laser.collides(laser2));
     }
 
-        @Test
+    @Test
     public void testLaserCollidesHitboxSize() {
         Laser laser = new Laser(0,0);
         Laser laser2 = new Laser(59,0);
         assertEquals(true, laser.collides(laser2));
     }
 
-            @Test
+    @Test
     public void testLaserNotCollides() {
         Laser laser = new Laser(0,0);
         Laser laser2 = new Laser(61,0);
         assertEquals(false, laser.collides(laser2));
+    }
+
+    @Test
+    public void testLaserMovingOutOfBounds() {
+        Laser laser = new Laser(0,0);
+        for (int i = 0; i < 1000; i++) {
+            laser.move();
+        }
+        assertEquals(true, laser.isOutOfBounds(800, 500));
     }
 }

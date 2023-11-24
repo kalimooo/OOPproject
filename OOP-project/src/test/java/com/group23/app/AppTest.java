@@ -21,48 +21,4 @@ public class AppTest
         assertTrue( true );
     }
 
-    @Test
-    public void testLaserOutOfBounds() {
-        Laser laser = new Laser();
-         assertEquals(false, laser.isOutOfBounds(800, 500));
-    }
-
-    @Test
-    public void testLaserMoveX() {
-        Laser laser = new Laser();
-        int tempX = laser.getX();
-        laser.move();
-        laser.move();
-        assertNotEquals(tempX, laser.getX());
-    }
-        @Test
-    public void testLaserMoveY() {
-        Laser laser = new Laser();
-        int tempY = laser.getY();
-        laser.move();
-        laser.move();
-        assertNotEquals(tempY, laser.getY());
-    }
-
-    @Test
-    public void testLaserCollides() {
-        Laser laser = new Laser(0,0);
-        Laser laser2 = new Laser(0,0);
-        assertEquals(true, laser.collides(laser2));
-    }
-
-        @Test
-    public void testLaserCollidesHitboxSize() {
-        Laser laser = new Laser(0,0);
-        Laser laser2 = new Laser(59,0);
-        assertEquals(true, laser.collides(laser2));
-    }
-
-            @Test
-    public void testLaserNotCollides() {
-        Laser laser = new Laser(0,0);
-        Laser laser2 = new Laser(61,0);
-        assertEquals(false, laser.collides(laser2));
-    }
-
 }
