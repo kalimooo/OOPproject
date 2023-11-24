@@ -1,5 +1,6 @@
 package com.group23.app.View;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GameWindow extends JFrame{
     
@@ -66,5 +68,15 @@ public class GameWindow extends JFrame{
         Graphics g = bi.createGraphics();
         g.drawImage(image, 0, 0, 50, 50, null);
         return new ImageIcon(bi);
+    }
+
+
+    // This might be poor design but it will work for now
+    public void moveToPanel(JPanel panelToShow) {
+        PlayingField.getPlayingField().setVisible(false);
+        Tutorial.getTutorial().setVisible(false);
+        TitleField.getTitleField().setVisible(false);
+        panelToShow.setVisible(true);
+        repaint();
     }
 }
