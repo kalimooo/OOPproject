@@ -1,4 +1,4 @@
-package com.group23.app.View;
+ package com.group23.app.View;
 
 import java.awt.Color;
 
