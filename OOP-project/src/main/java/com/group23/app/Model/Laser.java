@@ -28,6 +28,18 @@ public class Laser extends Entity implements Moveable {
         this.dy = speed.get(1);
     }
 
+        public Laser(int x, int y) {
+        super(x, y, 60, 60);
+        //Point point = generateXYPoint();
+        //this.x = point.x;
+        //this.y = point.y;
+    
+        ArrayList<Double> speed = generateSpeed(x,y);
+
+        this.dx = speed.get(0);
+        this.dy = speed.get(1);
+    }
+
 
 
     // TODO has to check with edge of sprite instead of center of body

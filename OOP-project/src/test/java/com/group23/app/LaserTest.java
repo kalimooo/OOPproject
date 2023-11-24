@@ -7,20 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
+public class LaserTest {
+    
     @Test
     public void testLaserOutOfBounds() {
         Laser laser = new Laser();
@@ -64,5 +52,4 @@ public class AppTest
         Laser laser2 = new Laser(61,0);
         assertEquals(false, laser.collides(laser2));
     }
-
 }
