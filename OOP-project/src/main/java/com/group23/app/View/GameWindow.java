@@ -11,8 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.group23.app.Controller.KeysFired;
-
 public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
@@ -22,7 +20,9 @@ public class GameWindow extends JFrame{
     ContentPane contentPane = ContentPane.getContentPane();
     static boolean gameBegun = false;
 
-    public GameWindow() {
+    static private GameWindow gameWindow;
+
+    private GameWindow() {
         super("Game");
 
         contentPane.add(TitleField.getTitleField());
@@ -38,6 +38,15 @@ public class GameWindow extends JFrame{
         setContentPane(contentPane);
         setLayout(null);
         setVisible(true);
+
+        GameWindow.gameWindow = this;
+    }
+
+    static public GameWindow getGameWindow() {
+        if (gameWindow == null) {
+            return new GameWindow();
+        }
+        return GameWindow.gameWindow;
     }
 
     public static void main(String[] args) {
@@ -45,16 +54,12 @@ public class GameWindow extends JFrame{
         while (true) {
             if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
                 if (gameBegun) {
-                PlayingField.getPlayingField().repaint();                    
-                if(!KeysFired.arrowDown) {
-                    dy -= MOVEMENT_SPEED;
-                    KeysFired.arrowDown = true;
+                    PlayingField.getPlayingField().repaint();                    
                 }
-        }
-                }
-                timeForLastUpdate = System.nanoTime();
             }
+            timeForLastUpdate = System.nanoTime();
         }
+    }
     
 
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
@@ -80,10 +85,32 @@ public class GameWindow extends JFrame{
 
     // This might be poor design but it will work for now
     public void moveToPanel(JPanel panelToShow) {
+        if (!panelToShow.isVisible()) {
+            PlayingField.getPlayingField().setVisible(false);
+            Tutorial.getTutorial().setVisible(false);
+            TitleField.getTitleField().setVisible(false);
+            panelToShow.setVisible(true);
+            repaint();
+        }
+    }
+
+    public void moveToTutorial() {
+        PlayingField.getPlayingField().setVisible(false);
+        Tutorial.getTutorial().setVisible(true);
+        TitleField.getTitleField().setVisible(false);
+        repaint();
+    }
+    public void moveToMenu() {
         PlayingField.getPlayingField().setVisible(false);
         Tutorial.getTutorial().setVisible(false);
+        TitleField.getTitleField().setVisible(true);
+        repaint();
+    }
+
+    public void moveToGame() {
+        PlayingField.getPlayingField().setVisible(true);
+        Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(false);
-        panelToShow.setVisible(true);
         repaint();
     }
 }
