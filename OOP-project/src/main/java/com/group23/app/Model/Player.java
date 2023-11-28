@@ -1,4 +1,5 @@
 package com.group23.app.Model;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Player extends Entity implements Collidable, Moveable {
@@ -27,11 +28,49 @@ public class Player extends Entity implements Collidable, Moveable {
         this.dy = dy;
     }
 
+    public boolean isOutOfBounds(int boundX, int boundY) {
+        if (x>= 0 && x + width <= boundX) {
+            if (y >= 0 && y + height + 10 <= boundY) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void reLocate(int boundX, int boundY) {
+
+        if (x < 0) {
+            x = 0;
+        }
+        else if (x + width > boundX) {
+            x = boundX - width;
+        }
+
+        if (y < 0) {
+            y = 0;
+        }
+        else if (y + height > boundY) {
+            y = boundY - height;
+        }
+    }
+
 
     // --------------------- Getters -----------------------
 
     @Override
     public Rectangle getBounds() {
         return new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
+    }
+
+    public void modifyDx(double dx) {
+        this.dx += dx;
+    }
+
+    public void modifyDy(double dy) {
+        this.dy += dy;
+    }
+
+    public Point getSpeed() {
+        return new Point((int)this.dx, (int)this.dy);
     }
 }

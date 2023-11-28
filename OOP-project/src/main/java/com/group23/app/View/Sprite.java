@@ -3,6 +3,7 @@
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.Laser;

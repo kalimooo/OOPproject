@@ -20,7 +20,7 @@ public class Model {
         moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
         lasers = EntityFactory.getLasers(nmrOfLasers);
-        player = new Player(boundY, boundX);
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -33,9 +33,10 @@ public class Model {
     }
 
     private void moveObjects() {
-        for (Moveable object : moveableObjects) {
-            object.move();
+        for (Laser laser : lasers) {
+            laser.move();
         }
+        player.move();
     }
 
     private void handleCollisions() {
@@ -44,8 +45,11 @@ public class Model {
                 // Game over
             }
             else if (((Laser)object).isOutOfBounds(boundX, boundY)) {
-                lasers.remove(object);
+                //lasers.remove(object);
             }
+        }
+        if (player.isOutOfBounds(boundX, boundY)) {
+            player.reLocate(boundX, boundY);
         }
     }
 
@@ -58,5 +62,9 @@ public class Model {
         entities.addAll(lasers);
         entities.add(player);
         return entities;
+    }
+
+    static public Player getPlayer() {
+        return player;
     }
 }
