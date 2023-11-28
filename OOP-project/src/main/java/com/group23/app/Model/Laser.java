@@ -45,8 +45,8 @@ public class Laser extends Entity implements Moveable {
 
     // TODO has to check with edge of sprite instead of center of body
     public boolean isOutOfBounds(int boundX, int boundY) {
-        if (this.x >= 0 && this.x <= boundX) {
-            if (this.y >= 0 && this.y <= boundY) {
+        if (this.x + this.width >= 0 && this.x <= boundX) {
+            if (this.y + this.height >= 0 && this.y <= boundY) {
                 return false;
             }
         }
