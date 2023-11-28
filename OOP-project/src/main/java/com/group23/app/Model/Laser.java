@@ -2,6 +2,7 @@ package com.group23.app.Model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
@@ -21,6 +22,18 @@ public class Laser extends Entity implements Moveable {
         Point point = generateXYPoint();
         this.x = point.x;
         this.y = point.y;
+    
+        ArrayList<Double> speed = generateSpeed(x,y);
+
+        this.dx = speed.get(0);
+        this.dy = speed.get(1);
+    }
+
+        public Laser(int x, int y) {
+        super(x, y, 60, 60);
+        //Point point = generateXYPoint();
+        //this.x = point.x;
+        //this.y = point.y;
     
         ArrayList<Double> speed = generateSpeed(x,y);
 
@@ -60,8 +73,8 @@ public class Laser extends Entity implements Moveable {
         double dx = (x - centerX);
         double dy = (y - centerY);
 
-        dx = dx +randomDirFactor();
-        dy = dy +randomDirFactor();
+        dx = dx +randomDirFactor(0,SCREEN_WIDTH);
+        dy = dy +randomDirFactor(0,SCREEN_HEIGHT);
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -71,8 +84,15 @@ public class Laser extends Entity implements Moveable {
         return reArrayList;
     }
 
-    private double randomDirFactor(){
-        return Math.random();
+    private double randomDirFactor(int lowerBound, int upperBound){
+        
+                // Create a Random object
+                Random random = new Random();
+        
+                // Generate a random number within the interval [lowerBound, upperBound]
+                int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+
+        return randomNumber;
     }
 
   private Color generateColor() {
