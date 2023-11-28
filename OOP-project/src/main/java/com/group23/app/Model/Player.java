@@ -2,17 +2,13 @@ package com.group23.app.Model;
 import java.awt.Rectangle;
 
 public class Player extends Entity implements Collidable, Moveable {
-    //private int x, y;
     private double dx, dy;
-
-    //private Sprite sprite;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
-        //this.sprite = new Sprite(imageName);
     }
 
     public Player(int width, int height) {

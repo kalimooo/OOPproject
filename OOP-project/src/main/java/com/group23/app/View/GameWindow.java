@@ -1,6 +1,5 @@
 package com.group23.app.View;
 
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -49,17 +48,17 @@ public class GameWindow extends JFrame{
         return GameWindow.gameWindow;
     }
 
-    public static void main(String[] args) {
-        GameWindow gameWindow = new GameWindow();
-        while (true) {
-            if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
-                if (gameBegun) {
-                    PlayingField.getPlayingField().repaint();                    
-                }
-            }
-            timeForLastUpdate = System.nanoTime();
-        }
-    }
+    // public static void main(String[] args) {
+    //     GameWindow gameWindow = new GameWindow();
+    //     while (true) {
+    //         if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
+    //             if (gameBegun) {
+    //                 PlayingField.getPlayingField().repaint();                    
+    //             }
+    //         }
+    //         timeForLastUpdate = System.nanoTime();
+    //     }
+    // }
     
 
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
@@ -112,5 +111,10 @@ public class GameWindow extends JFrame{
         Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(false);
         repaint();
+    }
+
+    public void updateView() {
+        PlayingField.getPlayingField().update();
+        gameWindow.repaint();
     }
 }

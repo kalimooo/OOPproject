@@ -9,15 +9,18 @@ import java.util.List;
 public class Model {
     private List<Moveable> moveableObjects;
     private List<Drawable> drawableObjects;
-    private static List<Entity> entities = new ArrayList<Entity>();
+    private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
+    private int boundX = 800;
+    private int boundY = 500;
 
-    private Player player;
+    private static Player player;
 
     public Model() {
         moveableObjects = new ArrayList<>(); // TODO maybe some factory magic? :)
         drawableObjects = new ArrayList<>();
-        entities = EntityFactory.getEntities(nmrOfLasers);
+        lasers = EntityFactory.getLasers(nmrOfLasers);
+        player = new Player(boundY, boundX);
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -36,10 +39,12 @@ public class Model {
     }
 
     private void handleCollisions() {
-        for (Entity object : entities) {
+        for (Laser object : lasers) {
             if (object.collides(player)) {
-                // TODO handle the collision
-                //object.handleCollision();
+                // Game over
+            }
+            else if (((Laser)object).isOutOfBounds(boundX, boundY)) {
+                lasers.remove(object);
             }
         }
     }
@@ -49,6 +54,9 @@ public class Model {
     }
 
     static public List<Entity> getEntities() {
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        entities.addAll(lasers);
+        entities.add(player);
         return entities;
     }
 }

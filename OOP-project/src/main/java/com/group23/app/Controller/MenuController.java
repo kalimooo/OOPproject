@@ -1,19 +1,17 @@
 package com.group23.app.Controller;
 
-import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import com.group23.app.View.GameWindow;
 
-public class MenuController extends Component implements KeyListener{
+public class MenuController implements KeyListener{
 
 
     GameWindow view = GameWindow.getGameWindow();
 
     public MenuController() {
         super();
-        addKeyListener(this);
     }
 
     @Override
@@ -21,12 +19,15 @@ public class MenuController extends Component implements KeyListener{
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_ENTER) {
             view.moveToGame();
+            view.updateView();
         }
         else if (code == KeyEvent.VK_BACK_SPACE) {
             view.moveToTutorial();
+            view.updateView();
         }
         else if (code == KeyEvent.VK_ESCAPE) {
             view.moveToMenu();
+            view.updateView();
         }
         
     }
