@@ -14,6 +14,7 @@ public class Model {
     private int nmrOfLasers = 1;
     private int boundX = 800;
     private int boundY = 500;
+    private boolean gameOver = false;
 
     private static Player player;
 
@@ -43,7 +44,7 @@ public class Model {
     private void handleCollisions() {
         for (Laser object : lasers) {
             if (object.collides(player)) {
-                // Game over
+                gameOver();
             }
             else if (((Laser)object).isOutOfBounds(boundX, boundY)) {
                 if (object.getX() + object.getWidth() > boundX) {
@@ -82,5 +83,9 @@ public class Model {
 
     static public Player getPlayer() {
         return player;
+    }
+
+    private void gameOver() {
+        System.out.println("Game over");
     }
 }

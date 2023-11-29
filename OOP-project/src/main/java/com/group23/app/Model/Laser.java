@@ -80,8 +80,8 @@ public class Laser extends Entity implements Moveable {
         double dx = 1;
         double dy = 1;
 
-        dx = dx +randomDirFactor(0,SCREEN_WIDTH);
-        dy = dy +randomDirFactor(0,SCREEN_HEIGHT);
+        dx = dx +randomDirFactor(1,2);
+        dy = dy +randomDirFactor(1,2);
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -111,7 +111,7 @@ public class Laser extends Entity implements Moveable {
         */
 
         // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
-        int random = (int) (Math.random());
+        int random = (int) (randomDirFactor(0, 3));
         List<Color> colors = new ArrayList<Color>();
         colors.add(Color.BLUE);
         colors.add(Color.YELLOW);
