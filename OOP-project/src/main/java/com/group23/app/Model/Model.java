@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.group23.app.Controller.Subscriber;
+
 /*
  * Facade class representing the model in its entirety
  */
@@ -14,7 +16,8 @@ public class Model {
     private int nmrOfLasers = 1;
     private int boundX = 800;
     private int boundY = 500;
-    private boolean gameOver = false;
+    private boolean gameActive = false;
+    private List<Subscriber> subscribers = new ArrayList<Subscriber>();
 
     private static Player player;
 
@@ -30,8 +33,10 @@ public class Model {
     }
 
     public void updateModel() {
-        moveObjects();
-        handleCollisions();
+        if (gameActive) {
+            moveObjects();
+            handleCollisions();
+        }
     }
 
     private void moveObjects() {
@@ -86,6 +91,17 @@ public class Model {
     }
 
     private void gameOver() {
-        System.out.println("Game over");
+        gameActive = false;
+        notifySubscribers();
+    }
+
+    public void addSubscriber(Subscriber subscriber) {
+        subscribers.add(subscriber);
+    }
+
+    private void notifySubscribers() {
+        for (Subscriber subscriber : subscribers) {
+            subscriber.doAction();
+        }
     }
 }
