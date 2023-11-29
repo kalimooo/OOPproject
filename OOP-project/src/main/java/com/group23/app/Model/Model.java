@@ -1,5 +1,6 @@
 package com.group23.app.Model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,22 @@ public class Model {
                 // Game over
             }
             else if (((Laser)object).isOutOfBounds(boundX, boundY)) {
-                //lasers.remove(object);
+                if (object.getX() + object.getWidth() > boundX) {
+                    Point objectSpeed = object.getSpeed();
+                    object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
+                }
+                else if (object.getX() < 0) {
+                    Point objectSpeed = object.getSpeed();
+                    object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
+                }
+                if (object.getY() + object.getHeight() > boundY) {
+                    Point objectSpeed = object.getSpeed();
+                    object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
+                }
+                else if (object.getY() < 0) {
+                    Point objectSpeed = object.getSpeed();
+                    object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
+                }
             }
         }
         if (player.isOutOfBounds(boundX, boundY)) {
