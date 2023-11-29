@@ -90,6 +90,7 @@ public class Laser extends Entity implements Moveable {
         #fc1723    (252,23,35)
         */
 
+        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
         int random = (int) (Math.random());
         List<Color> colors = new ArrayList<Color>();
         colors.add(Color.BLUE);
