@@ -28,7 +28,7 @@ public class PlayingMenu extends JPanel {
         // Sätt bakgrundsfärgen för hela menyn
         setBackground(menuBackgroundColor);
 
-        helloLabel = new JLabel("");
+        helloLabel = new JLabel("00:00:01");
         helloLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
         helloLabel.setForeground(Color.WHITE); // Ändra textfärgen till vit
         helloLabel.setBorder(new EmptyBorder(0, 10, 0, 0)); // Lägg till en kant till vänster om texten
@@ -48,6 +48,9 @@ public class PlayingMenu extends JPanel {
         quitButtonPanel.setBorder(new EmptyBorder(0,0,0,40));
         quitButtonPanel.setBackground(menuBackgroundColor);
         quitButton.setFocusable(false); // Förhindra att knappen tar emot fokus
+        quitButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        quitButton.setBackground(buttonColor);
+        quitButton.setForeground(Color.WHITE);
         add(quitButtonPanel, BorderLayout.EAST); // Placera quitButton längst till höger
 
         // ActionListener för quitbutton
