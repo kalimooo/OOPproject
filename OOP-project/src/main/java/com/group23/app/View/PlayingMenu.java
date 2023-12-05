@@ -41,9 +41,12 @@ public class PlayingMenu extends JPanel {
         add(helloLabel, BorderLayout.WEST); // Placera helloLabel längst till vänster
 
         quitButton = new JButton("QUIT");
+        JPanel quitButtonPanel = new JPanel(new BorderLayout());
+        quitButtonPanel.add(quitButton, BorderLayout.EAST);
+        quitButtonPanel.setBorder(new EmptyBorder(0,0,0,40));
+        quitButtonPanel.setBackground(menuBackgroundColor);
         quitButton.setFocusable(false); // Förhindra att knappen tar emot fokus
-        quitButton.setMargin(new Insets(0, 20, 0, 20)); // Lägg till en kant till höger om knappen
-        add(quitButton, BorderLayout.EAST); // Placera quitButton längst till höger
+        add(quitButtonPanel, BorderLayout.EAST); // Placera quitButton längst till höger
 
         setBounds(0, 0, 800, 60);
 
