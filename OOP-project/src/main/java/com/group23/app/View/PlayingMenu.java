@@ -58,8 +58,6 @@ public class PlayingMenu extends JPanel {
             }
         });
 
-        
-
         setBounds(0, 0, 800, 60);
 
         PlayingMenu.playingMenu = this;
