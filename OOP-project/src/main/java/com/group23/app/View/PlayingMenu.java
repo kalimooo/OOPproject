@@ -50,6 +50,9 @@ public class PlayingMenu extends JPanel {
         quitButtonPanel.setBorder(new EmptyBorder(0,0,0,40));
         quitButtonPanel.setBackground(menuBackgroundColor);
         quitButton.setFocusable(false); // Förhindra att knappen tar emot fokus
+        quitButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        quitButton.setBackground(buttonColor);
+        quitButton.setForeground(Color.WHITE); // Ändra textfärgen till vit
         add(quitButtonPanel, BorderLayout.EAST); // Placera quitButton längst till höger
 
         // ActionListener för quitbutton
@@ -74,7 +77,12 @@ public class PlayingMenu extends JPanel {
 
     public void updateTime() {
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time
-        String gameWatch = Long.toString(elapsedTime);
-        this.helloLabel.setText(gameWatch); // Update the helloLabel
+
+        long minutes = elapsedTime / 60; // Convert to minutes
+        long hours = minutes / 60; // Convert to hours
+
+        String formattedTime = String.format("%02d:%02d:%02d", hours, minutes % 60, elapsedTime % 60); // Format the time to 00:00:00 format
+
+        this.helloLabel.setText(formattedTime); // Update the helloLabel
     }
 }
