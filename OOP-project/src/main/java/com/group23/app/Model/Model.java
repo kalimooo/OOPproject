@@ -2,6 +2,7 @@ package com.group23.app.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.group23.app.Controller.Subscriber;
 
@@ -59,9 +60,11 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
+            System.out.println(nmrOfLasers);
+            tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
-            revalidateLasers();
+            //revalidateLasers();
         }
     }
 
@@ -81,32 +84,21 @@ public class Model {
     }
 
     private void handleCollisions() {
-        for (Laser object : lasers) {
+        for (int i = 0; i < lasers.size(); i++) {
+            Laser object = lasers.get(i);
+
             if (object.collides(player)) {
-                gameOver();
+                //gameOver();
             }
+
             else if (object.isOutOfBounds(boundX, boundY)) {
 
                 lasers.remove(object);
-
-                // if (object.getX() + object.getWidth() > boundX) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                // }
-                // else if (object.getX() < 0) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                // }
-                // if (object.getY() + object.getHeight() > boundY) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                // }
-                // else if (object.getY() < 0) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                // }
+                nmrOfLasers--;
+                spawnLaser();
             }
         }
+        
         if (player.isOutOfBounds(boundX, boundY)) {
             player.reLocate(boundX, boundY);
         }
@@ -118,8 +110,8 @@ public class Model {
 
     static public List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
-        entities.addAll(lasers);
         entities.add(player);
+        entities.addAll(lasers);
         return entities;
     }
 
@@ -146,5 +138,19 @@ public class Model {
         //Laser newLaser = EntityFactory.getLaser();
         Laser newLaser = new Laser();
         lasers.add(newLaser);
+        nmrOfLasers++;
+    }
+
+    public void tryToSpawnLaser(double time) {
+        if (chanceToFire(time) > 0.5) {
+            spawnLaser();
+        }
+    }
+
+    private double chanceToFire(double time) {
+        Random random = new Random();
+        double randomTime = random.nextDouble();
+        randomTime *= (1 - Math.exp(-0.00001 * time));
+        return randomTime;
     }
 }

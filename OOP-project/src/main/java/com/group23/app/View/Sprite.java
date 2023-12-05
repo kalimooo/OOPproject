@@ -1,7 +1,6 @@
  package com.group23.app.View;
 
 import java.awt.Color;
-
 import javax.swing.JLabel;
 
 import com.group23.app.Model.Entity;
@@ -18,14 +17,16 @@ public class Sprite extends JLabel{
         if (modelObject instanceof Laser) {
             Laser object = (Laser) modelObject;
             Color color = object.getColor();
-            if (color.equals(Color.blue)) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "Blue.png", modelObject.getWidth(), modelObject.getHeight()));
-            } else if (color.equals(Color.red)) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "Red.png", modelObject.getWidth(), modelObject.getHeight()));
-            } else if (color.equals(Color.YELLOW)) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "Yellow.png", modelObject.getWidth(), modelObject.getHeight()));
-            } else if (color.equals(Color.GREEN)) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "Green.png", modelObject.getWidth(), modelObject.getHeight()));
+            if (color.equals(Color.decode("#4deeea"))) {
+                setIcon(GameWindow.loadScaledImage(laserBasePath + "#4deeea.png", modelObject.getWidth(), modelObject.getHeight()));
+            } else if (color.equals(Color.decode("#74ee15"))) {
+                setIcon(GameWindow.loadScaledImage(laserBasePath + "#74ee15.png", modelObject.getWidth(), modelObject.getHeight()));
+            } else if (color.equals(Color.decode("#ffe700"))) {
+                setIcon(GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", modelObject.getWidth(), modelObject.getHeight()));
+            } else if (color.equals(Color.decode("#f000ff"))) {
+                setIcon(GameWindow.loadScaledImage(laserBasePath + "#f000ff.png", modelObject.getWidth(), modelObject.getHeight()));
+            } else if (color.equals(Color.decode("#fc1723"))) {
+                setIcon(GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", modelObject.getWidth(), modelObject.getHeight()));
             }
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
@@ -35,5 +36,12 @@ public class Sprite extends JLabel{
             setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", modelObject.getWidth(), modelObject.getHeight()));
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
+
+        setBackground(Color.white);
+    }
+
+    public void remake(Sprite sprite) {
+        setLocation(sprite.getLocation());
+        setIcon(sprite.getIcon());
     }
 }
