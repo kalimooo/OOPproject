@@ -18,7 +18,7 @@ public class App
 
     private App() {
         super();
-        model = new Model();
+        model = Model.getModel();
         gameWindow = GameWindow.getGameWindow();
         gameWindow.addKeyListener(new MenuController());
         gameWindow.addKeyListener(new ControllerAdapter(new PlayerController()));

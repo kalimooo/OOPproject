@@ -8,17 +8,15 @@ import java.awt.Point;
 public class Laser extends Entity implements Moveable {
     private double dx, dy;
 
+    private int startBound;
     public Color laserColor = generateColor();
 
     final static int SCREEN_WIDTH = 800;
     final static int SCREEN_HEIGHT = 500;
 
-    private int centerX = SCREEN_WIDTH/2;
-    private int centerY = SCREEN_HEIGHT/2;
-
-
     public Laser() {
-        super(0, 0, 60, 60);
+        super(0, 0, 40, 40);
+        startBound = (int) (Math.random() * 4);
         Point point = generateXYPoint();
         this.x = point.x;
         this.y = point.y;
@@ -43,8 +41,6 @@ public class Laser extends Entity implements Moveable {
     }
 
 
-
-    // TODO has to check with edge of sprite instead of center of body
     public boolean isOutOfBounds(int boundX, int boundY) {
         if (this.x + this.width >= 0 && this.x <= boundX) {
             if (this.y + this.height >= 0 && this.y <= boundY) {
@@ -58,7 +54,6 @@ public class Laser extends Entity implements Moveable {
     public void move() {
         this.x += dx;
         this.y += dy;
-        System.out.println(dx + "," + dy);
     }
 
     // -------------------------- Getters ----------------------
@@ -77,11 +72,27 @@ public class Laser extends Entity implements Moveable {
 
 
         // TODO temporary solution, generated starting speed should be modified in relation to the size of the screen
-        double dx = 1;
-        double dy = 1;
+        double dx;
+        double dy;
 
-        dx = dx +randomDirFactor(0,SCREEN_WIDTH);
-        dy = dy +randomDirFactor(0,SCREEN_HEIGHT);
+        switch (startBound) {
+            case 0: // Topp
+                dx = randomDirFactor(-1, 1);
+                dy = randomDirFactor(1, 2);
+                break;
+            case 1: // Höger
+                dx = randomDirFactor(-2, -1);
+                dy = randomDirFactor(-2, 2);
+                break;
+            case 2: // Botten
+                dx = randomDirFactor(-2, 2);
+                dy = randomDirFactor(-2, -1);
+                break;
+            default: // Vänster
+                dx = randomDirFactor(1, 2);
+                dy = randomDirFactor(-2, 2);
+                break;
+        }
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -97,7 +108,7 @@ public class Laser extends Entity implements Moveable {
                 Random random = new Random();
         
                 // Generate a random number within the interval [lowerBound, upperBound]
-                int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+                int randomNumber = random.nextInt(upperBound - lowerBound) + lowerBound;
 
         return randomNumber;
     }
@@ -110,12 +121,20 @@ public class Laser extends Entity implements Moveable {
         #fc1723    (252,23,35)
         */
 
-        List<String> colors = new ArrayList<String>();
-        colors.add("#4deeea");
-        colors.add("#74ee15");
-        colors.add("#ffe700");
-        colors.add("#f000ff");
-        colors.add("#fc1723");
+        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
+        int random = (int) (randomDirFactor(0, 3));
+        List<Color> colors = new ArrayList<Color>();
+        colors.add(Color.BLUE);
+        colors.add(Color.YELLOW);
+        colors.add(Color.RED);
+        colors.add(Color.GREEN);
+
+        // List<String> colors = new ArrayList<String>();
+        // colors.add("#4deeea");
+        // colors.add("#74ee15");
+        // colors.add("#ffe700");
+        // colors.add("#f000ff");
+        // colors.add("#fc1723");
         
         Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 4)));
         return randomColor;
@@ -125,7 +144,7 @@ public class Laser extends Entity implements Moveable {
         return this.laserColor;
     }
 
-    private static Point generateXYPoint(){
+    private Point generateXYPoint(){
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
         int side = (int) (Math.random() * 4);
 
@@ -138,12 +157,12 @@ public class Laser extends Entity implements Moveable {
                 randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
                 break;
             case 1: // Höger
-                randomX = SCREEN_WIDTH; // Låser x så vi tittar längst bort på skärmen
+                randomX = SCREEN_WIDTH - this.getWidth() - 5; // Låser x så vi tittar längst bort på skärmen
                 randomY = (int) (Math.random() * SCREEN_HEIGHT);
                 break;
             case 2: // Botten
                 randomX = (int) (Math.random() * SCREEN_WIDTH);
-                randomY = SCREEN_HEIGHT; // Låser y så vi alltid kollar längst ner
+                randomY = SCREEN_HEIGHT - this.getHeight() - 5; // Låser y så vi alltid kollar längst ner
                 break;
             case 3: // Vänster
                 randomX = 0;
