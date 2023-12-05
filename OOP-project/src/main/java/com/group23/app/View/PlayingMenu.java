@@ -30,6 +30,14 @@ public class PlayingMenu extends JPanel {
         helloLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
         helloLabel.setForeground(Color.black); // Ändra textfärgen till vit
         helloLabel.setBorder(new EmptyBorder(0, 10, 0, 0)); // Lägg till en kant till vänster om texten
+        
+        // Align the label to the left
+        helloLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+        
+        add(helloLabel);
+        setBounds(0,0,800,60);
+        
+        
         add(helloLabel, BorderLayout.WEST); // Placera helloLabel längst till vänster
 
         quitButton = new JButton("QUIT");
