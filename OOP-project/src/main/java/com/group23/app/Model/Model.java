@@ -2,6 +2,7 @@ package com.group23.app.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.group23.app.Controller.Subscriber;
 
@@ -59,6 +60,7 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
+            tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
             revalidateLasers();
@@ -151,5 +153,18 @@ public class Model {
         Laser newLaser = new Laser();
         lasers.add(newLaser);
         nmrOfLasers++;
+    }
+
+    public void tryToSpawnLaser(double time) {
+        if (chanceToFire(time) > 0.5) {
+            spawnLaser();
+        }
+    }
+
+    private double chanceToFire(double time) {
+        Random random = new Random();
+        double randomTime = random.nextDouble();
+        randomTime *= (1 - Math.exp(-0.34 * time));
+        return randomTime;
     }
 }
