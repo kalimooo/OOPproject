@@ -58,7 +58,7 @@ public class Laser extends Entity implements Moveable {
     public void move() {
         this.x += dx;
         this.y += dy;
-        System.out.println(dx + "," + dy);
+        System.out.println(x + "," + y);
     }
 
     // -------------------------- Getters ----------------------

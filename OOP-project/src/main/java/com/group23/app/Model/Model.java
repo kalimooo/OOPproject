@@ -81,10 +81,13 @@ public class Model {
     }
 
     private void handleCollisions() {
-        for (Laser object : lasers) {
+        for (int i = 0; i < lasers.size(); i++) {
+            Laser object = lasers.get(i);
+
             if (object.collides(player)) {
                 gameOver();
             }
+
             else if (object.isOutOfBounds(boundX, boundY)) {
 
                 lasers.remove(object);
@@ -107,6 +110,7 @@ public class Model {
                 // }
             }
         }
+        
         if (player.isOutOfBounds(boundX, boundY)) {
             player.reLocate(boundX, boundY);
         }
@@ -118,8 +122,8 @@ public class Model {
 
     static public List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
-        entities.addAll(lasers);
         entities.add(player);
+        entities.addAll(lasers);
         return entities;
     }
 
@@ -146,5 +150,6 @@ public class Model {
         //Laser newLaser = EntityFactory.getLaser();
         Laser newLaser = new Laser();
         lasers.add(newLaser);
+        nmrOfLasers++;
     }
 }

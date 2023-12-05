@@ -2,7 +2,6 @@ package com.group23.app.View;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,13 +51,21 @@ public class PlayingField extends JPanel{
     }
 
     public void update() {
-        ArrayList<Sprite> newSprites = SpriteFactory.getSprites();
-        for (Sprite sprite : sprites) {
-            remove(sprite);
+
+        // for (int i = 0; i < sprites.size(); i++) {
+        //     remove(sprites.get(i));
+        //     sprites.remove(i);
+        // }
+        // for (Sprite newSprite : SpriteFactory.getSprites()) {
+        //     add(newSprite);
+        // }
+
+        sprites
+
+        for (int i = 0; i < array.length; i++) {
+            
         }
-        for (Sprite newSprite : newSprites) {
-            add(newSprite);
-        }
+
         repaint();
     }
 
