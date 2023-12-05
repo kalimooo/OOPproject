@@ -91,6 +91,7 @@ public class Model {
             else if (object.isOutOfBounds(boundX, boundY)) {
 
                 lasers.remove(object);
+                nmrOfLasers--;
 
                 // if (object.getX() + object.getWidth() > boundX) {
                 //     Point objectSpeed = object.getSpeed();

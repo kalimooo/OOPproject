@@ -1,7 +1,6 @@
  package com.group23.app.View;
 
 import java.awt.Color;
-
 import javax.swing.JLabel;
 
 import com.group23.app.Model.Entity;
@@ -35,5 +34,12 @@ public class Sprite extends JLabel{
             setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", modelObject.getWidth(), modelObject.getHeight()));
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
+
+        setBackground(Color.white);
+    }
+
+    public void remake(Sprite sprite) {
+        setLocation(sprite.getLocation());
+        setIcon(sprite.getIcon());
     }
 }
