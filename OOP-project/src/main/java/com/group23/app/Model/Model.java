@@ -108,4 +108,9 @@ public class Model {
     public static void startGame() {
         Model.gameActive = true;
     }
+
+    private void spawnLaser() {
+        Laser newLaser = EntityFactory.getLaser();
+        lasers.add(newLaser);
+    }
 }
