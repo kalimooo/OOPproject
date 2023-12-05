@@ -1,5 +1,6 @@
 package com.group23.app;
 
+import com.group23.app.View.ControllerAdapter;
 import com.group23.app.View.GameWindow;
 
 import com.group23.app.Controller.MenuController;
@@ -17,10 +18,10 @@ public class App
 
     private App() {
         super();
-        model = new Model();
+        model = Model.getModel();
         gameWindow = GameWindow.getGameWindow();
         gameWindow.addKeyListener(new MenuController());
-        gameWindow.addKeyListener(new PlayerController());
+        gameWindow.addKeyListener(new ControllerAdapter(new PlayerController()));
     }
     public static void main( String[] args )
     {
@@ -37,10 +38,6 @@ public class App
                 gameWindow.updateView();
                 timeSinceLastUpdate = time;
             }
-            // handleInput();
-
-            // updateModel(); // should do something like moveObjects(); and handleCollisions();
-            // drawObjects();
         }
     }
 

@@ -22,6 +22,7 @@ public class Laser extends Entity implements Moveable {
         Point point = generateXYPoint();
         this.x = point.x;
         this.y = point.y;
+        System.out.println(x + "," + y);
     
         ArrayList<Double> speed = generateSpeed(x,y);
 
@@ -57,6 +58,7 @@ public class Laser extends Entity implements Moveable {
     public void move() {
         this.x += dx;
         this.y += dy;
+        System.out.println(dx + "," + dy);
     }
 
     // -------------------------- Getters ----------------------
@@ -70,11 +72,16 @@ public class Laser extends Entity implements Moveable {
 
     private ArrayList<Double> generateSpeed(int x, int y){
 
-        double dx = (x - centerX);
-        double dy = (y - centerY);
+        // double dx = (x - centerX);
+        // double dy = (y - centerY);
 
-        dx = dx +randomDirFactor(0,SCREEN_WIDTH);
-        dy = dy +randomDirFactor(0,SCREEN_HEIGHT);
+
+        // TODO temporary solution, generated starting speed should be modified in relation to the size of the screen
+        double dx = 1;
+        double dy = 1;
+
+        dx = dx +randomDirFactor(1,2);
+        dy = dy +randomDirFactor(1,2);
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -103,15 +110,22 @@ public class Laser extends Entity implements Moveable {
         #fc1723    (252,23,35)
         */
 
-        int random = (int) (Math.random() * 5);
-        List<String> colors = new ArrayList<String>();
-        colors.add("#4deeea");
-        colors.add("#74ee15");
-        colors.add("#ffe700");
-        colors.add("#f000ff");
-        colors.add("#fc1723");
+        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
+        int random = (int) (randomDirFactor(0, 3));
+        List<Color> colors = new ArrayList<Color>();
+        colors.add(Color.BLUE);
+        colors.add(Color.YELLOW);
+        colors.add(Color.RED);
+        colors.add(Color.GREEN);
+
+        // List<String> colors = new ArrayList<String>();
+        // colors.add("#4deeea");
+        // colors.add("#74ee15");
+        // colors.add("#ffe700");
+        // colors.add("#f000ff");
+        // colors.add("#fc1723");
         
-        Color randomColor = Color.decode(colors.get(random));
+        Color randomColor = colors.get(random);
         return randomColor;
     }
 
@@ -150,11 +164,14 @@ public class Laser extends Entity implements Moveable {
 
 
 
-@Override
-public void setSpeed(double dx, double dy) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setSpeed'");
-}
+    @Override
+    public void setSpeed(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
+    public Point getSpeed() {
+        return new Point((int)dx, (int)dy);
+    }
 
 
 
