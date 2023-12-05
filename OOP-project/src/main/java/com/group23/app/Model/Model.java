@@ -17,7 +17,7 @@ public class Model {
     private int boundY = 500;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private static Timer timer;
+    private static Timer timer = new Timer();
     private static Player player;
 
     private static Model model;
