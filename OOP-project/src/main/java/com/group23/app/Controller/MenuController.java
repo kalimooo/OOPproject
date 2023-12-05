@@ -3,6 +3,7 @@ package com.group23.app.Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import com.group23.app.Model.Model;
 import com.group23.app.View.GameWindow;
 
 public class MenuController implements KeyListener,Subscriber{
@@ -20,6 +21,7 @@ public class MenuController implements KeyListener,Subscriber{
         if (code == KeyEvent.VK_ENTER) {
             view.moveToGame();
             view.updateView();
+            Model.startGame();
         }
         else if (code == KeyEvent.VK_BACK_SPACE) {
             view.moveToTutorial();

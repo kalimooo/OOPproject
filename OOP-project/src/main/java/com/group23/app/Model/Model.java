@@ -16,7 +16,7 @@ public class Model {
     private int nmrOfLasers = 1;
     private int boundX = 800;
     private int boundY = 500;
-    private boolean gameActive = false;
+    private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
 
     private static Player player;
@@ -103,5 +103,9 @@ public class Model {
         for (Subscriber subscriber : subscribers) {
             subscriber.doAction();
         }
+    }
+
+    public static void startGame() {
+        Model.gameActive = true;
     }
 }
