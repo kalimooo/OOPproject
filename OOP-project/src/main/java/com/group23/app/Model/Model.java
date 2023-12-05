@@ -60,10 +60,11 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
+            System.out.println(nmrOfLasers);
             tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
-            revalidateLasers();
+            //revalidateLasers();
         }
     }
 
@@ -87,30 +88,14 @@ public class Model {
             Laser object = lasers.get(i);
 
             if (object.collides(player)) {
-                gameOver();
+                //gameOver();
             }
 
             else if (object.isOutOfBounds(boundX, boundY)) {
 
                 lasers.remove(object);
                 nmrOfLasers--;
-
-                // if (object.getX() + object.getWidth() > boundX) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                // }
-                // else if (object.getX() < 0) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                // }
-                // if (object.getY() + object.getHeight() > boundY) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                // }
-                // else if (object.getY() < 0) {
-                //     Point objectSpeed = object.getSpeed();
-                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                // }
+                spawnLaser();
             }
         }
         
@@ -165,7 +150,7 @@ public class Model {
     private double chanceToFire(double time) {
         Random random = new Random();
         double randomTime = random.nextDouble();
-        randomTime *= (1 - Math.exp(-0.34 * time));
+        randomTime *= (1 - Math.exp(-0.00001 * time));
         return randomTime;
     }
 }

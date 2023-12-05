@@ -54,7 +54,6 @@ public class Laser extends Entity implements Moveable {
     public void move() {
         this.x += dx;
         this.y += dy;
-        System.out.println(x + "," + y);
     }
 
     // -------------------------- Getters ----------------------
@@ -89,14 +88,11 @@ public class Laser extends Entity implements Moveable {
                 dx = randomDirFactor(-2, 2);
                 dy = randomDirFactor(-2, -1);
                 break;
-            case 3: // Vänster
+            default: // Vänster
                 dx = randomDirFactor(1, 2);
                 dy = randomDirFactor(-2, 2);
                 break;
         }
-
-        dx = randomDirFactor(-2,2);
-        dy = randomDirFactor(-2,2);
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -112,7 +108,7 @@ public class Laser extends Entity implements Moveable {
                 Random random = new Random();
         
                 // Generate a random number within the interval [lowerBound, upperBound]
-                int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+                int randomNumber = random.nextInt(upperBound - lowerBound) + lowerBound;
 
         return randomNumber;
     }
