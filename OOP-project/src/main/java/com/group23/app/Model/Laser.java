@@ -123,18 +123,18 @@ public class Laser extends Entity implements Moveable {
 
         // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
         int random = (int) (randomDirFactor(0, 3));
-        List<Color> colors = new ArrayList<Color>();
-        colors.add(Color.BLUE);
-        colors.add(Color.YELLOW);
-        colors.add(Color.RED);
-        colors.add(Color.GREEN);
+        // List<Color> colors = new ArrayList<Color>();
+        // colors.add(Color.BLUE);
+        // colors.add(Color.YELLOW);
+        // colors.add(Color.RED);
+        // colors.add(Color.GREEN);
 
-        // List<String> colors = new ArrayList<String>();
-        // colors.add("#4deeea");
-        // colors.add("#74ee15");
-        // colors.add("#ffe700");
-        // colors.add("#f000ff");
-        // colors.add("#fc1723");
+        List<String> colors = new ArrayList<String>();
+        colors.add("#4deeea");
+        colors.add("#74ee15");
+        colors.add("#ffe700");
+        colors.add("#f000ff");
+        colors.add("#fc1723");
         
         Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 4)));
         return randomColor;

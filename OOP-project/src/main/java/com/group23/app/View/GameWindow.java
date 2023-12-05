@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
-    static final int SCREEN_HEIGHT = 700;
+    static final int SCREEN_HEIGHT = 600;
     static final int UPDATE_SPEED = 2000000;
     static long timeForLastUpdate = System.nanoTime();
     ContentPane contentPane = ContentPane.getContentPane();
