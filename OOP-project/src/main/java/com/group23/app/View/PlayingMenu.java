@@ -73,6 +73,8 @@ public class PlayingMenu extends JPanel {
     }
 
     public void updateTime() {
-        this.helloLabel.setText(Model.getModel().getElapsedTimeInSeconds() + " seconds");
+        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time
+        String gameWatch = Long.toString(elapsedTime);
+        this.helloLabel.setText(gameWatch); // Update the helloLabel
     }
 }
