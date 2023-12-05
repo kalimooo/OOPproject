@@ -17,7 +17,7 @@ public class Model {
     private int boundY = 500;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-
+    private Timer timer;
     private static Player player;
 
     private static Model model;
@@ -26,6 +26,7 @@ public class Model {
         drawableObjects = new ArrayList<>();
         lasers = EntityFactory.getLasers(nmrOfLasers);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
+        timer = new Timer();
         Model.model = this;
     }
 
@@ -34,6 +35,14 @@ public class Model {
             return new Model();
         }
         return model;
+    }
+
+    public long getElapsedTimeInSeconds() {
+        return timer.getElapsedTimeInSeconds();
+    }
+
+    public void restartTimer() {
+        timer.restartTimer();
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
