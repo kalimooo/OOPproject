@@ -2,6 +2,7 @@ package com.group23.app.Model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
@@ -21,6 +22,19 @@ public class Laser extends Entity implements Moveable {
         Point point = generateXYPoint();
         this.x = point.x;
         this.y = point.y;
+        System.out.println(x + "," + y);
+    
+        ArrayList<Double> speed = generateSpeed(x,y);
+
+        this.dx = speed.get(0);
+        this.dy = speed.get(1);
+    }
+
+        public Laser(int x, int y) {
+        super(x, y, 60, 60);
+        //Point point = generateXYPoint();
+        //this.x = point.x;
+        //this.y = point.y;
     
         ArrayList<Double> speed = generateSpeed(x,y);
 
@@ -32,8 +46,8 @@ public class Laser extends Entity implements Moveable {
 
     // TODO has to check with edge of sprite instead of center of body
     public boolean isOutOfBounds(int boundX, int boundY) {
-        if (this.x >= 0 && this.x <= boundX) {
-            if (this.y >= 0 && this.y <= boundY) {
+        if (this.x + this.width >= 0 && this.x <= boundX) {
+            if (this.y + this.height >= 0 && this.y <= boundY) {
                 return false;
             }
         }
@@ -44,6 +58,7 @@ public class Laser extends Entity implements Moveable {
     public void move() {
         this.x += dx;
         this.y += dy;
+        System.out.println(dx + "," + dy);
     }
 
     // -------------------------- Getters ----------------------
@@ -57,11 +72,16 @@ public class Laser extends Entity implements Moveable {
 
     private ArrayList<Double> generateSpeed(int x, int y){
 
-        double dx = (x - centerX);
-        double dy = (y - centerY);
+        // double dx = (x - centerX);
+        // double dy = (y - centerY);
 
-        dx = dx +randomDirFactor();
-        dy = dy +randomDirFactor();
+
+        // TODO temporary solution, generated starting speed should be modified in relation to the size of the screen
+        double dx = 1;
+        double dy = 1;
+
+        dx = dx +randomDirFactor(1,2);
+        dy = dy +randomDirFactor(1,2);
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
 
@@ -71,8 +91,15 @@ public class Laser extends Entity implements Moveable {
         return reArrayList;
     }
 
-    private double randomDirFactor(){
-        return Math.random();
+    private double randomDirFactor(int lowerBound, int upperBound){
+        
+                // Create a Random object
+                Random random = new Random();
+        
+                // Generate a random number within the interval [lowerBound, upperBound]
+                int randomNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+
+        return randomNumber;
     }
 
   private Color generateColor() {
@@ -83,15 +110,22 @@ public class Laser extends Entity implements Moveable {
         #fc1723    (252,23,35)
         */
 
-        int random = (int) (Math.random() * 5);
-        List<String> colors = new ArrayList<String>();
-        colors.add("#4deeea");
-        colors.add("#74ee15");
-        colors.add("#ffe700");
-        colors.add("#f000ff");
-        colors.add("#fc1723");
+        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
+        int random = (int) (randomDirFactor(0, 3));
+        List<Color> colors = new ArrayList<Color>();
+        colors.add(Color.BLUE);
+        colors.add(Color.YELLOW);
+        colors.add(Color.RED);
+        colors.add(Color.GREEN);
+
+        // List<String> colors = new ArrayList<String>();
+        // colors.add("#4deeea");
+        // colors.add("#74ee15");
+        // colors.add("#ffe700");
+        // colors.add("#f000ff");
+        // colors.add("#fc1723");
         
-        Color randomColor = Color.decode(colors.get(random));
+        Color randomColor = colors.get(random);
         return randomColor;
     }
 
@@ -130,11 +164,14 @@ public class Laser extends Entity implements Moveable {
 
 
 
-@Override
-public void setSpeed(double dx, double dy) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setSpeed'");
-}
+    @Override
+    public void setSpeed(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
+    public Point getSpeed() {
+        return new Point((int)dx, (int)dy);
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.group23.app.View;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import com.group23.app.Model.Entity;
@@ -13,5 +14,13 @@ public class SpriteFactory {
             sprites.add(new Sprite(entity));
         }
         return sprites;
+    }
+
+    static ArrayList<Point> getPositions() {
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (Entity entity : Model.getEntities()) {
+            points.add(new Point(entity.getX(), entity.getY()));
+        }
+        return points;
     }
 }

@@ -1,34 +1,43 @@
 package com.group23.app;
 
+import com.group23.app.View.ControllerAdapter;
 import com.group23.app.View.GameWindow;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import com.group23.app.Model.Drawable;
+import com.group23.app.Controller.MenuController;
+import com.group23.app.Controller.PlayerController;
 import com.group23.app.Model.Model;
-import com.group23.app.Model.Collidable;
-import com.group23.app.Model.Moveable;
+
 
 /**
  * App containing the main game-loop
  */
-public class App 
+public class App
 {
+    private Model model;
+    private GameWindow gameWindow;
+
+    private App() {
+        super();
+        model = Model.getModel();
+        gameWindow = GameWindow.getGameWindow();
+        gameWindow.addKeyListener(new MenuController());
+        gameWindow.addKeyListener(new ControllerAdapter(new PlayerController()));
+    }
     public static void main( String[] args )
     {
-        GameWindow gameWindow = new GameWindow();
-        Model model = new Model();
-
-        gameLoop();
+        App myApp = new App();
+        myApp.gameLoop();
     }
 
-    private void gameLoop() {
+    public void gameLoop() {
+        long timeSinceLastUpdate = System.currentTimeMillis();
         while (true) {
-            handleInput();
-
-            updateModel(); // should do something like moveObjects(); and handleCollisions();
-            drawObjects();
+            long time = System.currentTimeMillis();
+            if (time - timeSinceLastUpdate >= 2) {
+                model.updateModel();
+                gameWindow.updateView();
+                timeSinceLastUpdate = time;
+            }
         }
     }
 
