@@ -8,12 +8,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
 import javax.swing.JPanel;
+
+
 
 public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
-    static final int SCREEN_HEIGHT = 500;
+    static final int SCREEN_HEIGHT = 700;
     static final int UPDATE_SPEED = 2000000;
     static long timeForLastUpdate = System.nanoTime();
     ContentPane contentPane = ContentPane.getContentPane();
@@ -29,7 +32,6 @@ public class GameWindow extends JFrame{
         contentPane.add(Tutorial.getTutorial());
 
 
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setLocationRelativeTo(null);
@@ -40,6 +42,8 @@ public class GameWindow extends JFrame{
 
         GameWindow.gameWindow = this;
     }
+
+    
 
     static public GameWindow getGameWindow() {
         if (gameWindow == null) {
