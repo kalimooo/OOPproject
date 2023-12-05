@@ -1,6 +1,5 @@
 package com.group23.app.Model;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ public class Model {
     private List<Drawable> drawableObjects;
     private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
+    private int maxLasers = 1;
     private int boundX = 800;
     private int boundY = 500;
     private static boolean gameActive = false;
@@ -52,6 +52,7 @@ public class Model {
         if (gameActive) {
             moveObjects();
             handleCollisions();
+            revalidateLasers();
         }
     }
 
@@ -62,28 +63,39 @@ public class Model {
         player.move();
     }
 
+    private void revalidateLasers() {
+        if (nmrOfLasers < maxLasers) {
+            for (int i = 0; i < maxLasers - nmrOfLasers; i++) {
+                spawnLaser();
+            }
+        }
+    }
+
     private void handleCollisions() {
         for (Laser object : lasers) {
             if (object.collides(player)) {
                 gameOver();
             }
-            else if (((Laser)object).isOutOfBounds(boundX, boundY)) {
-                if (object.getX() + object.getWidth() > boundX) {
-                    Point objectSpeed = object.getSpeed();
-                    object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                }
-                else if (object.getX() < 0) {
-                    Point objectSpeed = object.getSpeed();
-                    object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
-                }
-                if (object.getY() + object.getHeight() > boundY) {
-                    Point objectSpeed = object.getSpeed();
-                    object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                }
-                else if (object.getY() < 0) {
-                    Point objectSpeed = object.getSpeed();
-                    object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
-                }
+            else if (object.isOutOfBounds(boundX, boundY)) {
+
+                lasers.remove(object);
+
+                // if (object.getX() + object.getWidth() > boundX) {
+                //     Point objectSpeed = object.getSpeed();
+                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
+                // }
+                // else if (object.getX() < 0) {
+                //     Point objectSpeed = object.getSpeed();
+                //     object.setSpeed(objectSpeed.getX()*-1, objectSpeed.getY());
+                // }
+                // if (object.getY() + object.getHeight() > boundY) {
+                //     Point objectSpeed = object.getSpeed();
+                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
+                // }
+                // else if (object.getY() < 0) {
+                //     Point objectSpeed = object.getSpeed();
+                //     object.setSpeed(objectSpeed.getX(), objectSpeed.getY()*-1);
+                // }
             }
         }
         if (player.isOutOfBounds(boundX, boundY)) {
@@ -122,7 +134,8 @@ public class Model {
     }
 
     private void spawnLaser() {
-        Laser newLaser = EntityFactory.getLaser();
+        //Laser newLaser = EntityFactory.getLaser();
+        Laser newLaser = new Laser();
         lasers.add(newLaser);
     }
 }
