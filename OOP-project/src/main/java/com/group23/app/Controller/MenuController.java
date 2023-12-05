@@ -19,6 +19,7 @@ public class MenuController implements KeyListener,Subscriber{
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_ENTER) {
+            Model.restartTimer();
             view.moveToGame();
             view.updateView();
             Model.startGame();

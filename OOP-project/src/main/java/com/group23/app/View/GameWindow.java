@@ -119,6 +119,7 @@ public class GameWindow extends JFrame{
 
     public void updateView() {
         PlayingField.getPlayingField().update();
+        PlayingMenu.getPlayingMenu().updateTime();
         gameWindow.repaint();
     }
 }

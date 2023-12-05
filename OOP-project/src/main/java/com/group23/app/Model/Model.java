@@ -17,7 +17,7 @@ public class Model {
     private int boundY = 500;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private Timer timer;
+    private static Timer timer;
     private static Player player;
 
     private static Model model;
@@ -41,7 +41,7 @@ public class Model {
         return timer.getElapsedTimeInSeconds();
     }
 
-    public void restartTimer() {
+    public static void restartTimer() {
         timer.restartTimer();
     }
 

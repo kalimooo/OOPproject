@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.group23.app.Model.Model;
+
 public class PlayingMenu extends JPanel {
     Color menuBackgroundColor = Color.decode("#4f504e");
     Color buttonColor = Color.decode("#767675");
@@ -21,14 +23,14 @@ public class PlayingMenu extends JPanel {
     static PlayingMenu playingMenu;
 
     // Konstruktor
-    public PlayingMenu() {
+    private PlayingMenu() {
         // Använd BorderLayout för att placera komponenter
         setLayout(new BorderLayout());
         
         // Sätt bakgrundsfärgen för hela menyn
         setBackground(menuBackgroundColor);
 
-        helloLabel = new JLabel("");
+        helloLabel = new JLabel("Carlbanan");
         helloLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
         helloLabel.setForeground(Color.WHITE); // Ändra textfärgen till vit
         helloLabel.setBorder(new EmptyBorder(0, 10, 0, 0)); // Lägg till en kant till vänster om texten
@@ -63,7 +65,14 @@ public class PlayingMenu extends JPanel {
         PlayingMenu.playingMenu = this;
     }
 
-    public void updateTime(String elapsedTime) {
-        this.helloLabel.setText(elapsedTime);
+    public static PlayingMenu getPlayingMenu() {
+        if (PlayingMenu.playingMenu == null) {
+            return new PlayingMenu();
+        }
+        return PlayingMenu.playingMenu;
+    }
+
+    public void updateTime() {
+        this.helloLabel.setText(Model.getModel().getElapsedTimeInSeconds() + " seconds");
     }
 }
