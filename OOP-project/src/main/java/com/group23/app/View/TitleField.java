@@ -30,7 +30,6 @@ public class TitleField extends JPanel{
         header.setVerticalAlignment(SwingConstants.TOP);
         header.setBounds(0, 100, fieldWidth, fieldHeight -100);
 
-        // Create a new JLabel with the text "Press enter to start!"
         promptEnter = new JLabel("Press enter to start!");
 
         // Set the foreground color of the label to white
