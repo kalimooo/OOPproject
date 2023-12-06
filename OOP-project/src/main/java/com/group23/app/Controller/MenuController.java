@@ -24,7 +24,7 @@ public class MenuController implements KeyListener,Subscriber{
             view.updateView();
             Model.startGame();
         }
-        else if (code == KeyEvent.VK_BACK_SPACE) {
+        else if (code == KeyEvent.VK_T) {
             view.moveToTutorial();
             view.updateView();
         }
