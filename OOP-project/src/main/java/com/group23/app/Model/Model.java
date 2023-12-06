@@ -10,12 +10,16 @@ import com.group23.app.Controller.Subscriber;
  * Facade class representing the model in its entirety
  */
 public class Model {
+
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 700;
+
     private List<Drawable> drawableObjects;
     private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
     private int maxLasers = 1;
-    private int boundX = 800;
-    private int boundY = 500;
+    private int boundX = SCREEN_WIDTH;
+    private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
     private static Timer timer = new Timer();

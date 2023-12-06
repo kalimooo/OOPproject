@@ -41,7 +41,7 @@ public class PlayingMenu extends JPanel {
         helloLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
         add(helloLabel);
-        setBounds(0, 0, 800, 60);
+        setBounds(0, 0, GameWindow.SCREEN_WIDTH, 60);
 
         add(helloLabel, BorderLayout.WEST); // Placera helloLabel längst till vänster
 
@@ -66,7 +66,7 @@ public class PlayingMenu extends JPanel {
             }
         });
 
-        setBounds(0, 0, 800, 60);
+        setBounds(0, 0, GameWindow.SCREEN_WIDTH, 60);
 
         PlayingMenu.playingMenu = this;
     }
