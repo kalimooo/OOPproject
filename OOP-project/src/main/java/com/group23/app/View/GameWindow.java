@@ -34,6 +34,7 @@ public class GameWindow extends JFrame{
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setLocationRelativeTo(null);
 
+        setResizable(false);
         setContentPane(contentPane);
         setLayout(null);
         setVisible(true);
