@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 public class LaserHandler {
-    private List<Laser> lasers;
+    private static List<Laser> lasers;
 
     private int boundX, boundY;
     
@@ -18,11 +18,20 @@ public class LaserHandler {
         this.boundY = boundY;
     }
 
+    public static List<Laser> getLasers() {
+        return lasers;
+    }
+
     public void updateLasers() {
         for (Laser laser : lasers) {
             laser.move();
 
-            if (laser.isOutOfBounds(0, 0))
+            if (laser.isOutOfBounds(0, 0)) {
+                lasers.remove(laser);
+
+                //TODO remove this when we can spawn additional lasers
+                spawnLaser();
+            }
         }
     }
 
@@ -42,6 +51,11 @@ public class LaserHandler {
             }
         }
         return false;
+    }
+
+    private void spawnLaser() {
+        Laser laser = new Laser();
+        lasers.add(laser);
     }
 
 

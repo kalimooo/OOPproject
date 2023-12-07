@@ -23,17 +23,17 @@ public class Model {
 
     private static Model model;
 
-    private LaserHandler laserHandler;
-    private CollectibleHandler collectibleHandler;
-    private PowerUPHandler powerUPHandler;
+    private static LaserHandler laserHandler;
+    //private CollectibleHandler collectibleHandler;
+    //private PowerUPHandler powerUPHandler;
 
     private Model() {
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
         timer = new Timer();
 
         this.laserHandler = new LaserHandler(boundX, boundY);
-        this.collectibleHandler = new CollectibleHandler();
-        this.powerUPHandler = new PowerUPHandler();
+        //this.collectibleHandler = new CollectibleHandler();
+        //this.powerUPHandler = new PowerUPHandler();
 
         Model.model = this;
     }
@@ -67,15 +67,13 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
-            System.out.println(nmrOfLasers);
-            tryToSpawnLaser(getElapsedTimeInSeconds());
-            moveObjects();
+            updateObjects();
             handleCollisions();
             //revalidateLasers();
         }
     }
 
-    private void updateObejcts() {
+    private void updateObjects() {
         laserHandler.updateLasers();
         player.move();
     }
@@ -83,18 +81,8 @@ public class Model {
 
     // TODO Add CollisionHandler class that handles collisions
     private void handleCollisions() {
-        if (this.laserHandler.isHitByLaser(player)) {
+        if (laserHandler.isHitByLaser(player)) {
             //gameOver();
-        }
-        for (int i = 0; i < lasers.size(); i++) {
-            Laser object = lasers.get(i);
-
-            else if (object.isOutOfBounds(boundX, boundY)) {
-
-                lasers.remove(object);
-                nmrOfLasers--;
-                spawnLaser();
-            }
         }
         
         if (player.isOutOfBounds(boundX, boundY)) {
@@ -102,14 +90,10 @@ public class Model {
         }
     }
 
-    public List<Drawable> getDrawableObjects() {
-        return this.drawableObjects;
-    }
-
-    static public List<Entity> getEntities() {
+    public static List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
-        entities.addAll(lasers);
+        entities.addAll(laserHandler.getLasers());
         return entities;
     }
 
@@ -130,25 +114,5 @@ public class Model {
 
     public static void startGame() {
         Model.gameActive = true;
-    }
-
-    private void spawnLaser() {
-        //Laser newLaser = EntityFactory.getLaser();
-        Laser newLaser = new Laser();
-        lasers.add(newLaser);
-        nmrOfLasers++;
-    }
-
-    public void tryToSpawnLaser(double time) {
-        if (chanceToFire(time) > 0.5) {
-            spawnLaser();
-        }
-    }
-
-    private double chanceToFire(double time) {
-        Random random = new Random();
-        double randomTime = random.nextDouble();
-        randomTime *= (1 - Math.exp(-0.00001 * time));
-        return randomTime;
     }
 }

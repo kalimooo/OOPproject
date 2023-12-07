@@ -8,7 +8,7 @@ import com.group23.app.Model.Model;
 
 public class SpriteFactory {
     
-    static ArrayList<Sprite> getSprites() {
+    public static ArrayList<Sprite> getSprites() {
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         for (Entity entity : Model.getEntities()) {
             sprites.add(new Sprite(entity));
@@ -16,7 +16,7 @@ public class SpriteFactory {
         return sprites;
     }
 
-    static ArrayList<Point> getPositions() {
+    public static ArrayList<Point> getPositions() {
         ArrayList<Point> points = new ArrayList<Point>();
         for (Entity entity : Model.getEntities()) {
             points.add(new Point(entity.getX(), entity.getY()));
