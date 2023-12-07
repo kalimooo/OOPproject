@@ -4,7 +4,7 @@ import com.group23.app.Model.Model;
 
 public class PlayerController {
     Model model;
-    private final static int MOVEMENT_SPEED = 1;
+    private final static int MOVEMENT_SPEED = 1;//FIX
 
     public PlayerController() {
         this.model = Model.getModel();

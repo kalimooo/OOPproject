@@ -14,7 +14,6 @@ public class Model {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
 
-    private List<Drawable> drawableObjects;
     private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
     private int maxLasers = 1;
@@ -28,7 +27,6 @@ public class Model {
     private static Model model;
 
     private Model() {
-        drawableObjects = new ArrayList<>();
         lasers = EntityFactory.getLasers(nmrOfLasers);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
         timer = new Timer();
@@ -64,7 +62,6 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
-            System.out.println(nmrOfLasers);
             tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
@@ -106,10 +103,6 @@ public class Model {
         if (player.isOutOfBounds(boundX, boundY)) {
             player.reLocate(boundX, boundY);
         }
-    }
-
-    public List<Drawable> getDrawableObjects() {
-        return this.drawableObjects;
     }
 
     static public List<Entity> getEntities() {

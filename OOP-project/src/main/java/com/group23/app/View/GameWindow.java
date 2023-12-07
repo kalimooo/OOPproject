@@ -15,8 +15,6 @@ public class GameWindow extends JFrame{
     
     static final int SCREEN_WIDTH = 800;
     static final int SCREEN_HEIGHT = 700;
-    static final int UPDATE_SPEED = 2000000;
-    static long timeForLastUpdate = System.nanoTime();
     ContentPane contentPane = ContentPane.getContentPane();
     static boolean gameBegun = false;
 
@@ -50,20 +48,7 @@ public class GameWindow extends JFrame{
         }
         return GameWindow.gameWindow;
     }
-
-    // public static void main(String[] args) {
-    //     GameWindow gameWindow = new GameWindow();
-    //     while (true) {
-    //         if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
-    //             if (gameBegun) {
-    //                 PlayingField.getPlayingField().repaint();                    
-    //             }
-    //         }
-    //         timeForLastUpdate = System.nanoTime();
-    //     }
-    // }
     
-
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
         BufferedImage image;
         try {
@@ -117,8 +102,8 @@ public class GameWindow extends JFrame{
     }
 
     public void updateView() {
-        PlayingField.getPlayingField().update();
+        PlayingField.getPlayingField().stateUpdate();
         PlayingMenu.getPlayingMenu().updateTime();
-        gameWindow.repaint();
+        //contentPane.repaint();
     }
 }

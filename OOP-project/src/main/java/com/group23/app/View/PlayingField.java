@@ -35,26 +35,17 @@ public class PlayingField extends JPanel{
     private PlayingField() {
         super(null);
         
-        //setLayout(new BorderLayout());
         add(pm);
 
         sprites = SpriteFactory.getSprites();
         for (Sprite sprite : sprites) {
             add(sprite);
         }
-
-        // playerChar = new JLabel();
-        // playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
-        // playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
-        // add(playerChar);
         
         bgImage = new JLabel();
         bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
         bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
-        add(bgImage);
-
-        
-        
+        //add(bgImage);
 
         setBounds(0,0, fieldWidth, fieldHeight);
         setBackground(Color.black);
@@ -68,12 +59,32 @@ public class PlayingField extends JPanel{
         return PlayingField.playingField;
     }
 
-    public void update() {
-        ArrayList<Point> updatedPositions = SpriteFactory.getPositions();
-        for (int i = 0; i < sprites.size(); i++) {
-            sprites.get(i).setLocation(updatedPositions.get(i));
+    public void stateUpdate() {
+
+        
+        for (int i = sprites.size() - 1; i >= 0 ; i--) {
+            Sprite current = sprites.get(i);
+            current.setVisible(false);
+            sprites.remove(i);
+            remove(current);
         }
-        repaint();
+
+        //bgImage.setVisible(false);
+        //remove(bgImage);
+
+        sprites.addAll(SpriteFactory.getSprites());
+        for (int i = 0; i < sprites.size(); i++) {
+            add(sprites.get(i));
+        }
+        //add(bgImage);
+        //bgImage.setVisible(true);
+        //repaint();
+
+        // ArrayList<Point> updatedPositions = SpriteFactory.getPositions();
+        // for (int i = 0; i < sprites.size(); i++) {
+        //     sprites.get(i).setLocation(updatedPositions.get(i));
+        // }
+        // repaint();
     }
 
     @Override

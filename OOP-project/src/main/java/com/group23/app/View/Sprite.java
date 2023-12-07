@@ -1,7 +1,10 @@
  package com.group23.app.View;
 
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.Laser;
@@ -9,7 +12,13 @@ import com.group23.app.Model.Player;
 
 public class Sprite extends JLabel{
     
-    private String laserBasePath = "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/";
+    private static String laserBasePath = "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/";
+
+    private static ImageIcon blueLaser = GameWindow.loadScaledImage(laserBasePath + "#4deeea.png", 40, 40);
+    private static ImageIcon greenLaser = GameWindow.loadScaledImage(laserBasePath + "#74ee15.png", 40, 40);
+    private static ImageIcon purpleIcon = GameWindow.loadScaledImage(laserBasePath + "#f000ff.png", 40, 40);
+    private static ImageIcon redIcon = GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", 40, 40);
+    private static ImageIcon yellowIcon = GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", 40, 40);
 
     public Sprite(Entity modelObject) {
 
@@ -18,15 +27,15 @@ public class Sprite extends JLabel{
             Laser object = (Laser) modelObject;
             Color color = object.getColor();
             if (color.equals(Color.decode("#4deeea"))) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "#4deeea.png", modelObject.getWidth(), modelObject.getHeight()));
+                setIcon(blueLaser);
             } else if (color.equals(Color.decode("#74ee15"))) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "#74ee15.png", modelObject.getWidth(), modelObject.getHeight()));
+                setIcon(greenLaser);
             } else if (color.equals(Color.decode("#ffe700"))) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", modelObject.getWidth(), modelObject.getHeight()));
+                setIcon(yellowIcon);
             } else if (color.equals(Color.decode("#f000ff"))) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "#f000ff.png", modelObject.getWidth(), modelObject.getHeight()));
+                setIcon(purpleIcon);
             } else if (color.equals(Color.decode("#fc1723"))) {
-                setIcon(GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", modelObject.getWidth(), modelObject.getHeight()));
+                setIcon(redIcon);
             }
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
@@ -36,6 +45,8 @@ public class Sprite extends JLabel{
             setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", modelObject.getWidth(), modelObject.getHeight()));
             setBounds(modelObject.getX(), modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
+        setHorizontalAlignment(SwingConstants.CENTER);
+        setVerticalAlignment(SwingConstants.CENTER);
 
         setBackground(Color.white);
     }

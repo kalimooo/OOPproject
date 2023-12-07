@@ -3,7 +3,6 @@ package com.group23.app.View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -79,7 +78,7 @@ public class PlayingMenu extends JPanel {
     }
 
     public void updateTime() {
-        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time
+        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed, breaks MVC
 
         long minutes = elapsedTime / 60; // Convert to minutes
         long hours = minutes / 60; // Convert to hours

@@ -1,8 +1,7 @@
 package com.group23.app.Model;
 import java.awt.Point;
-import java.awt.Rectangle;
 
-public class Player extends Entity implements Collidable, Moveable {
+public class Player extends Entity implements Moveable {
     private double dx, dy;
 
     private final static int DEFAULT_X = 0;
@@ -56,11 +55,6 @@ public class Player extends Entity implements Collidable, Moveable {
 
 
     // --------------------- Getters -----------------------
-
-    @Override
-    public Rectangle getBounds() {
-        return new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
-    }
 
     public void modifyDx(double dx) {
         this.dx += dx;
