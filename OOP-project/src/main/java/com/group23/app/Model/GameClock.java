@@ -1,10 +1,10 @@
 package com.group23.app.Model;
 
 
-public class Timer {
+public class GameClock {
     private long startTime;
 
-    public Timer() {
+    public GameClock() {
         startTime = 0;
     }
 

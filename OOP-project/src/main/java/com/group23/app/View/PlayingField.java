@@ -3,10 +3,12 @@ package com.group23.app.View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -28,7 +30,7 @@ public class PlayingField extends JPanel{
     JLabel playerChar;
     static boolean isVisible = false;
     List<Sprite> sprites = new ArrayList<Sprite>();
-    JLabel bgImage;
+    private static ImageIcon bgImage = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT);
 
     static PlayingField playingField;
 
@@ -42,9 +44,9 @@ public class PlayingField extends JPanel{
             add(sprite);
         }
         
-        bgImage = new JLabel();
-        bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
-        bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
+        // bgImage = new JLabel();
+        // bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
+        // bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
         //add(bgImage);
 
         setBounds(0,0, fieldWidth, fieldHeight);
@@ -61,24 +63,22 @@ public class PlayingField extends JPanel{
 
     public void stateUpdate() {
 
-        
+        Sprite current;
         for (int i = sprites.size() - 1; i >= 0 ; i--) {
-            Sprite current = sprites.get(i);
-            current.setVisible(false);
-            sprites.remove(i);
+            current = sprites.get(i);
+            //current.setVisible(false);
+            sprites.remove(current);
             remove(current);
+            repaint();
         }
 
-        //bgImage.setVisible(false);
-        //remove(bgImage);
-
-        sprites.addAll(SpriteFactory.getSprites());
-        for (int i = 0; i < sprites.size(); i++) {
+        ArrayList<Sprite> newSprites = SpriteFactory.getSprites();
+        for (int i = 0; i < newSprites.size(); i++) {
+            current = newSprites.get(i);
+            sprites.add(current);
             add(sprites.get(i));
+            current.repaint();
         }
-        //add(bgImage);
-        //bgImage.setVisible(true);
-        //repaint();
 
         // ArrayList<Point> updatedPositions = SpriteFactory.getPositions();
         // for (int i = 0; i < sprites.size(); i++) {
@@ -90,5 +90,6 @@ public class PlayingField extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(bgImage.getImage(), 0, 0, null);
     }
 }

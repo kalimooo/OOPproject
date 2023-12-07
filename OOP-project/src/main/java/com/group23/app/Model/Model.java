@@ -1,8 +1,12 @@
 package com.group23.app.Model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 import com.group23.app.Controller.Subscriber;
 
@@ -21,16 +25,23 @@ public class Model {
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private static Timer timer = new Timer();
+    private static GameClock gameClock = new GameClock();
+    private static Timer timer;
     private static Player player;
+    private static final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds (currently 10 seconds)" 
 
     private static Model model;
 
     private Model() {
         lasers = EntityFactory.getLasers(nmrOfLasers);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
-        timer = new Timer();
+        gameClock = new GameClock();
         Model.model = this;
+        timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                spawnLaser();
+            }
+        });
     }
 
     public static Model getModel() {
@@ -41,11 +52,11 @@ public class Model {
     }
 
     public long getElapsedTimeInSeconds() {
-        return timer.getElapsedTimeInSeconds();
+        return gameClock.getElapsedTimeInSeconds();
     }
 
     public static void restartTimer() {
-        timer.restartTimer();
+        gameClock.restartTimer();
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -109,6 +120,9 @@ public class Model {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
         entities.addAll(lasers);
+        if (entities.size() == 0) {
+            System.out.println("Is empty");
+        }
         return entities;
     }
 
@@ -129,6 +143,7 @@ public class Model {
 
     public static void startGame() {
         Model.gameActive = true;
+        timer.start();
     }
 
     private void spawnLaser() {
