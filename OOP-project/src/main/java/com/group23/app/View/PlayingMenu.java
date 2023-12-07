@@ -101,8 +101,7 @@ public class PlayingMenu extends JPanel {
         UIManager.put("Button.foreground", Color.WHITE);
 
         // Använd HTML-formatering för att ställa in textfärgen till vit
-        String message = "<html><font color='white'>Game over! Your score is: "
-                /* //TODO: hämta tiden här */ + "</font></html>";
+        String message = "<html><font color='white'>Game over! Your score is: " + Model.getModel().getElapsedTimeInSeconds() + "</font></html>";
 
         JOptionPane.showMessageDialog(this, message, "Game Over!", JOptionPane.INFORMATION_MESSAGE);
 
