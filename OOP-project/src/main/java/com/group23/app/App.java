@@ -1,6 +1,5 @@
 package com.group23.app;
 
-import com.group23.app.View.ControllerAdapter;
 import com.group23.app.View.GameWindow;
 
 import com.group23.app.Controller.StateController;

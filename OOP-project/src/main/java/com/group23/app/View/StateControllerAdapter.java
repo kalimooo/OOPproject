@@ -2,7 +2,6 @@ package com.group23.app.View;
 
 import com.group23.app.Controller.StateController;
 import com.group23.app.Controller.Subscriber;
-import com.group23.app.Model.Model;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
