@@ -7,6 +7,8 @@ import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
     private double dx, dy;
+    //private double centerX = Model.SCREEN_WIDTH/2;
+    //private double centerY = Model.SCREEN_HEIGHT/2;
 
     private int startBound;
     public Color laserColor = generateColor();
@@ -22,7 +24,7 @@ public class Laser extends Entity implements Moveable {
         this.y = point.y;
         System.out.println(x + "," + y);
     
-        ArrayList<Double> speed = generateSpeed(x,y);
+        ArrayList<Double> speed = generateSpeed((int)x,(int)y);
 
         this.dx = speed.get(0);
         this.dy = speed.get(1);
@@ -52,24 +54,25 @@ public class Laser extends Entity implements Moveable {
 
     @Override
     public void move() {
+        System.out.println("dx: " + dx + " dy: " + dy + "\n");
+        System.out.println("x: " + x + " y: " + y);
         this.x += dx;
         this.y += dy;
     }
 
     // -------------------------- Getters ----------------------
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
     private ArrayList<Double> generateSpeed(int x, int y){
 
-        // double dx = (x - centerX);
-        // double dy = (y - centerY);
-
+        //double dx = (x - centerX);
+        //double dy = (y - centerY);
 
         // TODO temporary solution, generated starting speed should be modified in relation to the size of the screen
         double dx;
@@ -94,17 +97,21 @@ public class Laser extends Entity implements Moveable {
                 break;
         }
 
-        ArrayList<Double> reArrayList = new ArrayList<Double>();
+        System.out.println("Before normalize dx: " + dx + " dy: " + dy);
+
+       ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
+        
+ 
+        /*ArrayList<Double> reArrayList = new ArrayList<Double>();
 
         reArrayList.add(dx);
-        reArrayList.add(dy);
+        reArrayList.add(dy);*/
 
         return reArrayList;
     }
 
     private double randomDirFactor(int lowerBound, int upperBound){
         
-                // Create a Random object
                 Random random = new Random();
         
                 // Generate a random number within the interval [lowerBound, upperBound]
@@ -182,6 +189,20 @@ public class Laser extends Entity implements Moveable {
     }
     public Point getSpeed() {
         return new Point((int)dx, (int)dy);
+    }
+
+        private ArrayList<Double> normalizeSpeed(double dx, double dy) {
+        double magnitude = Math.sqrt(dx * dx + dy * dy);
+        if (magnitude != 0) {
+            dx /= magnitude;
+            dy /= magnitude;
+        }
+
+        System.out.println("dx: " + dx + " dy: " + dy);
+        ArrayList<Double> reArrayList = new ArrayList<Double>();
+        reArrayList.add(dx);
+        reArrayList.add(dy);
+        return reArrayList;
     }
 
 

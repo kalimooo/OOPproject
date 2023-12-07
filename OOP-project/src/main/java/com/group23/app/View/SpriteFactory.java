@@ -19,7 +19,7 @@ public class SpriteFactory {
     static ArrayList<Point> getPositions() {
         ArrayList<Point> points = new ArrayList<Point>();
         for (Entity entity : Model.getEntities()) {
-            points.add(new Point(entity.getX(), entity.getY()));
+            points.add(new Point((int)entity.getX(),(int) entity.getY()));
         }
         return points;
     }

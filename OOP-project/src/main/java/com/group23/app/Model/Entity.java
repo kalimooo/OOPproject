@@ -1,7 +1,7 @@
 package com.group23.app.Model;
 
 public abstract class Entity {
-    protected int x,y;
+    protected double x,y;
     protected int width,height;
 
     Entity(int x, int y, int width, int height) {
@@ -11,10 +11,10 @@ public abstract class Entity {
         this.height = height;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
-    public int getY() {
+    public double getY() {
         return y;
     }
     public int getWidth() {

@@ -59,7 +59,7 @@ public class Player extends Entity implements Collidable, Moveable {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
+        return new Rectangle((int)this.x, (int)this.y, this.getWidth(), this.getHeight());
     }
 
     public void modifyDx(double dx) {
