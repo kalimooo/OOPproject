@@ -11,10 +11,10 @@ public class Laser extends Entity implements Moveable {
     //private double centerY = Model.SCREEN_HEIGHT/2;
 
     private int startBound;
-    public Color laserColor = generateColor();
+    private Color laserColor = generateColor();
 
-    final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
-    final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
+    private final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
+    private final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
 
     public Laser() {
         super(0, 0, 40, 40);

@@ -8,13 +8,28 @@ public class Player extends Entity implements Collidable, Moveable {
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
+    private int collectibleScore;
+
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
+        collectibleScore = 0;
     }
 
     public Player(int width, int height) {
         this(DEFAULT_X, DEFAULT_Y, width, height);
         
+    }
+
+    public int getCollectibleScore() {
+        return this.collectibleScore;
+    }
+
+    public void incrementCollectibleScore() {
+        this.collectibleScore++;
+    }
+
+    public void resetColletibleScore() {
+        this.collectibleScore = 0;
     }
 
     @Override
