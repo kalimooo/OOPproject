@@ -32,6 +32,10 @@ public class MenuController implements KeyListener,Subscriber{
             view.moveToMenu();
             view.updateView();
         }
+        else if (code == KeyEvent.VK_Q) {
+            // TODO: Show Quit dialog
+            System.out.println("User pressed Q to show quit dialog!");
+        }
         
     }
     @Override

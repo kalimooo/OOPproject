@@ -64,7 +64,7 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
-            System.out.println(nmrOfLasers);
+          //  System.out.println(nmrOfLasers);
             tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
