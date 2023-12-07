@@ -14,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.group23.app.Controller.PlayerController;
+import com.group23.app.Controller.StateController;
+
 public class GameWindow extends JFrame{
     
     public static final int SCREEN_WIDTH = 800;
@@ -22,6 +25,9 @@ public class GameWindow extends JFrame{
     public static final int WINDOW_UPDATE_TIMER = 10; //Time is given in milliseconds
     static boolean gameBegun = false;
     private Timer timer;
+
+    private PlayerControllerAdapter playerControllerAdapter;
+    private StateControllerAdapter stateControllerAdapter;
 
     static private GameWindow gameWindow;
 
@@ -78,6 +84,16 @@ public class GameWindow extends JFrame{
         Graphics g = bi.createGraphics();
         g.drawImage(image, 0, 0, 50, 50, null);
         return new ImageIcon(bi);
+    }
+
+    public void addStateController(StateController stateController) {
+        stateControllerAdapter = new StateControllerAdapter(stateController);
+        addKeyListener(stateControllerAdapter);
+    }
+
+    public void addPlayerController(PlayerController playerController) {
+        playerControllerAdapter = new PlayerControllerAdapter(playerController);
+        addKeyListener(playerControllerAdapter);
     }
 
 

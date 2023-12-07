@@ -20,12 +20,11 @@ public class Model {
 
     private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
-    private int maxLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private static GameClock gameClock = new GameClock();
+    private GameClock gameClock = new GameClock();
     private static Timer timer;
     private static Player player;
     private static final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds (currently 10 seconds)" 
@@ -55,7 +54,7 @@ public class Model {
         return gameClock.getElapsedTimeInSeconds();
     }
 
-    public static void restartTimer() {
+    public void restartTimer() {
         gameClock.restartTimer();
     }
 
@@ -133,7 +132,7 @@ public class Model {
         }
     }
 
-    public static void startGame() {
+    public void startGame() {
         Model.gameActive = true;
         timer.start();
     }

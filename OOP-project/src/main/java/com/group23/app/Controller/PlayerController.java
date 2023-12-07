@@ -6,8 +6,8 @@ public class PlayerController {
     Model model;
     private final static int MOVEMENT_SPEED = 1;//FIX
 
-    public PlayerController() {
-        this.model = Model.getModel();
+    public PlayerController(Model model) {
+        this.model = model;
     }
 
     public void moveRight() {
