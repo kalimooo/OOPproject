@@ -1,5 +1,7 @@
 package com.group23.app.Model;
 
+import java.awt.Rectangle;
+
 public abstract class Entity {
     protected int x,y;
     protected int width,height;
@@ -34,5 +36,19 @@ public abstract class Entity {
             return true;
         }
         return false;
+    }
+
+    public boolean collides(Rectangle targetBounds) {
+        if (this.x < targetBounds.getX() + targetBounds.getWidth() && 
+            this.x + this.width > targetBounds.getX() &&
+            this.y < targetBounds.getY() + targetBounds.getHeight() &&
+            this.y + this.height > targetBounds.getY()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean collides(int x, int y, int width, int height) {
+        return this.collides(new Rectangle(x, y, width, height));
     }
 }
