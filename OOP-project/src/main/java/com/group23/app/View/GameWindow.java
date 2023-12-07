@@ -2,6 +2,8 @@ package com.group23.app.View;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,18 +12,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GameWindow extends JFrame{
     
-    static final int SCREEN_WIDTH = 800;
-    static final int SCREEN_HEIGHT = 700;
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 700;
     ContentPane contentPane = ContentPane.getContentPane();
+    public static final int WINDOW_UPDATE_TIMER = 10; //Time is given in milliseconds
     static boolean gameBegun = false;
+    private Timer timer;
 
     static private GameWindow gameWindow;
 
     private GameWindow() {
         super("Game");
+
+        timer = new Timer(WINDOW_UPDATE_TIMER, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                updateView();
+            }
+        });
 
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
@@ -98,6 +109,7 @@ public class GameWindow extends JFrame{
         PlayingField.getPlayingField().setVisible(true);
         Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(false);
+        timer.start();
         repaint();
     }
 

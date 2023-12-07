@@ -87,14 +87,6 @@ public class Model {
         player.move();
     }
 
-    private void revalidateLasers() {
-        if (nmrOfLasers < maxLasers) {
-            for (int i = 0; i < maxLasers - nmrOfLasers; i++) {
-                spawnLaser();
-            }
-        }
-    }
-
     private void handleCollisions() {
         for (int i = 0; i < lasers.size(); i++) {
             Laser object = lasers.get(i);
