@@ -1,8 +1,12 @@
 package com.group23.app.Model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 import com.group23.app.Controller.Subscriber;
 
@@ -14,7 +18,6 @@ public class Model {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
 
-    private List<Drawable> drawableObjects;
     private static List<Laser> lasers = new ArrayList<Laser>();
     private int nmrOfLasers = 1;
     private int maxLasers = 1;
@@ -22,17 +25,23 @@ public class Model {
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private static Timer timer = new Timer();
+    private static GameClock gameClock = new GameClock();
+    private static Timer timer;
     private static Player player;
+    private static final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds (currently 10 seconds)" 
 
     private static Model model;
 
     private Model() {
-        drawableObjects = new ArrayList<>();
         lasers = EntityFactory.getLasers(nmrOfLasers);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
-        timer = new Timer();
+        gameClock = new GameClock();
         Model.model = this;
+        timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                spawnLaser();
+            }
+        });
     }
 
     public static Model getModel() {
@@ -43,11 +52,11 @@ public class Model {
     }
 
     public long getElapsedTimeInSeconds() {
-        return timer.getElapsedTimeInSeconds();
+        return gameClock.getElapsedTimeInSeconds();
     }
 
     public static void restartTimer() {
-        timer.restartTimer();
+        gameClock.restartTimer();
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -64,7 +73,6 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
-          //  System.out.println(nmrOfLasers);
             tryToSpawnLaser(getElapsedTimeInSeconds());
             moveObjects();
             handleCollisions();
@@ -108,14 +116,13 @@ public class Model {
         }
     }
 
-    public List<Drawable> getDrawableObjects() {
-        return this.drawableObjects;
-    }
-
     static public List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
         entities.addAll(lasers);
+        if (entities.size() == 0) {
+            System.out.println("Is empty");
+        }
         return entities;
     }
 
@@ -136,6 +143,7 @@ public class Model {
 
     public static void startGame() {
         Model.gameActive = true;
+        timer.start();
     }
 
     private void spawnLaser() {
