@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Timer;
-
-import com.group23.app.Controller.Subscriber;
-
 /*
  * Facade class representing the model in its entirety
  */
@@ -22,8 +19,7 @@ public class Model implements StateListener{
     private int maxLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
-    private boolean gameActive = false;
-    private List<Subscriber> subscribers = new ArrayList<Subscriber>();
+    private static boolean gameActive = false;
     private GameClock gameClock = new GameClock();
     private Timer timer;
     private static Player player;
@@ -46,13 +42,13 @@ public class Model implements StateListener{
         //this.powerUPHandler = new PowerUPHandler();
         collectibleItem = new CollectibleItem();
         entities.add(player);
-
-        Model.model = this;
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 maxLasers++;
             }
         });
+
+        Model.model = this;
     }
 
     public static Model getModel() {
@@ -98,6 +94,7 @@ public class Model implements StateListener{
             handleCollisions();
             revalidateLasers();
             System.out.println(player.getCollectibleScore());
+            System.out.println("Hello");
         }
     }
 
@@ -129,17 +126,6 @@ public class Model implements StateListener{
 
     private void gameOver() {
         gameActive = false;
-        notifySubscribers();
-    }
-
-    public void addSubscriber(Subscriber subscriber) {
-        subscribers.add(subscriber);
-    }
-
-    private void notifySubscribers() {
-        for (Subscriber subscriber : subscribers) {
-            subscriber.doAction();
-        }
     }
 
     public void onDeleted() {
@@ -149,5 +135,6 @@ public class Model implements StateListener{
     public void startGame() {
         gameActive = true;
         timer.start();
+        System.out.println(gameActive);
     }
 }
