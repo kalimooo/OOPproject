@@ -20,4 +20,12 @@ public class EntityFactory {
         }
         return lasers;
     }
+
+    static public List<Laser> spawnLasers(int nmrOfLasers) {
+        List<Laser> lasers = new ArrayList<Laser>(nmrOfLasers);
+        for (int i = 0; i < nmrOfLasers; i++) {
+            lasers.add(new Laser());
+        }
+        return lasers;
+    }
 }

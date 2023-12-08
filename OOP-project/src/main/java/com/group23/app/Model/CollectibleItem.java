@@ -25,4 +25,12 @@ public class CollectibleItem extends Entity{
     public Rectangle getBounds() {
         return new Rectangle((int) this.x,(int) this.y, this.width, this.height);
     }
+
+    @Override
+    public void update() {}
+
+    @Override
+    public void accept(Visitor v) {
+        v.resolveCollectibleItemCollision(this);
+    }
 }

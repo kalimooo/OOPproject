@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class Player extends Entity implements Moveable{
+public class Player extends Entity implements Moveable, Visitor {
     private double dx, dy;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
+
+    private final int BOUNDX = Model.SCREEN_WIDTH;
+    private final int BOUNDY = Model.SCREEN_HEIGHT;
 
     private int collectibleScore;
 
@@ -49,6 +52,7 @@ public class Player extends Entity implements Moveable{
     public void move() {
         x += dx;
         y += dy;
+        System.out.println(x + "," + y);
     }
 
     public void setSpeed(double dx, double dy) {
@@ -65,7 +69,7 @@ public class Player extends Entity implements Moveable{
         return true;
     }
 
-    public void reLocate(int boundX, int boundY) {
+    public void relocate(int boundX, int boundY) {
 
         if (x < 0) {
             x = 0;
@@ -109,4 +113,32 @@ public class Player extends Entity implements Moveable{
     public Point getSpeed() {
         return new Point((int)this.dx, (int)this.dy);
     }
+
+    @Override
+    public void accept(Visitor v) {
+        v.resolvePlayerCollision(this);
+    }
+
+    public void resolveLaserCollision(Laser laser) {
+        setInactive();
+        laser.setInactive();
+    }
+    public void resolvePowerUpCollision(PowerUp powerUp) {
+        powerUp.setInactive();
+        // TODO add functionality for modifying player state when power is picked up
+    }
+    public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
+        collectibleItem.setInactive();
+        this.incrementCollectibleScore();
+    }
+
+    @Override
+    public void update() {
+        move();
+        if (isOutOfBounds(BOUNDX, BOUNDY)) {
+            relocate(BOUNDX, BOUNDY);
+        }
+    }
+
+    public void resolvePlayerCollision(Player player) {}
 }

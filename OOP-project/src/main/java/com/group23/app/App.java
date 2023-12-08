@@ -12,23 +12,14 @@ import com.group23.app.Model.Model;
  */
 public class App
 {
-    private Model model;
-    private GameWindow gameWindow;
-
-    private App() {
-        super();
-        model = Model.getModel();
-        gameWindow = GameWindow.getGameWindow();
-        gameWindow.addStateController(new StateController(model));
-        gameWindow.addPlayerController(new PlayerController(model));
-    }
     public static void main( String[] args )
     {
-        App myApp = new App();
-        myApp.gameLoop();
-    }
+        Model model = Model.getModel();
 
-    public void gameLoop() {
+        GameWindow window = GameWindow.getGameWindow();
+        window.addStateController(new StateController(model));
+        window.addPlayerController(new PlayerController(model));
+
         long timeSinceLastUpdate = System.currentTimeMillis();
         while (true) {
             long time = System.currentTimeMillis();
@@ -38,5 +29,4 @@ public class App
             }
         }
     }
-
 }

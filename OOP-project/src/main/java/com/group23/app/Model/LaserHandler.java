@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 public class LaserHandler {
-    private static List<Laser> lasers;
+    private List<Entity> lasers;
 
     private int boundX, boundY;
     
@@ -12,13 +12,13 @@ public class LaserHandler {
     //private int nmrOfLasers = 0;
     //private int maxLasers = 10;
 
-    public LaserHandler(int boundX, int boundY) {
-        lasers = EntityFactory.getLasers(1);
+    public LaserHandler(int boundX, int boundY, List<Entity> lasers) {
+        this.lasers = lasers;
         this.boundX = boundX;
         this.boundY = boundY;
     }
 
-    public static List<Laser> getLasers() {
+    public List<Entity> getLasers() {
         return lasers;
     }
 
