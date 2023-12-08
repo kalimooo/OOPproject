@@ -1,10 +1,11 @@
 package com.group23.app.Model;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class Player extends Entity implements Moveable {
+public class Player extends Entity implements Moveable{
     private double dx, dy;
 
     private final static int DEFAULT_X = 0;
@@ -89,7 +90,6 @@ public class Player extends Entity implements Moveable {
 
     // --------------------- Getters -----------------------
 
-    @Override
     public Rectangle getBounds() {
         return new Rectangle((int)this.x, (int)this.y, this.getWidth(), this.getHeight());
     }

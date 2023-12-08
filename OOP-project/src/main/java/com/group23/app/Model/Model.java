@@ -50,7 +50,7 @@ public class Model {
         Model.model = this;
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                spawnLaser();
+                //spawnLaser();
                 spawnShield();
             }
         });

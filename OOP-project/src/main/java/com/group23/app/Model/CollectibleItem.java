@@ -3,7 +3,7 @@ package com.group23.app.Model;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class CollectibleItem extends Entity implements Collidable{
+public class CollectibleItem extends Entity{
     
     public CollectibleItem(int x, int y, int width, int height) {
         super(x, y, width, height);
