@@ -23,6 +23,6 @@ public class CollectibleItem extends Entity implements Collidable{
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(this.x, this.y, this.width, this.height);
+        return new Rectangle((int) this.x,(int) this.y, this.width, this.height);
     }
 }

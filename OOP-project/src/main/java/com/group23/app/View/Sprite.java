@@ -3,6 +3,7 @@
 import java.awt.Color;
 import javax.swing.JLabel;
 
+import com.group23.app.Model.CollectibleItem;
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.Laser;
 import com.group23.app.Model.Player;
@@ -28,6 +29,9 @@ public class Sprite extends JLabel{
             } else if (color.equals(Color.decode("#fc1723"))) {
                 setIcon(GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", modelObject.getWidth(), modelObject.getHeight()));
             }
+            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
+        } else if (modelObject instanceof CollectibleItem) {
+            setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Coin1.png", modelObject.getWidth(), modelObject.getHeight()));
             setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
 

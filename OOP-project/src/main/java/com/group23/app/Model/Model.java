@@ -24,6 +24,7 @@ public class Model {
     private static Model model;
 
     private static LaserHandler laserHandler;
+    private static CollectibleItem collectibleItem;
     //private CollectibleHandler collectibleHandler;
     //private PowerUPHandler powerUPHandler;
 
@@ -31,9 +32,10 @@ public class Model {
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
         timer = new Timer();
 
-        this.laserHandler = new LaserHandler(boundX, boundY);
+        laserHandler = new LaserHandler(boundX, boundY);
         //this.collectibleHandler = new CollectibleHandler();
         //this.powerUPHandler = new PowerUPHandler();
+        collectibleItem = new CollectibleItem();
 
         Model.model = this;
     }
@@ -70,6 +72,7 @@ public class Model {
             updateObjects();
             handleCollisions();
             //revalidateLasers();
+            System.out.println(player.getCollectibleScore());
         }
     }
 
@@ -84,6 +87,10 @@ public class Model {
         if (laserHandler.isHitByLaser(player)) {
             //gameOver();
         }
+
+        if (collectibleItem.collides(player)) {
+            player.incrementCollectibleScore();
+        }
         
         if (player.isOutOfBounds(boundX, boundY)) {
             player.reLocate(boundX, boundY);
@@ -94,6 +101,7 @@ public class Model {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
         entities.addAll(laserHandler.getLasers());
+        entities.add(collectibleItem);
         return entities;
     }
 
