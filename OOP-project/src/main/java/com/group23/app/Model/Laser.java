@@ -57,15 +57,15 @@ public class Laser extends Entity implements Moveable {
     }
 
     // -------------------------- Getters ----------------------
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
-    private ArrayList<Double> generateSpeed(int x, int y){
+    private ArrayList<Double> generateSpeed(double x, double y){
 
         // double dx = (x - centerX);
         // double dy = (y - centerY);
