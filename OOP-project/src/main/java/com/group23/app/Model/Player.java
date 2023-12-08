@@ -1,8 +1,10 @@
 package com.group23.app.Model;
 import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
-public class Player extends Entity implements Collidable, Moveable {
+public class Player extends Entity implements Moveable {
     private double dx, dy;
 
     private final static int DEFAULT_X = 0;
@@ -10,9 +12,19 @@ public class Player extends Entity implements Collidable, Moveable {
 
     private int collectibleScore;
 
+    private Timer powerTimer;
+
+    private boolean isIntangible = false;
+
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
         collectibleScore = 0;
+        powerTimer = new Timer(5000, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                isIntangible = false;
+                powerTimer.stop();
+            }
+        });
     }
 
     public Player(int width, int height) {
@@ -69,6 +81,11 @@ public class Player extends Entity implements Collidable, Moveable {
         }
     }
 
+    public void setIntangible() {
+        isIntangible = true;
+        powerTimer.start();
+    }
+
 
     // --------------------- Getters -----------------------
 
@@ -79,6 +96,10 @@ public class Player extends Entity implements Collidable, Moveable {
 
     public void modifyDx(double dx) {
         this.dx += dx;
+    }
+
+    public boolean isIntangible() {
+        return isIntangible;
     }
 
     public void modifyDy(double dy) {

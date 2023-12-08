@@ -1,36 +1,32 @@
-package com.group23.app.Controller;
+package com.group23.app.View;
 
+import com.group23.app.Controller.StateController;
+import com.group23.app.Controller.Subscriber;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.group23.app.Model.Model;
-import com.group23.app.View.GameWindow;
+public class StateControllerAdapter implements KeyListener, Subscriber{
+    private StateController stateController;
 
-public class MenuController implements KeyListener,Subscriber{
-
-
-    GameWindow view = GameWindow.getGameWindow();
-
-    public MenuController() {
-        super();
+    public StateControllerAdapter(StateController stateController) {
+        this.stateController = stateController;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if (code == KeyEvent.VK_ENTER) {
-            Model.restartTimer();
-            view.moveToGame();
-            view.updateView();
-            Model.startGame();
+            stateController.startGame();
         }
         else if (code == KeyEvent.VK_T) {
-            view.moveToTutorial();
-            view.updateView();
+            stateController.showTutorial();
         }
         else if (code == KeyEvent.VK_ESCAPE) {
-            view.moveToMenu();
-            view.updateView();
+            stateController.showMainScreen();
+        }
+        else if (code == KeyEvent.VK_Q) {
+            // TODO: Show Quit dialog
+            System.out.println("User pressed Q to show quit dialog!");
         }
         
     }

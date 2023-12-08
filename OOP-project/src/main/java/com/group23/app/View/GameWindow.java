@@ -2,6 +2,8 @@ package com.group23.app.View;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,20 +12,33 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import com.group23.app.Controller.PlayerController;
+import com.group23.app.Controller.StateController;
 
 public class GameWindow extends JFrame{
     
-    static final int SCREEN_WIDTH = 800;
-    static final int SCREEN_HEIGHT = 700;
-    static final int UPDATE_SPEED = 2000000;
-    static long timeForLastUpdate = System.nanoTime();
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 700;
     ContentPane contentPane = ContentPane.getContentPane();
+    public static final int WINDOW_UPDATE_TIMER = 10; //Time is given in milliseconds
     static boolean gameBegun = false;
+    private Timer timer;
+
+    private PlayerControllerAdapter playerControllerAdapter;
+    private StateControllerAdapter stateControllerAdapter;
 
     static private GameWindow gameWindow;
 
     private GameWindow() {
         super("Game");
+
+        timer = new Timer(WINDOW_UPDATE_TIMER, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                updateView();
+            }
+        });
 
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
@@ -50,20 +65,7 @@ public class GameWindow extends JFrame{
         }
         return GameWindow.gameWindow;
     }
-
-    // public static void main(String[] args) {
-    //     GameWindow gameWindow = new GameWindow();
-    //     while (true) {
-    //         if (System.nanoTime() - timeForLastUpdate > UPDATE_SPEED) {
-    //             if (gameBegun) {
-    //                 PlayingField.getPlayingField().repaint();                    
-    //             }
-    //         }
-    //         timeForLastUpdate = System.nanoTime();
-    //     }
-    // }
     
-
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
         BufferedImage image;
         try {
@@ -82,6 +84,16 @@ public class GameWindow extends JFrame{
         Graphics g = bi.createGraphics();
         g.drawImage(image, 0, 0, 50, 50, null);
         return new ImageIcon(bi);
+    }
+
+    public void addStateController(StateController stateController) {
+        stateControllerAdapter = new StateControllerAdapter(stateController);
+        addKeyListener(stateControllerAdapter);
+    }
+
+    public void addPlayerController(PlayerController playerController) {
+        playerControllerAdapter = new PlayerControllerAdapter(playerController);
+        addKeyListener(playerControllerAdapter);
     }
 
 
@@ -113,12 +125,13 @@ public class GameWindow extends JFrame{
         PlayingField.getPlayingField().setVisible(true);
         Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(false);
+        timer.start();
         repaint();
     }
 
     public void updateView() {
-        PlayingField.getPlayingField().update();
+        PlayingField.getPlayingField().stateUpdate();
         PlayingMenu.getPlayingMenu().updateTime();
-        gameWindow.repaint();
+        //contentPane.repaint();
     }
 }

@@ -69,7 +69,7 @@ public class Laser extends Entity implements Moveable {
         return this.y;
     }
 
-    private ArrayList<Double> generateSpeed(int x, int y){
+    private ArrayList<Double> generateSpeed(double x, double y){
 
         //double dx = (x - centerX);
         //double dy = (y - centerY);

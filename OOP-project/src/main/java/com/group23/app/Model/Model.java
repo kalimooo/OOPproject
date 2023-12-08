@@ -1,8 +1,12 @@
 package com.group23.app.Model;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 import com.group23.app.Controller.Subscriber;
 
@@ -14,12 +18,17 @@ public class Model {
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
 
+    private static List<Laser> lasers = new ArrayList<Laser>();
+    private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
+    private int nmrOfLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private List<Subscriber> subscribers = new ArrayList<Subscriber>();
-    private static Timer timer = new Timer();
+    private GameClock gameClock = new GameClock();
+    private static Timer timer;
     private static Player player;
+    private static final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds (currently 10 seconds)" 
 
     private static Model model;
 
@@ -29,8 +38,9 @@ public class Model {
     //private PowerUPHandler powerUPHandler;
 
     private Model() {
+        lasers = EntityFactory.getLasers(nmrOfLasers);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
-        timer = new Timer();
+        gameClock = new GameClock();
 
         laserHandler = new LaserHandler(boundX, boundY);
         //this.collectibleHandler = new CollectibleHandler();
@@ -38,6 +48,12 @@ public class Model {
         collectibleItem = new CollectibleItem();
 
         Model.model = this;
+        timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                spawnLaser();
+                spawnShield();
+            }
+        });
     }
 
     public static Model getModel() {
@@ -47,12 +63,16 @@ public class Model {
         return model;
     }
 
-    public long getElapsedTimeInSeconds() {
-        return timer.getElapsedTimeInSeconds();
+    private void spawnShield() {
+        powerUps.add(new PowerUp(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
-    public static void restartTimer() {
-        timer.restartTimer();
+    public long getElapsedTimeInSeconds() {
+        return gameClock.getElapsedTimeInSeconds();
+    }
+
+    public void restartTimer() {
+        gameClock.restartTimer();
     }
 
     public void updatePlayerSpeed(double dx, double dy) {
@@ -85,7 +105,9 @@ public class Model {
     // TODO Add CollisionHandler class that handles collisions
     private void handleCollisions() {
         if (laserHandler.isHitByLaser(player)) {
-            //gameOver();
+                if (!player.isIntangible()) {
+                //gameOver();    
+                }
         }
 
         if (collectibleItem.collides(player)) {
@@ -100,6 +122,7 @@ public class Model {
     public static List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
+        entities.addAll(powerUps);
         entities.addAll(laserHandler.getLasers());
         entities.add(collectibleItem);
         return entities;
@@ -120,7 +143,7 @@ public class Model {
         }
     }
 
-    public static void startGame() {
+    public void startGame() {
         Model.gameActive = true;
     }
 }
