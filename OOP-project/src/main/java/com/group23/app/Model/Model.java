@@ -19,6 +19,7 @@ public class Model {
     public static final int SCREEN_HEIGHT = 700;
 
     private static List<Laser> lasers = new ArrayList<Laser>();
+    private static List<PowerUp> powerUps = new ArrayList<PowerUp>();
     private int nmrOfLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
@@ -39,6 +40,7 @@ public class Model {
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 spawnLaser();
+                spawnShield();
             }
         });
     }
@@ -48,6 +50,10 @@ public class Model {
             return new Model();
         }
         return model;
+    }
+
+    private void spawnShield() {
+        powerUps.add(new PowerUp(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
     public long getElapsedTimeInSeconds() {
@@ -91,7 +97,9 @@ public class Model {
             Laser object = lasers.get(i);
 
             if (object.collides(player)) {
-                //gameOver();
+                if (!player.isIntangible()) {
+                    gameOver();    
+                }
             }
 
             else if (object.isOutOfBounds(boundX, boundY)) {
@@ -100,6 +108,14 @@ public class Model {
                 nmrOfLasers--;
                 spawnLaser();
             }
+        }
+
+        for (int i = 0; i < powerUps.size(); i++) {
+            PowerUp currPowerUp = powerUps.get(i);
+            if (currPowerUp.collides(player)) {
+                player.setIntangible();
+                powerUps.remove(currPowerUp);
+            } 
         }
         
         if (player.isOutOfBounds(boundX, boundY)) {
@@ -110,10 +126,8 @@ public class Model {
     static public List<Entity> getEntities() {
         ArrayList<Entity> entities = new ArrayList<Entity>();
         entities.add(player);
+        entities.addAll(powerUps);
         entities.addAll(lasers);
-        if (entities.size() == 0) {
-            System.out.println("Is empty");
-        }
         return entities;
     }
 

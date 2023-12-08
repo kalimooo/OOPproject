@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.Laser;
 import com.group23.app.Model.Player;
+import com.group23.app.Model.PowerUp;
 
 public class Sprite extends JLabel{
     
@@ -19,6 +20,9 @@ public class Sprite extends JLabel{
     private static ImageIcon purpleIcon = GameWindow.loadScaledImage(laserBasePath + "#f000ff.png", 40, 40);
     private static ImageIcon redIcon = GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", 40, 40);
     private static ImageIcon yellowIcon = GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", 40, 40);
+    private static ImageIcon shieldIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/shield.png", 40, 40);
+    private static ImageIcon playerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", 40, 40);
+    private static ImageIcon shieldedPlayerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9BwithShield.png.png", 40, 40);
 
     public Sprite(Entity modelObject) {
 
@@ -42,7 +46,18 @@ public class Sprite extends JLabel{
 
         // Logic for painting the Player
         else if (modelObject instanceof Player) {
-            setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", modelObject.getWidth(), modelObject.getHeight()));
+            if (((Player)modelObject).isIntangible()) {
+                setIcon(shieldedPlayerIcon);
+            }
+            else {
+                setIcon(playerIcon);
+            }
+            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
+        }
+
+        // Logic for painting a shield PowerUp
+        else if (modelObject instanceof PowerUp) {
+            setIcon(shieldIcon);
             setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
         setHorizontalAlignment(SwingConstants.CENTER);

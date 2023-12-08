@@ -56,7 +56,6 @@ public class PlayingField extends JPanel{
         Sprite current;
         for (int i = sprites.size() - 1; i >= 0 ; i--) {
             current = sprites.get(i);
-            //current.setVisible(false);
             sprites.remove(current);
             remove(current);
             repaint();
@@ -69,12 +68,6 @@ public class PlayingField extends JPanel{
             add(sprites.get(i));
             current.repaint();
         }
-
-        // ArrayList<Point> updatedPositions = SpriteFactory.getPositions();
-        // for (int i = 0; i < sprites.size(); i++) {
-        //     sprites.get(i).setLocation(updatedPositions.get(i));
-        // }
-        // repaint();
     }
 
     @Override
