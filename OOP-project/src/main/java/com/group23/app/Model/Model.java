@@ -98,7 +98,7 @@ public class Model {
 
             if (object.collides(player)) {
                 if (!player.isIntangible()) {
-                    gameOver();    
+                    //gameOver();    
                 }
             }
 
