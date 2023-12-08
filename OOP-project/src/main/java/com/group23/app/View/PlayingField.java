@@ -52,7 +52,6 @@ public class PlayingField extends JPanel{
     }
 
     public void stateUpdate() {
-
         Sprite current;
         for (int i = sprites.size() - 1; i >= 0 ; i--) {
             current = sprites.get(i);

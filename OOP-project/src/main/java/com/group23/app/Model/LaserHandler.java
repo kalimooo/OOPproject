@@ -26,7 +26,7 @@ public class LaserHandler {
         for (Laser laser : lasers) {
             laser.move();
 
-            if (laser.isOutOfBounds(0, 0)) {
+            if (laser.isOutOfBounds(boundX, boundY)) {
                 lasers.remove(laser);
 
                 //TODO remove this when we can spawn additional lasers
