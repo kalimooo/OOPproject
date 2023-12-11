@@ -49,7 +49,7 @@ public class GameWindow extends JFrame {
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
-        loadBackgroundMusic("C:\\project\\OOPproject\\OOP-project\\src\\main\\java\\com\\group23\\app\\View\\music\\track1.wav"); // TODO change to variable
+        loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); // TODO change to variable
         playBackgroundMusic();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
