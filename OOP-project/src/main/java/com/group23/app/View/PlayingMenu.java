@@ -108,7 +108,7 @@ public class PlayingMenu extends JPanel {
         return PlayingMenu.playingMenu;
     }
 
-    public void updateTime() {
+    public void updateScore() {
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed, breaks MVC
         this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
