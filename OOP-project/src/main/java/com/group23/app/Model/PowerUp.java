@@ -24,5 +24,13 @@ public class PowerUp extends Entity{
 
         return new Point((int)(innerBoundXMin + (randomX * innerBoundXMax)) , (int)(innerBoundYMin + (randomY * innerBoundYMax)));
     }
+
+    @Override
+    public void update() {}
+
+    @Override
+    public void accept(Visitor v) {
+        v.resolvePowerUpCollision(this);
+    }
     
 }

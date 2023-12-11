@@ -1,10 +1,14 @@
 package com.group23.app.Model;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Entity {
     protected double x,y;
     protected int width,height;
+    private boolean isActive = true;
+    protected List<StateListener> listeners = new ArrayList<StateListener>();
 
     Entity(double x, double y, int width, int height) {
         this.x = x;
@@ -12,6 +16,8 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
     }
+
+    public abstract void accept(Visitor v);
 
     public double getX() {
         return x;
@@ -24,6 +30,14 @@ public abstract class Entity {
     }
     public int getHeight() {
         return height;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    protected void setInactive() {
+        isActive = false;
     }
 
     // If any corner of one Entity is within any corner of another Entity, they are colliding
@@ -51,4 +65,7 @@ public abstract class Entity {
     public boolean collides(int x, int y, int width, int height) {
         return this.collides(new Rectangle(x, y, width, height));
     }
+
+    public abstract void update();
+    
 }

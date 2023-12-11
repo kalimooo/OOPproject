@@ -16,6 +16,7 @@ public class PlayingField extends JPanel{
     static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
 
     static PlayingMenu pm = PlayingMenu.getPlayingMenu();
+    private SpriteFactory spriteFactory = new SpriteFactory();
     
     JLabel playerChar;
     static boolean isVisible = false;
@@ -29,7 +30,7 @@ public class PlayingField extends JPanel{
         
         add(pm);
 
-        sprites = SpriteFactory.getSprites();
+        sprites = spriteFactory.getSprites();
         for (Sprite sprite : sprites) {
             add(sprite);
         }
@@ -60,7 +61,7 @@ public class PlayingField extends JPanel{
             repaint();
         }
 
-        ArrayList<Sprite> newSprites = SpriteFactory.getSprites();
+        ArrayList<Sprite> newSprites = spriteFactory.getSprites();
         for (int i = 0; i < newSprites.size(); i++) {
             current = newSprites.get(i);
             sprites.add(current);

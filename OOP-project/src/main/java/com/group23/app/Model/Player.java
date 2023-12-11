@@ -1,15 +1,21 @@
 package com.group23.app.Model;
+import java.util.List;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.Timer;
 
-public class Player extends Entity implements Moveable{
+public class Player extends Entity implements Moveable, Visitor {
     private double dx, dy;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
+
+    private final int BOUNDX = Model.SCREEN_WIDTH;
+    private final int BOUNDY = Model.SCREEN_HEIGHT;
 
     private int collectibleScore;
 
@@ -17,9 +23,10 @@ public class Player extends Entity implements Moveable{
 
     private boolean isIntangible = false;
 
-    public Player(int x, int y, int width, int height) {
+    public Player(int x, int y, int width, int height, StateListener stateListener) {
         super(x, y, width, height);
         collectibleScore = 0;
+        listeners.add(stateListener);
         powerTimer = new Timer(5000, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 isIntangible = false;
@@ -29,8 +36,7 @@ public class Player extends Entity implements Moveable{
     }
 
     public Player(int width, int height) {
-        this(DEFAULT_X, DEFAULT_Y, width, height);
-        
+        this(DEFAULT_X, DEFAULT_Y, width, height,null);
     }
 
     public int getCollectibleScore() {
@@ -65,7 +71,7 @@ public class Player extends Entity implements Moveable{
         return true;
     }
 
-    public void reLocate(int boundX, int boundY) {
+    public void relocate(int boundX, int boundY) {
 
         if (x < 0) {
             x = 0;
@@ -109,4 +115,34 @@ public class Player extends Entity implements Moveable{
     public Point getSpeed() {
         return new Point((int)this.dx, (int)this.dy);
     }
+
+    @Override
+    public void accept(Visitor v) {
+        v.resolvePlayerCollision(this);
+    }
+
+    public void resolveLaserCollision(Laser laser) {
+        setInactive();
+        laser.setInactive();
+        for (StateListener stateListener : listeners) {
+            stateListener.onDeleted(this);
+        }
+    }
+    public void resolvePowerUpCollision(PowerUp powerUp) {
+        powerUp.setInactive();
+    }
+    public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
+        collectibleItem.setInactive();
+        this.incrementCollectibleScore();
+    }
+
+    @Override
+    public void update() {
+        move();
+        if (isOutOfBounds(BOUNDX, BOUNDY)) {
+            relocate(BOUNDX, BOUNDY);
+        }
+    }
+
+    public void resolvePlayerCollision(Player player) {}
 }

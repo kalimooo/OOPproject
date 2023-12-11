@@ -12,6 +12,7 @@ public class Laser extends Entity implements Moveable {
 
     private int startBound;
     private Color laserColor = generateColor();
+    private List<StateListener> listeners = new ArrayList<StateListener>();
 
     private final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
     private final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
@@ -21,16 +22,14 @@ public class Laser extends Entity implements Moveable {
         startBound = (int) (Math.random() * 4);
         Point point = generateXYPoint();
         this.x = point.x;
-        this.y = point.y;
-        System.out.println(x + "," + y);
-    
+        this.y = point.y;    
         ArrayList<Double> speed = generateSpeed((int)x,(int)y);
 
         this.dx = speed.get(0);
         this.dy = speed.get(1);
     }
 
-        public Laser(int x, int y) {
+    public Laser(int x, int y) {
         super(x, y, 60, 60);
         //Point point = generateXYPoint();
         //this.x = point.x;
@@ -40,6 +39,10 @@ public class Laser extends Entity implements Moveable {
 
         this.dx = speed.get(0);
         this.dy = speed.get(1);
+    }
+
+    public void addStateListener(StateListener stateListener) {
+        listeners.add(stateListener);
     }
 
 
@@ -54,8 +57,6 @@ public class Laser extends Entity implements Moveable {
 
     @Override
     public void move() {
-        System.out.println("dx: " + dx + " dy: " + dy + "\n");
-        System.out.println("x: " + x + " y: " + y);
         this.x += dx;
         this.y += dy;
     }
@@ -97,8 +98,6 @@ public class Laser extends Entity implements Moveable {
                 break;
         }
 
-        System.out.println("Before normalize dx: " + dx + " dy: " + dy);
-
        ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
         
  
@@ -121,20 +120,6 @@ public class Laser extends Entity implements Moveable {
     }
 
   private Color generateColor() {
-      /*#4deeea    (77,238,234)
-        #74ee15    (116,238,21)
-        #ffe700    (255,231,0)
-        #f000ff    (240,0,255) 
-        #fc1723    (252,23,35)
-        */
-
-        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
-        int random = (int) (randomDirFactor(0, 3));
-        // List<Color> colors = new ArrayList<Color>();
-        // colors.add(Color.BLUE);
-        // colors.add(Color.YELLOW);
-        // colors.add(Color.RED);
-        // colors.add(Color.GREEN);
 
         List<String> colors = new ArrayList<String>();
         colors.add("#4deeea");
@@ -143,7 +128,7 @@ public class Laser extends Entity implements Moveable {
         colors.add("#f000ff");
         colors.add("#fc1723");
         
-        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 4)));
+        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 5)));
         return randomColor;
     }
 
@@ -152,6 +137,7 @@ public class Laser extends Entity implements Moveable {
     }
 
     private Point generateXYPoint(){
+
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
         int side = (int) (Math.random() * 4);
 
@@ -197,17 +183,25 @@ public class Laser extends Entity implements Moveable {
             dx /= magnitude;
             dy /= magnitude;
         }
-
-        System.out.println("dx: " + dx + " dy: " + dy);
         ArrayList<Double> reArrayList = new ArrayList<Double>();
         reArrayList.add(dx);
         reArrayList.add(dy);
         return reArrayList;
     }
 
+    @Override
+    public void update() {
+        move();
+        if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
+            setInactive();
+            for (StateListener stateListener : listeners) {
+                stateListener.onDeleted(this);
+            }
+        }
+    }
 
-
-    /*public boolean collides(Sprite sprite) {
-        return false;
-    }*/
+    @Override
+    public void accept(Visitor v) {
+        v.resolveLaserCollision(this);
+    }
 }
