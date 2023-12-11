@@ -137,7 +137,7 @@ public class Laser extends Entity implements Moveable {
     }
 
     private Point generateXYPoint(){
-        
+
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
         int side = (int) (Math.random() * 4);
 
@@ -195,7 +195,7 @@ public class Laser extends Entity implements Moveable {
         if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             setInactive();
             for (StateListener stateListener : listeners) {
-                stateListener.onDeleted();
+                stateListener.onDeleted(this);
             }
         }
     }

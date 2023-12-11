@@ -15,7 +15,6 @@ public class Model implements StateListener{
     public static final int SCREEN_HEIGHT = 700;
 
     private List<Entity> entities = new ArrayList<Entity>();
-    public static int nmrOfLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
@@ -27,17 +26,21 @@ public class Model implements StateListener{
     private static Model model;
 
     private Model() {
-        Laser startLaser = EntityFactory.spawnLaser();
-        startLaser.addStateListener(this);
-        entities.add(startLaser);
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
-        gameClock = new GameClock();
+        // Adding the first laser to the model
+        entities.add(EntityFactory.spawnLaser(this));
+
+        // Creating and adding the player to the model
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40, this);
         entities.add(player);
+
+        // The game clock which keeps track of the elapsed time in the game
+        gameClock = new GameClock();
+
+        // Timer for creating lasers. Once every TIME_FOR_LASERS milliseconds it creates a laser. As of now this means a new laser
+        // every ten seconds
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                Laser newLaser = EntityFactory.spawnLaser();
-                newLaser.addStateListener(model);
-                entities.add(newLaser);
+                entities.add(EntityFactory.spawnLaser(model));
             }
         });
 
@@ -108,12 +111,12 @@ public class Model implements StateListener{
         gameActive = false;
     }
 
-    public void onDeleted() {
-        nmrOfLasers--;
-        Laser newLaser = EntityFactory.spawnLaser();
-        newLaser.addStateListener(this);
-        entities.add(newLaser);
-        nmrOfLasers++;
+    public void onDeleted(Entity entity) {
+        if (entity instanceof Laser) {
+            entities.add(EntityFactory.spawnLaser(this));
+        } else {
+            gameOver();
+        }
     }
 
     public void startGame() {

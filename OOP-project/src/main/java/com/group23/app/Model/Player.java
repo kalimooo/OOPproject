@@ -1,8 +1,11 @@
 package com.group23.app.Model;
+import java.util.List;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.Timer;
 
 public class Player extends Entity implements Moveable, Visitor {
@@ -14,15 +17,18 @@ public class Player extends Entity implements Moveable, Visitor {
     private final int BOUNDX = Model.SCREEN_WIDTH;
     private final int BOUNDY = Model.SCREEN_HEIGHT;
 
+    private final List<StateListener> listeners = new ArrayList<StateListener>();
+
     private int collectibleScore;
 
     private Timer powerTimer;
 
     private boolean isIntangible = false;
 
-    public Player(int x, int y, int width, int height) {
+    public Player(int x, int y, int width, int height, StateListener stateListener) {
         super(x, y, width, height);
         collectibleScore = 0;
+        listeners.add(stateListener);
         powerTimer = new Timer(5000, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 isIntangible = false;
@@ -32,8 +38,7 @@ public class Player extends Entity implements Moveable, Visitor {
     }
 
     public Player(int width, int height) {
-        this(DEFAULT_X, DEFAULT_Y, width, height);
-        
+        this(DEFAULT_X, DEFAULT_Y, width, height,null);
     }
 
     public int getCollectibleScore() {
@@ -121,6 +126,9 @@ public class Player extends Entity implements Moveable, Visitor {
     public void resolveLaserCollision(Laser laser) {
         setInactive();
         laser.setInactive();
+        for (StateListener stateListener : listeners) {
+            stateListener.onDeleted(this);
+        }
     }
     public void resolvePowerUpCollision(PowerUp powerUp) {
         powerUp.setInactive();
