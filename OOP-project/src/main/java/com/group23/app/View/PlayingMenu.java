@@ -109,16 +109,7 @@ public class PlayingMenu extends JPanel {
 
     public void updateTime() {
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed, breaks MVC
-
-        long minutes = elapsedTime / 60; // Convert to minutes
-        long hours = minutes / 60; // Convert to hours
-
-        String formattedTime = String.format("%02d:%02d:%02d", hours, minutes % 60, elapsedTime % 60); // Format the
-                                                                                                       // time to
-                                                                                                       // 00:00:00
-                                                                                                       // format
-
-        this.scoreLabel.setText(formattedTime); // Update the helloLabel
+        this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
     private void showQuitDialog() {
