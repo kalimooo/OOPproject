@@ -44,7 +44,7 @@ public class PlayingMenu extends JPanel {
 
         add(helloLabel, BorderLayout.WEST); // Placera helloLabel längst till vänster
 
-        quitButton = new JButton("QUIT");
+        quitButton = new JButton("[Q] QUIT");
         JPanel quitButtonPanel = new JPanel(new BorderLayout());
         quitButtonPanel.add(quitButton, BorderLayout.EAST);
         quitButtonPanel.setBorder(new EmptyBorder(0, 0, 0, 40));
