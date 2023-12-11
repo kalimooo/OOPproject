@@ -4,8 +4,6 @@ import com.group23.app.View.GameWindow;
 
 import com.group23.app.Controller.StateController;
 
-import javax.swing.Timer;
-
 import com.group23.app.Controller.PlayerController;
 
 import com.group23.app.Model.Model;
@@ -17,7 +15,6 @@ public class App
 {
     private Model model;
     private GameWindow gameWindow;
-    private Timer timer;
 
     private App() {
         super();

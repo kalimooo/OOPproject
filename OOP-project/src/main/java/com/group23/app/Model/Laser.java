@@ -120,19 +120,6 @@ public class Laser extends Entity implements Moveable {
     }
 
   private Color generateColor() {
-      /*#4deeea    (77,238,234)
-        #74ee15    (116,238,21)
-        #ffe700    (255,231,0)
-        #f000ff    (240,0,255) 
-        #fc1723    (252,23,35)
-        */
-
-        // TODO Remove this and add in the other colors, alternatively, change Sprite class to fit these colors
-        // List<Color> colors = new ArrayList<Color>();
-        // colors.add(Color.BLUE);
-        // colors.add(Color.YELLOW);
-        // colors.add(Color.RED);
-        // colors.add(Color.GREEN);
 
         List<String> colors = new ArrayList<String>();
         colors.add("#4deeea");
@@ -141,7 +128,7 @@ public class Laser extends Entity implements Moveable {
         colors.add("#f000ff");
         colors.add("#fc1723");
         
-        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 4)));
+        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 5)));
         return randomColor;
     }
 
@@ -150,6 +137,7 @@ public class Laser extends Entity implements Moveable {
     }
 
     private Point generateXYPoint(){
+        
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
         int side = (int) (Math.random() * 4);
 

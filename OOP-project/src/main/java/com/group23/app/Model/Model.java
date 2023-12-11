@@ -16,7 +16,6 @@ public class Model implements StateListener{
 
     private List<Entity> entities = new ArrayList<Entity>();
     public static int nmrOfLasers = 1;
-    private int maxLasers = 1;
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
@@ -36,7 +35,9 @@ public class Model implements StateListener{
         entities.add(player);
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                maxLasers++;
+                Laser newLaser = EntityFactory.spawnLaser();
+                newLaser.addStateListener(model);
+                entities.add(newLaser);
             }
         });
 
@@ -70,27 +71,16 @@ public class Model implements StateListener{
         player.modifyDy(dy);
     }
 
-    public void revalidateLasers() {
-        int difference = maxLasers - nmrOfLasers;
-        //System.out.println(difference);
-        List<Laser> newLasers = EntityFactory.spawnLasers(difference);
-        for (Laser laser : newLasers) {
-            laser.addStateListener(this);
-            entities.add(laser);
-        }
-    }
-
     public void updateModel() {
         if (gameActive) {
             updateObjects();
             handleCollisions();
-            //revalidateLasers();
         }
     }
 
     private void updateObjects() {
-        for (Entity entity : entities) {
-            entity.update();
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).update();
         }
 
         for (int i = entities.size() - 1; i >= 0; i--) {
