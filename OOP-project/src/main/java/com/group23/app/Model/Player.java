@@ -52,7 +52,6 @@ public class Player extends Entity implements Moveable, Visitor {
     public void move() {
         x += dx;
         y += dy;
-        System.out.println(x + "," + y);
     }
 
     public void setSpeed(double dx, double dy) {

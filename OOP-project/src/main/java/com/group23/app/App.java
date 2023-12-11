@@ -25,8 +25,7 @@ public class App
         gameWindow = GameWindow.getGameWindow();
         gameWindow.addStateController(new StateController(model));
         gameWindow.addPlayerController(new PlayerController(model));
-        System.out.println();
-    }
+        }
     public static void main( String[] args )
     {
         App myApp = new App();

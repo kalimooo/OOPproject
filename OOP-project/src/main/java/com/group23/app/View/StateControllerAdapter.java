@@ -25,7 +25,6 @@ public class StateControllerAdapter implements KeyListener{
         }
         else if (code == KeyEvent.VK_Q) {
             // TODO: Show Quit dialog
-            System.out.println("User pressed Q to show quit dialog!");
         }
         
     }

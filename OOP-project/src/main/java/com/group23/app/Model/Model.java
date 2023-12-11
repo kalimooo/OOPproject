@@ -93,8 +93,6 @@ public class Model implements StateListener{
             updateObjects();
             handleCollisions();
             revalidateLasers();
-            System.out.println(player.getCollectibleScore());
-            System.out.println("Hello");
         }
     }
 
