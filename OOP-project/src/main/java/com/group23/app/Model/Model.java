@@ -144,13 +144,13 @@ public class Model implements StateListener{
         gameActive = true;
         lasTimer.start();
         colTimer.start();
-        System.out.println(gameActive);
     }
 
     public void resetGame() {
         Model.gameActive = false;
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
         entities.clear();
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        entities.add(player);
         entities.add(EntityFactory.spawnLaser(this));
         gameClock.restartTimer();
         lasTimer.restart();
