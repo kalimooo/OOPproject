@@ -91,6 +91,7 @@ public class PlayingMenu extends JPanel {
         buttonPanel.add(muteButton);
         buttonPanel.add(tutorialButton);
         buttonPanel.add(quitButton);
+        buttonPanel.setFocusable(false);
         
 
         add(buttonPanel, BorderLayout.EAST);
@@ -112,7 +113,7 @@ public class PlayingMenu extends JPanel {
         this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
-    private void showQuitDialog() {
+    public void showQuitDialog() {
         UIManager.put("OptionPane.background", menuBackgroundColor);
         UIManager.put("Panel.background", menuBackgroundColor);
         UIManager.put("OptionPane.messageFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
