@@ -12,8 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import java.io.File;
-import java.io.IOException;
 import javax.sound.sampled.*;
 
 import javax.swing.JPanel;
@@ -49,7 +47,7 @@ public class GameWindow extends JFrame {
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
-        loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); // TODO change to variable
+        loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); 
         playBackgroundMusic();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
