@@ -40,7 +40,7 @@ public class Tutorial extends JPanel{
         title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 50));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setVerticalAlignment(SwingConstants.TOP);
-        title.setBounds(0,0, SCREEN_WIDTH, SCREEN_HEIGHT/4);
+        title.setBounds(0,15, SCREEN_WIDTH, SCREEN_HEIGHT/4);
 
         WASD_image.setIcon(Tutorial.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/WASD.png", 87, 50));
         WASD_image.setBounds(SCREEN_WIDTH/2 - 30, SCREEN_HEIGHT - 550, WASD_image.getIcon().getIconWidth(), WASD_image.getIcon().getIconHeight());
