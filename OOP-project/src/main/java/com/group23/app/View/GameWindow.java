@@ -30,7 +30,7 @@ public class GameWindow extends JFrame {
     public static final int WINDOW_UPDATE_TIMER = 10; // Time is given in milliseconds
     static boolean gameBegun = false;
     private Timer timer;
-    private Clip backgroundMusic;
+    public Clip backgroundMusic;
 
     private PlayerControllerAdapter playerControllerAdapter;
     private StateControllerAdapter stateControllerAdapter;

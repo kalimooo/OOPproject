@@ -23,6 +23,7 @@ public class PlayingMenu extends JPanel {
     private JLabel scoreLabel;
     private JButton quitButton;
     private JButton tutorialButton;
+    private JButton muteButton;
 
     static PlayingMenu playingMenu;
 
@@ -65,11 +66,32 @@ public class PlayingMenu extends JPanel {
             }
         });
 
+        muteButton = new JButton("[M] MUTE");
+        muteButton.setFocusable(false);
+        muteButton.setFont(menuFont);
+        muteButton.setBackground(buttonColor);
+        muteButton.setForeground(Color.WHITE);
+
+        muteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("USER PRESSED MUTE!");
+                if(GameWindow.getGameWindow().backgroundMusic.isRunning()) {
+                GameWindow.getGameWindow().stopBackgroundMusic();
+                muteButton.setText("[M] Unmute");
+                }
+                else {GameWindow.getGameWindow().playBackgroundMusic(); 
+                    muteButton.setText("[M] Mute");}
+            }
+        });
+
         // Use FlowLayout for the button panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(menuBackgroundColor);
+        buttonPanel.add(muteButton);
         buttonPanel.add(tutorialButton);
         buttonPanel.add(quitButton);
+        
 
         add(buttonPanel, BorderLayout.EAST);
 
