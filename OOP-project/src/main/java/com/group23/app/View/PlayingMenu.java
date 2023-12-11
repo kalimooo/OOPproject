@@ -1,20 +1,31 @@
 package com.group23.app.View;
+import com.group23.app.Model.Model;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
 
-import com.group23.app.Model.Model;
+import javax.swing.border.EmptyBorder;
+import javax.swing.UIManager;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PlayingMenu extends JPanel {
     Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
@@ -76,12 +87,13 @@ public class PlayingMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("USER PRESSED MUTE!");
-                if(GameWindow.getGameWindow().backgroundMusic.isRunning()) {
-                GameWindow.getGameWindow().stopBackgroundMusic();
-                muteButton.setText("[M] Unmute");
+                if (GameWindow.getGameWindow().backgroundMusic.isRunning()) {
+                    GameWindow.getGameWindow().stopBackgroundMusic();
+                    muteButton.setText("[M] Unmute");
+                } else {
+                    GameWindow.getGameWindow().playBackgroundMusic();
+                    muteButton.setText("[M] Mute");
                 }
-                else {GameWindow.getGameWindow().playBackgroundMusic(); 
-                    muteButton.setText("[M] Mute");}
             }
         });
 
@@ -92,7 +104,6 @@ public class PlayingMenu extends JPanel {
         buttonPanel.add(tutorialButton);
         buttonPanel.add(quitButton);
         buttonPanel.setFocusable(false);
-        
 
         add(buttonPanel, BorderLayout.EAST);
 
@@ -109,7 +120,8 @@ public class PlayingMenu extends JPanel {
     }
 
     public void updateTime() {
-        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed, breaks MVC
+        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed,
+                                                                       // breaks MVC
         this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
@@ -120,12 +132,36 @@ public class PlayingMenu extends JPanel {
         UIManager.put("OptionPane.buttonFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
         UIManager.put("Button.background", buttonColor);
         UIManager.put("Button.foreground", Color.WHITE);
-
-        // Använd HTML-formatering för att ställa in textfärgen till vit
-        String message = "<html><font color='white'>Game over! Your score is: " + Model.getModel().getElapsedTimeInSeconds() + "</font></html>";
-
-        JOptionPane.showMessageDialog(this, message, "Game Over!", JOptionPane.INFORMATION_MESSAGE);
-
+    
+        // Hämta det aktuella poängen
+        long elapsedTime = Model.getModel().getElapsedTimeInSeconds();
+        String currentScore = elapsedTime + " points";
+    
+        // Skapar lista över highscores
+        List<ScoreEntry> highScores = getHighScoreData();
+    
+        // Sortera i fallande ordning (Störst --> Minst)
+        Collections.sort(highScores, Collections.reverseOrder());
+    
+        // Visa de 10 bästa highscoren inklusive den aktuella poängen
+        StringBuilder highScoreMessage = new StringBuilder("<html><font color='white'>Top 10 Highscores:<br><br>");
+    
+        int count = 0;
+        for (ScoreEntry entry : highScores) {
+            if (count >= 10) {
+                break;
+            }
+            // Lägger till highscore med radbrytning
+            highScoreMessage.append(entry.toString()).append("<br>");
+            count++;
+        }
+    
+        // Lägg till den aktuella poängen i meddelandet
+        highScoreMessage.append("<br>Your score: ").append(currentScore).append("</font></html>");
+    
+        // Visa dialogrutan med highscore-meddelandet
+        JOptionPane.showMessageDialog(this, highScoreMessage.toString(), "Highscores", JOptionPane.INFORMATION_MESSAGE);
+    
         Object[] options = { "Restart Game", "Go to Menu" };
         int result = JOptionPane.showOptionDialog(
                 this,
@@ -136,7 +172,7 @@ public class PlayingMenu extends JPanel {
                 null,
                 options,
                 options[1]);
-
+    
         // Handle the user's choice
         switch (result) {
             case JOptionPane.YES_OPTION:
@@ -150,6 +186,78 @@ public class PlayingMenu extends JPanel {
             default:
                 // User closed the dialog without making a choice
                 break;
+        }
+    
+        // Låt användaren ange sitt namn
+        String playerName = JOptionPane.showInputDialog(this,
+                "<html><font color ='white'> Enter your name:</font></html>");
+    
+        // Kontrollera om spelarnamnet är null eller tomt
+        if (playerName != null && !playerName.trim().isEmpty()) {
+            // Skapa en sträng för att spara i filen
+            String scoreEntry = currentScore + ";" + playerName;
+    
+            // Spara poängen i filen
+            saveScoreToFile(scoreEntry);
+        } else {
+            // Användaren har inte angett ett giltigt namn, ge felmeddelande
+            JOptionPane.showMessageDialog(this, "Invalid name. Score not saved.", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+
+    private List<ScoreEntry> getHighScoreData() {
+        List<ScoreEntry> highScores = new ArrayList<>();
+    
+        // Läs av högsta poäng och spelarnamn från filen
+        try (BufferedReader reader = new BufferedReader(new FileReader("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length == 2) {
+                    String scoreString = parts[0].trim().replaceAll("[^\\d]", "");
+                    long score = Long.parseLong(scoreString);
+                    highScores.add(new ScoreEntry(score, parts[1].trim()));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+        return highScores;
+    }
+
+    private void saveScoreToFile(String scoreEntry) {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt", true))) {
+            // Skriv poängen till filen
+            writer.write(scoreEntry);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // A nested static class representing a ScoreEntry. 
+    // Implements Comparable to allow for sorting based on the score.
+    private static class ScoreEntry implements Comparable<ScoreEntry> {
+        private final long score;
+        private final String playerName;
+
+        public ScoreEntry(long score, String playerName) {
+            this.score = score;
+            this.playerName = playerName;
+        }
+
+        @Override
+        public int compareTo(ScoreEntry other) {
+            return Long.compare(this.score, other.score);
+        }
+
+        @Override
+        public String toString() {
+            return playerName + ": " + score + " points";
         }
     }
 
