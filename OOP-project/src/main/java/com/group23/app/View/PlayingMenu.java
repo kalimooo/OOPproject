@@ -23,7 +23,7 @@ public class PlayingMenu extends JPanel {
     private JLabel scoreLabel;
     private JButton quitButton;
     private JButton tutorialButton;
-    private JButton muteButton;
+    public JButton muteButton;
 
     static PlayingMenu playingMenu;
 

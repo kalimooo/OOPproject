@@ -28,6 +28,16 @@ public class StateControllerAdapter implements KeyListener, Subscriber{
             // TODO: Show Quit dialog
             System.out.println("User pressed Q to show quit dialog!");
         }
+        else if (code == KeyEvent.VK_M) {
+            // TODO: Show Quit dialog
+            System.out.println("User pressed key M to mute/unmute!");
+            if(GameWindow.getGameWindow().backgroundMusic.isRunning()) {
+                GameWindow.getGameWindow().stopBackgroundMusic();
+                PlayingMenu.getPlayingMenu().muteButton.setText("[M] Unmute");
+                }
+                else {GameWindow.getGameWindow().playBackgroundMusic(); 
+                    PlayingMenu.getPlayingMenu().muteButton.setText("[M] Mute");}
+        }
         
     }
     @Override
