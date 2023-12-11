@@ -20,7 +20,7 @@ public class PlayingMenu extends JPanel {
     Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
     Color menuBackgroundColor = Color.decode("#4f504e");
     Color buttonColor = Color.decode("#767675");
-    private JLabel helloLabel;
+    private JLabel scoreLabel;
     private JButton quitButton;
     private JButton tutorialButton;
 
@@ -30,13 +30,13 @@ public class PlayingMenu extends JPanel {
         setLayout(new BorderLayout());
         setBackground(menuBackgroundColor);
 
-        helloLabel = new JLabel("00:00:01");
-        helloLabel.setFont(menuFont);
-        helloLabel.setForeground(Color.WHITE);
-        helloLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
-        helloLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+        scoreLabel = new JLabel("");
+        scoreLabel.setFont(menuFont);
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+        scoreLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
-        add(helloLabel, BorderLayout.WEST);
+        add(scoreLabel, BorderLayout.WEST);
 
         quitButton = new JButton("[Q] QUIT");
         quitButton.setFocusable(false);
@@ -62,7 +62,6 @@ public class PlayingMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("USER PRESSED TUTORIAL!");
-                // Add your code to handle the tutorial button press (open tutorial, etc.)
             }
         });
 
@@ -97,7 +96,7 @@ public class PlayingMenu extends JPanel {
                                                                                                        // 00:00:00
                                                                                                        // format
 
-        this.helloLabel.setText(formattedTime); // Update the helloLabel
+        this.scoreLabel.setText(formattedTime); // Update the helloLabel
     }
 
     private void showQuitDialog() {
