@@ -12,58 +12,89 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
 
 import com.group23.app.Model.Model;
 
 public class PlayingMenu extends JPanel {
+    Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
     Color menuBackgroundColor = Color.decode("#4f504e");
     Color buttonColor = Color.decode("#767675");
-    private JLabel helloLabel;
+    private JLabel scoreLabel;
     private JButton quitButton;
+    private JButton tutorialButton;
+    public JButton muteButton;
 
     static PlayingMenu playingMenu;
 
-    // Konstruktor
     private PlayingMenu() {
-        // Använd BorderLayout för att placera komponenter
         setLayout(new BorderLayout());
-
-        // Sätt bakgrundsfärgen för hela menyn
         setBackground(menuBackgroundColor);
 
-        helloLabel = new JLabel("00:00:01");
-        helloLabel.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-        helloLabel.setForeground(Color.WHITE); // Ändra textfärgen till vit
-        helloLabel.setBorder(new EmptyBorder(0, 10, 0, 0)); // Lägg till en kant till vänster om texten
+        scoreLabel = new JLabel("");
+        scoreLabel.setFont(menuFont);
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+        scoreLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 
-        // Align the label to the left
-        helloLabel.setAlignmentX(JLabel.LEFT_ALIGNMENT);
+        add(scoreLabel, BorderLayout.WEST);
 
-        add(helloLabel);
-        setBounds(0, 0, GameWindow.SCREEN_WIDTH, 60);
-
-        add(helloLabel, BorderLayout.WEST); // Placera helloLabel längst till vänster
-
-        quitButton = new JButton("QUIT");
-        JPanel quitButtonPanel = new JPanel(new BorderLayout());
-        quitButtonPanel.add(quitButton, BorderLayout.EAST);
-        quitButtonPanel.setBorder(new EmptyBorder(0, 0, 0, 40));
-        quitButtonPanel.setBackground(menuBackgroundColor);
-        quitButton.setFocusable(false); // Förhindra att knappen tar emot fokus
-        quitButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        quitButton = new JButton("[Q] QUIT");
+        quitButton.setFocusable(false);
+        quitButton.setFont(menuFont);
         quitButton.setBackground(buttonColor);
         quitButton.setForeground(Color.WHITE);
-        add(quitButtonPanel, BorderLayout.EAST); // Placera quitButton längst till höger
 
-        // ActionListener för quitbutton
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("USER PRESSED QUIT!");
                 showQuitDialog();
-
             }
         });
+
+        tutorialButton = new JButton("[T] TUTORIAL");
+        tutorialButton.setFocusable(false);
+        tutorialButton.setFont(menuFont);
+        tutorialButton.setBackground(buttonColor);
+        tutorialButton.setForeground(Color.WHITE);
+
+        tutorialButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("USER PRESSED TUTORIAL!");
+            }
+        });
+
+        muteButton = new JButton("[M] MUTE");
+        muteButton.setFocusable(false);
+        muteButton.setFont(menuFont);
+        muteButton.setBackground(buttonColor);
+        muteButton.setForeground(Color.WHITE);
+
+        muteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("USER PRESSED MUTE!");
+                if(GameWindow.getGameWindow().backgroundMusic.isRunning()) {
+                GameWindow.getGameWindow().stopBackgroundMusic();
+                muteButton.setText("[M] Unmute");
+                }
+                else {GameWindow.getGameWindow().playBackgroundMusic(); 
+                    muteButton.setText("[M] Mute");}
+            }
+        });
+
+        // Use FlowLayout for the button panel
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(menuBackgroundColor);
+        buttonPanel.add(muteButton);
+        buttonPanel.add(tutorialButton);
+        buttonPanel.add(quitButton);
+        buttonPanel.setFocusable(false);
+        
+
+        add(buttonPanel, BorderLayout.EAST);
 
         setBounds(0, 0, GameWindow.SCREEN_WIDTH, 60);
 
@@ -77,21 +108,12 @@ public class PlayingMenu extends JPanel {
         return PlayingMenu.playingMenu;
     }
 
-    public void updateTime() {
+    public void updateScore() {
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed, breaks MVC
-
-        long minutes = elapsedTime / 60; // Convert to minutes
-        long hours = minutes / 60; // Convert to hours
-
-        String formattedTime = String.format("%02d:%02d:%02d", hours, minutes % 60, elapsedTime % 60); // Format the
-                                                                                                       // time to
-                                                                                                       // 00:00:00
-                                                                                                       // format
-
-        this.helloLabel.setText(formattedTime); // Update the helloLabel
+        this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
-    private void showQuitDialog() {
+    public void showQuitDialog() {
         UIManager.put("OptionPane.background", menuBackgroundColor);
         UIManager.put("Panel.background", menuBackgroundColor);
         UIManager.put("OptionPane.messageFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
