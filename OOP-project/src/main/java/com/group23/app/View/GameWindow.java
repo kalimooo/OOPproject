@@ -12,6 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -26,6 +30,7 @@ public class GameWindow extends JFrame {
     public static final int WINDOW_UPDATE_TIMER = 10; // Time is given in milliseconds
     static boolean gameBegun = false;
     private Timer timer;
+    private Clip backgroundMusic;
 
     private PlayerControllerAdapter playerControllerAdapter;
     private StateControllerAdapter stateControllerAdapter;
@@ -44,6 +49,8 @@ public class GameWindow extends JFrame {
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
+        loadBackgroundMusic("C:\\project\\OOPproject\\OOP-project\\src\\main\\java\\com\\group23\\app\\View\\music\\track1.wav"); // TODO change to variable
+        playBackgroundMusic();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -56,7 +63,6 @@ public class GameWindow extends JFrame {
 
         GameWindow.gameWindow = this;
 
-
         // Close dialog
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         // Listener for the windows-window
@@ -68,7 +74,6 @@ public class GameWindow extends JFrame {
             }
         });
     }
-
 
     static public GameWindow getGameWindow() {
         if (gameWindow == null) {
@@ -153,6 +158,37 @@ public class GameWindow extends JFrame {
 
         if (option == JOptionPane.YES_OPTION) {
             System.exit(0);
+        }
+    }
+
+    // Music
+    private void loadBackgroundMusic(String filePath) {
+        try {
+            File musicFile = new File(filePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
+
+            // Get a Clip object
+            backgroundMusic = AudioSystem.getClip();
+
+            // Open the AudioInputStream
+            backgroundMusic.open(audioStream);
+
+            // Loop the background music
+            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playBackgroundMusic() {
+        if (backgroundMusic != null) {
+            backgroundMusic.start();
+        }
+    }
+
+    public void stopBackgroundMusic() {
+        if (backgroundMusic != null && backgroundMusic.isRunning()) {
+            backgroundMusic.stop();
         }
     }
 }
