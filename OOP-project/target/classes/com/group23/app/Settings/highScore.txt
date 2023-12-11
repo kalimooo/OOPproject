@@ -1,5 +1,4 @@
-10 points;Bengan
-12 points;Smurfen
-1 points;Lars
-3 points;Lisa
-1 points;Laban
+4 points;lISA
+13 points;Leif
+19 points;olof
+7 points;hattifnatt
