@@ -2,6 +2,7 @@ package com.group23.app.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityFactory {    
 
@@ -22,8 +23,13 @@ public class EntityFactory {
     }
 
     static public Laser spawnLaser(StateListener stateListener) {
-
-        Laser newLaser = new Laser();
+        Random random = new Random();
+        Laser newLaser;
+        if (random.nextFloat() < 0.9) {
+            newLaser = new Laser();
+        } else {
+            newLaser = new FastLaser();
+        }
         newLaser.addStateListener(stateListener);
         return newLaser;
     }

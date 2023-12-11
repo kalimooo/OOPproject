@@ -146,4 +146,15 @@ public class Model implements StateListener{
         colTimer.start();
         System.out.println(gameActive);
     }
+
+    public void resetGame() {
+        Model.gameActive = false;
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        entities.clear();
+        entities.add(EntityFactory.spawnLaser(this));
+        gameClock.restartTimer();
+        lasTimer.restart();
+        colTimer.restart();
+        startGame();
+    }
 }
