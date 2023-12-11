@@ -9,11 +9,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JPanel; 
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 
+import com.group23.app.Model.Entity;
 import com.group23.app.Model.Model;
 
 public class PlayingMenu extends JPanel {
@@ -141,7 +142,7 @@ public class PlayingMenu extends JPanel {
         switch (result) {
             case JOptionPane.YES_OPTION:
                 System.out.println("User pressed Restart Game");
-                // Perform actions for restarting the game
+                Model.getModel().resetGame();
                 break;
             case JOptionPane.NO_OPTION:
                 System.out.println("User pressed Go to Menu");

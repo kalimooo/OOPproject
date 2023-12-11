@@ -146,4 +146,15 @@ public class Model {
     public void startGame() {
         Model.gameActive = true;
     }
+
+    public void resetGame() {
+        Model.gameActive = false;
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
+        laserHandler = new LaserHandler(boundX, boundY);
+        powerUps.clear();
+        gameClock.restartTimer();
+        timer.restart();
+
+        startGame();
+    }
 }
