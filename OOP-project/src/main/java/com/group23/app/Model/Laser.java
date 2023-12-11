@@ -143,7 +143,7 @@ public class Laser extends Entity implements Moveable {
         colors.add("#f000ff");
         colors.add("#fc1723");
         
-        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 4)));
+        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 5)));
         return randomColor;
     }
 

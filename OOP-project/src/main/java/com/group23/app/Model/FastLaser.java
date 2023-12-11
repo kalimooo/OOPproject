@@ -147,6 +147,8 @@ public class FastLaser extends Laser {
         if (magnitude != 0) {
             dx /= magnitude;
             dy /= magnitude;
+            dx *= 2;
+            dy *= 2;
         }
 
         System.out.println("dx: " + dx + " dy: " + dy);
@@ -159,10 +161,6 @@ public class FastLaser extends Laser {
     private ArrayList<Double> generateSpeed(ArrayList<Double> inputArrayList) {
         double dx = inputArrayList.get(0);
         double dy = inputArrayList.get(1);
-
-        dx *= 2;
-        dy *= 2;
-
         ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
         return reArrayList;
     }

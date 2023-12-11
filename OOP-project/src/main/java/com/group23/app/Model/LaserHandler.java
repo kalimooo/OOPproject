@@ -2,6 +2,7 @@ package com.group23.app.Model;
 
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.Random;
 
 public class LaserHandler {
     private static List<Laser> lasers;
@@ -54,7 +55,15 @@ public class LaserHandler {
     }
 
     private void spawnLaser() {
-        Laser laser = new Laser();
+        Random random = new Random();
+        Laser laser;
+
+        if (random.nextFloat() < 0.9) {
+            laser = new Laser();
+        } else {
+            laser = new FastLaser();
+        }
+
         lasers.add(laser);
     }
 
