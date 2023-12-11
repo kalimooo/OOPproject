@@ -1,5 +1,4 @@
 package com.group23.app.View;
-
 import com.group23.app.Model.Model;
 
 import java.awt.event.ActionListener;
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class PlayingMenu extends JPanel {
     Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
@@ -120,10 +120,9 @@ public class PlayingMenu extends JPanel {
     }
 
     public void updateTime() {
-        // Get the elapsed time TODO needs to be changed, breaks MVC
-        long elapsedTime = Model.getModel().getElapsedTimeInSeconds();
-        // Update the score
-        this.scoreLabel.setText(elapsedTime + " points");
+        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed,
+                                                                       // breaks MVC
+        this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
     public void showQuitDialog() {
@@ -133,37 +132,36 @@ public class PlayingMenu extends JPanel {
         UIManager.put("OptionPane.buttonFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
         UIManager.put("Button.background", buttonColor);
         UIManager.put("Button.foreground", Color.WHITE);
-
-        // Get the current score
+    
+        // Hämta det aktuella poängen
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds();
         String currentScore = elapsedTime + " points";
-
-        // Create list of highscores
+    
+        // Skapar lista över highscores
         List<ScoreEntry> highScores = getHighScoreData();
-
-        // Sort from Largest --> Smallest score
+    
+        // Sortera i fallande ordning (Störst --> Minst)
         Collections.sort(highScores, Collections.reverseOrder());
-
-        // Show the 10 highest highscoers and the current score
-
+    
+        // Visa de 10 bästa highscoren inklusive den aktuella poängen
         StringBuilder highScoreMessage = new StringBuilder("<html><font color='white'>Top 10 Highscores:<br><br>");
-
+    
         int count = 0;
         for (ScoreEntry entry : highScores) {
             if (count >= 10) {
                 break;
             }
-            // Add highscore with new line
+            // Lägger till highscore med radbrytning
             highScoreMessage.append(entry.toString()).append("<br>");
             count++;
         }
-
-        // Show current score
+    
+        // Lägg till den aktuella poängen i meddelandet
         highScoreMessage.append("<br>Your score: ").append(currentScore).append("</font></html>");
-
-        // Show dialog with high score message
+    
+        // Visa dialogrutan med highscore-meddelandet
         JOptionPane.showMessageDialog(this, highScoreMessage.toString(), "Highscores", JOptionPane.INFORMATION_MESSAGE);
-
+    
         Object[] options = { "Restart Game", "Go to Menu" };
         int result = JOptionPane.showOptionDialog(
                 this,
@@ -174,7 +172,7 @@ public class PlayingMenu extends JPanel {
                 null,
                 options,
                 options[1]);
-
+    
         // Handle the user's choice
         switch (result) {
             case JOptionPane.YES_OPTION:
@@ -189,30 +187,31 @@ public class PlayingMenu extends JPanel {
                 // User closed the dialog without making a choice
                 break;
         }
-
-        // To allow user to enter its name
+    
+        // Låt användaren ange sitt namn
         String playerName = JOptionPane.showInputDialog(this,
                 "<html><font color ='white'> Enter your name:</font></html>");
-
-        // Check if player name is empty
+    
+        // Kontrollera om spelarnamnet är null eller tomt
         if (playerName != null && !playerName.trim().isEmpty()) {
-            // Create string to save in file
+            // Skapa en sträng för att spara i filen
             String scoreEntry = currentScore + ";" + playerName;
-
-            // Save score to our file
+    
+            // Spara poängen i filen
             saveScoreToFile(scoreEntry);
         } else {
+            // Användaren har inte angett ett giltigt namn, ge felmeddelande
             JOptionPane.showMessageDialog(this, "Invalid name. Score not saved.", "Warning",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
+    
 
     private List<ScoreEntry> getHighScoreData() {
         List<ScoreEntry> highScores = new ArrayList<>();
-
-        // Reads highest points from file
-        try (BufferedReader reader = new BufferedReader(
-                new FileReader("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt"))) {
+    
+        // Läs av högsta poäng och spelarnamn från filen
+        try (BufferedReader reader = new BufferedReader(new FileReader("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
@@ -225,14 +224,14 @@ public class PlayingMenu extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+    
         return highScores;
     }
 
     private void saveScoreToFile(String scoreEntry) {
         try (BufferedWriter writer = new BufferedWriter(
                 new FileWriter("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt", true))) {
-            // Write points to file
+            // Skriv poängen till filen
             writer.write(scoreEntry);
             writer.newLine();
         } catch (IOException e) {
@@ -240,7 +239,7 @@ public class PlayingMenu extends JPanel {
         }
     }
 
-    // A nested static class representing a ScoreEntry.
+    // A nested static class representing a ScoreEntry. 
     // Implements Comparable to allow for sorting based on the score.
     private static class ScoreEntry implements Comparable<ScoreEntry> {
         private final long score;
