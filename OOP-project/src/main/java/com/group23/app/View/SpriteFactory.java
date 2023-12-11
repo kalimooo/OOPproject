@@ -2,6 +2,7 @@ package com.group23.app.View;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.Model;
@@ -15,8 +16,9 @@ public class SpriteFactory {
     
     public ArrayList<Sprite> getSprites() {
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-        for (Entity entity : model.getEntities()) {
-            sprites.add(new Sprite(entity));
+        List<Entity> entities = model.getEntities();
+        for (int i = 0; i < entities.size(); i++) {
+            sprites.add(new Sprite(entities.get(i)));
         }
         return sprites;
     }

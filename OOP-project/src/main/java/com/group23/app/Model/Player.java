@@ -17,8 +17,6 @@ public class Player extends Entity implements Moveable, Visitor {
     private final int BOUNDX = Model.SCREEN_WIDTH;
     private final int BOUNDY = Model.SCREEN_HEIGHT;
 
-    private final List<StateListener> listeners = new ArrayList<StateListener>();
-
     private int collectibleScore;
 
     private Timer powerTimer;
@@ -132,7 +130,6 @@ public class Player extends Entity implements Moveable, Visitor {
     }
     public void resolvePowerUpCollision(PowerUp powerUp) {
         powerUp.setInactive();
-        // TODO add functionality for modifying player state when power is picked up
     }
     public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
         collectibleItem.setInactive();

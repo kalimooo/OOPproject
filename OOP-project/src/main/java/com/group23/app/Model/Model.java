@@ -19,9 +19,16 @@ public class Model implements StateListener{
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private GameClock gameClock = new GameClock();
-    private Timer timer;
+
+
+    private Timer lasTimer;
+    private Timer colTimer;
+
     private static Player player;
-    private static final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds (currently 10 seconds)" 
+
+    private final double COLLECTIBLE_CHANCE = 0.05;
+    private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
+    private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
 
     private static Model model;
 
@@ -38,15 +45,28 @@ public class Model implements StateListener{
 
         // Timer for creating lasers. Once every TIME_FOR_LASERS milliseconds it creates a laser. As of now this means a new laser
         // every ten seconds
-        timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
+        lasTimer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 entities.add(EntityFactory.spawnLaser(model));
             }
         });
 
+        // Timer for creating collectibles. Every 20 seconds it has a 5% chance to create a collectible
+        colTimer = new Timer(TIME_FOR_COLLECTIBLES, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                double random = Math.random();
+                if (random < COLLECTIBLE_CHANCE) {
+                    entities.add(new CollectibleItem());
+                }  
+            }
+        });
+        
+
+        // This line is for Singleton pattern, there should only be ONE model object
         Model.model = this;
     }
 
+    // Singleton pattern implemented for the Model class
     public static Model getModel() {
         if (model == null) {
             return new Model();
@@ -96,9 +116,10 @@ public class Model implements StateListener{
 
     // TODO Add CollisionHandler class that handles collisions
     private void handleCollisions() {
-        for (Entity entity : entities) {
-            if (player.collides(entity)) {
-                entity.accept(player);
+        for (int i = entities.size() - 1; i >= 0; i--) {
+            Entity curEntity = entities.get(i);
+            if (player.collides(curEntity)) {
+                curEntity.accept(player);
             }
         }
     }
@@ -121,7 +142,8 @@ public class Model implements StateListener{
 
     public void startGame() {
         gameActive = true;
-        timer.start();
+        lasTimer.start();
+        colTimer.start();
         System.out.println(gameActive);
     }
 }

@@ -1,11 +1,14 @@
 package com.group23.app.Model;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Entity {
     protected double x,y;
     protected int width,height;
     private boolean isActive = true;
+    protected List<StateListener> listeners = new ArrayList<StateListener>();
 
     Entity(double x, double y, int width, int height) {
         this.x = x;
