@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,12 +18,12 @@ import javax.swing.Timer;
 import com.group23.app.Controller.PlayerController;
 import com.group23.app.Controller.StateController;
 
-public class GameWindow extends JFrame{
-    
+public class GameWindow extends JFrame {
+
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
     ContentPane contentPane = ContentPane.getContentPane();
-    public static final int WINDOW_UPDATE_TIMER = 10; //Time is given in milliseconds
+    public static final int WINDOW_UPDATE_TIMER = 10; // Time is given in milliseconds
     static boolean gameBegun = false;
     private Timer timer;
 
@@ -44,7 +45,6 @@ public class GameWindow extends JFrame{
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
 
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setLocationRelativeTo(null);
@@ -55,9 +55,20 @@ public class GameWindow extends JFrame{
         setVisible(true);
 
         GameWindow.gameWindow = this;
+
+
+        // Close dialog
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        // Listener for the windows-window
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            // If X-button is pressed
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                confirmExit();
+            }
+        });
     }
 
-    
 
     static public GameWindow getGameWindow() {
         if (gameWindow == null) {
@@ -65,7 +76,7 @@ public class GameWindow extends JFrame{
         }
         return GameWindow.gameWindow;
     }
-    
+
     static public ImageIcon loadScaledImage(String path, int preferredSizeX, int preferredSizeY) {
         BufferedImage image;
         try {
@@ -96,7 +107,6 @@ public class GameWindow extends JFrame{
         addKeyListener(playerControllerAdapter);
     }
 
-
     // This might be poor design but it will work for now
     public void moveToPanel(JPanel panelToShow) {
         if (!panelToShow.isVisible()) {
@@ -114,6 +124,7 @@ public class GameWindow extends JFrame{
         TitleField.getTitleField().setVisible(false);
         repaint();
     }
+
     public void moveToMenu() {
         PlayingField.getPlayingField().setVisible(false);
         Tutorial.getTutorial().setVisible(false);
@@ -132,6 +143,16 @@ public class GameWindow extends JFrame{
     public void updateView() {
         PlayingField.getPlayingField().stateUpdate();
         PlayingMenu.getPlayingMenu().updateTime();
-        //contentPane.repaint();
+        // contentPane.repaint();
+    }
+
+    // Quit dialog
+    private void confirmExit() {
+        int option = JOptionPane.showConfirmDialog(this, "Do you want to quit?", "Confirm Exit",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 }
