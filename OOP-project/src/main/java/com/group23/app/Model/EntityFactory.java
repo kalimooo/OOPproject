@@ -28,4 +28,8 @@ public class EntityFactory {
         }
         return lasers;
     }
+
+    static public Laser spawnLaser() {
+        return new Laser();
+    }
 }

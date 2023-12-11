@@ -28,7 +28,9 @@ public class Model implements StateListener{
     private static Model model;
 
     private Model() {
-        entities.addAll(EntityFactory.getLasers(nmrOfLasers));
+        Laser startLaser = EntityFactory.spawnLaser();
+        startLaser.addStateListener(this);
+        entities.add(startLaser);
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
         gameClock = new GameClock();
         entities.add(player);
@@ -70,7 +72,7 @@ public class Model implements StateListener{
 
     public void revalidateLasers() {
         int difference = maxLasers - nmrOfLasers;
-        System.out.println(difference);
+        //System.out.println(difference);
         List<Laser> newLasers = EntityFactory.spawnLasers(difference);
         for (Laser laser : newLasers) {
             laser.addStateListener(this);
@@ -82,7 +84,7 @@ public class Model implements StateListener{
         if (gameActive) {
             updateObjects();
             handleCollisions();
-            revalidateLasers();
+            //revalidateLasers();
         }
     }
 
@@ -118,6 +120,10 @@ public class Model implements StateListener{
 
     public void onDeleted() {
         nmrOfLasers--;
+        Laser newLaser = EntityFactory.spawnLaser();
+        newLaser.addStateListener(this);
+        entities.add(newLaser);
+        nmrOfLasers++;
     }
 
     public void startGame() {
