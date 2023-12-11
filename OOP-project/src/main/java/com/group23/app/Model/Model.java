@@ -27,20 +27,10 @@ public class Model implements StateListener{
 
     private static Model model;
 
-    //private static LaserHandler laserHandler;
-    private static CollectibleItem collectibleItem;
-    //private CollectibleHandler collectibleHandler;
-    //private PowerUPHandler powerUPHandler;
-
     private Model() {
         entities.addAll(EntityFactory.getLasers(nmrOfLasers));
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40);
         gameClock = new GameClock();
-
-        //laserHandler = new LaserHandler(boundX, boundY, entities);
-        //this.collectibleHandler = new CollectibleHandler();
-        //this.powerUPHandler = new PowerUPHandler();
-        collectibleItem = new CollectibleItem();
         entities.add(player);
         timer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
