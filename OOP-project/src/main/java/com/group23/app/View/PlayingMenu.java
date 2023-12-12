@@ -202,7 +202,7 @@ public class PlayingMenu extends JPanel {
             saveScoreToFile(scoreEntry);
         } else {
             // Användaren har inte angett ett giltigt namn, ge felmeddelande
-            JOptionPane.showMessageDialog(this, "Invalid name. Score not saved.", "Warning",
+            JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
