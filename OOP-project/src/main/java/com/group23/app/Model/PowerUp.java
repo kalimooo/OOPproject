@@ -28,6 +28,8 @@ public class PowerUp extends Entity{
     @Override
     public void update() {}
 
+    public void resolveCollision(Player player) {}
+
     @Override
     public void accept(Visitor v) {
         v.resolvePowerUpCollision(this);
