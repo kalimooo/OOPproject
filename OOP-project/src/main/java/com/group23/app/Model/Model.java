@@ -19,6 +19,7 @@ public class Model implements StateListener{
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private GameClock gameClock = new GameClock();
+    private long finalTime = 0;
 
 
     private Timer lasTimer;
@@ -75,6 +76,9 @@ public class Model implements StateListener{
     }
 
     public long getElapsedTimeInSeconds() {
+        if (finalTime != 0) {
+            return finalTime;
+        }
         return gameClock.getElapsedTimeInSeconds();
     }
 
@@ -130,6 +134,7 @@ public class Model implements StateListener{
 
     private void gameOver() {
         gameActive = false;
+        finalTime = getElapsedTimeInSeconds();
     }
 
     public void onDeleted(Entity entity) {
