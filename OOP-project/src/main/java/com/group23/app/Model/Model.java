@@ -96,7 +96,13 @@ public class Model implements StateListener{
 
     public void updateModel() {
         if (gameActive) {
+<<<<<<< Updated upstream
             updateObjects();
+=======
+            //System.out.println(nmrOfLasers);
+            tryToSpawnLaser(getElapsedTimeInSeconds());
+            //moveObjects();
+>>>>>>> Stashed changes
             handleCollisions();
         }
     }

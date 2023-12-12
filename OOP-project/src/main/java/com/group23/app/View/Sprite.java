@@ -55,6 +55,13 @@ public class Sprite extends JLabel{
             setIcon(redIcon);
             setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
+
+        if(modelObject instanceof Laser)  {
+            setIcon(redIcon);
+        }
+        else if (modelObject instanceof FastLaser) {
+            setIcon(blueLaser);
+        }
         
         // Logic for painting the Player
         else if (modelObject instanceof Player) {
