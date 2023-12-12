@@ -13,7 +13,6 @@ public class StateController{
     }
 
     public void startGame() {
-        model.restartTimer();
         view.moveToGame();
         view.updateView();
         model.startGame();

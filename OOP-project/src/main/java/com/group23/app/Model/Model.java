@@ -146,13 +146,12 @@ public class Model implements StateListener{
     }
 
     public void startGame() {
-        gameActive = true;
-        lasTimer.start();
-        colTimer.start();
+        if (!gameActive) {
+            resetGame();
+        }
     }
 
     public void resetGame() {
-        Model.gameActive = false;
         finalTime = 0;
         entities.clear();
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
@@ -161,6 +160,6 @@ public class Model implements StateListener{
         gameClock.restartTimer();
         lasTimer.restart();
         colTimer.restart();
-        startGame();
+        gameActive = true;
     }
 }

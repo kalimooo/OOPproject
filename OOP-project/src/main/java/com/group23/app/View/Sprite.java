@@ -11,7 +11,7 @@ import com.group23.app.Model.Entity;
 import com.group23.app.Model.FastLaser;
 import com.group23.app.Model.Laser;
 import com.group23.app.Model.Player;
-import com.group23.app.Model.PowerUp;
+import com.group23.app.Model.ShieldPower;
 
 public class Sprite extends JLabel{
     
@@ -30,24 +30,6 @@ public class Sprite extends JLabel{
     private static ImageIcon shieldedPlayerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9BwithShield.png.png", 40, 40);
 
     public Sprite(Entity modelObject) {
-
-        //Logic for painting a Projectile
-        // if (modelObject instanceof Laser) {
-        //     Laser object = (Laser) modelObject;
-        //     Color color = object.getColor();
-        //     if (color.equals(Color.decode("#4deeea"))) {
-        //         setIcon(blueLaser);
-        //     } else if (color.equals(Color.decode("#74ee15"))) {
-        //         setIcon(greenLaser);
-        //     } else if (color.equals(Color.decode("#ffe700"))) {
-        //         setIcon(yellowIcon);
-        //     } else if (color.equals(Color.decode("#f000ff"))) {
-        //         setIcon(purpleIcon);
-        //     } else if (color.equals(Color.decode("#fc1723"))) {
-        //         setIcon(redIcon);
-        //     }
-        //     setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
-        // }
 
         if(modelObject instanceof FastLaser)  {
             setIcon(blueLaser);
@@ -74,7 +56,7 @@ public class Sprite extends JLabel{
         }
 
         // Logic for painting a shield PowerUp
-        else if (modelObject instanceof PowerUp) {
+        else if (modelObject instanceof ShieldPower) {
             setIcon(shieldIcon);
         }
 
