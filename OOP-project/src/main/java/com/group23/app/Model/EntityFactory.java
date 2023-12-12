@@ -33,4 +33,8 @@ public class EntityFactory {
         newLaser.addStateListener(stateListener);
         return newLaser;
     }
+
+    static public PowerUp spawnPowerUp(int boundX, int boundY) {
+        return new ShieldPower(boundX, boundY);
+    }
 }

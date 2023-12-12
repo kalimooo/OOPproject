@@ -7,6 +7,7 @@ public class ShieldPower extends PowerUp{
     }
 
     public void resolveCollision(Player player) {
-
+        player.setIntangible();
+        setInactive();
     }
 }

@@ -10,6 +10,8 @@ public abstract class Entity {
     private boolean isActive = true;
     protected List<StateListener> listeners = new ArrayList<StateListener>();
 
+    protected CollisionStrategy strategy;
+
     Entity(double x, double y, int width, int height) {
         this.x = x;
         this.y = y;
