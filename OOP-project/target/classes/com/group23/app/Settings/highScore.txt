@@ -2,3 +2,5 @@
 13 points;Leif
 19 points;olof
 7 points;hattifnatt
+1 points;ad
+9 points;be
