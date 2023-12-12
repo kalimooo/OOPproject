@@ -19,6 +19,7 @@ public class Model implements StateListener{
     private int boundY = SCREEN_HEIGHT;
     private static boolean gameActive = false;
     private GameClock gameClock = new GameClock();
+    private long finalTime = 0;
 
 
     private Timer lasTimer;
@@ -75,6 +76,9 @@ public class Model implements StateListener{
     }
 
     public long getElapsedTimeInSeconds() {
+        if (finalTime != 0) {
+            return finalTime;
+        }
         return gameClock.getElapsedTimeInSeconds();
     }
 
@@ -130,6 +134,7 @@ public class Model implements StateListener{
 
     private void gameOver() {
         gameActive = false;
+        finalTime = getElapsedTimeInSeconds();
     }
 
     public void onDeleted(Entity entity) {
@@ -144,13 +149,14 @@ public class Model implements StateListener{
         gameActive = true;
         lasTimer.start();
         colTimer.start();
-        System.out.println(gameActive);
     }
 
     public void resetGame() {
         Model.gameActive = false;
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        finalTime = 0;
         entities.clear();
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        entities.add(player);
         entities.add(EntityFactory.spawnLaser(this));
         gameClock.restartTimer();
         lasTimer.restart();

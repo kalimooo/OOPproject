@@ -127,7 +127,7 @@ public class Player extends Entity implements Moveable, Visitor {
         }
     }
     public void resolvePowerUpCollision(PowerUp powerUp) {
-        powerUp.setInactive();
+        powerUp.resolveCollision(this);
     }
     public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
         collectibleItem.setInactive();
