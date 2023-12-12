@@ -1,7 +1,5 @@
 package com.group23.app.Model;
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.awt.Point;
 

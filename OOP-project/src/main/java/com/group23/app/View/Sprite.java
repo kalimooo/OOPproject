@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import com.group23.app.Model.CollectibleItem;
 import com.group23.app.Model.Entity;
 import com.group23.app.Model.FastLaser;
 import com.group23.app.Model.Laser;
@@ -22,6 +23,7 @@ public class Sprite extends JLabel{
     private static ImageIcon redIcon = GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", 40, 40);
     private static ImageIcon yellowIcon = GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", 40, 40);
 
+    private static ImageIcon collectibleIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Coin1.png", 40, 40);
     private static ImageIcon shieldIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/shield.png", 40, 40);
 
     private static ImageIcon playerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", 40, 40);
@@ -49,11 +51,16 @@ public class Sprite extends JLabel{
 
         if(modelObject instanceof FastLaser)  {
             setIcon(blueLaser);
-            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
         else if (modelObject instanceof Laser) {
             setIcon(redIcon);
-            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
+        }
+
+        if(modelObject instanceof Laser)  {
+            setIcon(redIcon);
+        }
+        else if (modelObject instanceof FastLaser) {
+            setIcon(blueLaser);
         }
         
         // Logic for painting the Player
@@ -64,17 +71,19 @@ public class Sprite extends JLabel{
             else {
                 setIcon(playerIcon);
             }
-            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         }
 
         // Logic for painting a shield PowerUp
         else if (modelObject instanceof PowerUp) {
             setIcon(shieldIcon);
-            setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
+        }
+
+        else if (modelObject instanceof CollectibleItem) {
+            setIcon(collectibleIcon);
         }
         setHorizontalAlignment(SwingConstants.CENTER);
         setVerticalAlignment(SwingConstants.CENTER);
-
+        setBounds((int)modelObject.getX(), (int)modelObject.getY(), modelObject.getWidth(), modelObject.getHeight());
         setBackground(Color.white);
     }
 

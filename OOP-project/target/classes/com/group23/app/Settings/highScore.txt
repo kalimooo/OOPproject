@@ -2,5 +2,10 @@
 13 points;Leif
 19 points;olof
 7 points;hattifnatt
+<<<<<<< HEAD
 7 points;HEJ
 16 points;NEJ
+=======
+1 points;ad
+9 points;be
+>>>>>>> 6ec6f2564f32aa14bd12023f0a4fcaa37158f370

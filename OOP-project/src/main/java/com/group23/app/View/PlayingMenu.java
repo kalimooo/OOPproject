@@ -61,7 +61,6 @@ public class PlayingMenu extends JPanel {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("USER PRESSED QUIT!");
                 showQuitDialog();
             }
         });

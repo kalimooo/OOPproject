@@ -1,11 +1,10 @@
 package com.group23.app.View;
 
 import com.group23.app.Controller.StateController;
-import com.group23.app.Controller.Subscriber;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class StateControllerAdapter implements KeyListener, Subscriber{
+public class StateControllerAdapter implements KeyListener{
     private StateController stateController;
 
     public StateControllerAdapter(StateController stateController) {
@@ -48,10 +47,5 @@ public class StateControllerAdapter implements KeyListener, Subscriber{
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
         
-    }
-
-    @Override
-    public void doAction() {
-        // TODO Show a game over screen
     }
 }
