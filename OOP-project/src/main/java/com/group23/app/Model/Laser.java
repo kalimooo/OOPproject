@@ -11,7 +11,6 @@ public class Laser extends Entity implements Moveable {
     //private double centerY = Model.SCREEN_HEIGHT/2;
 
     private int startBound;
-    private Color laserColor = generateColor();
     private List<StateListener> listeners = new ArrayList<StateListener>();
 
     private final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
@@ -31,10 +30,7 @@ public class Laser extends Entity implements Moveable {
 
     public Laser(int x, int y) {
         super(x, y, 60, 60);
-        //Point point = generateXYPoint();
-        //this.x = point.x;
-        //this.y = point.y;
-    
+
         ArrayList<Double> speed = generateSpeed(x,y);
 
         this.dx = speed.get(0);
@@ -70,12 +66,7 @@ public class Laser extends Entity implements Moveable {
         return this.y;
     }
 
-    private ArrayList<Double> generateSpeed(double x, double y){
-
-        //double dx = (x - centerX);
-        //double dy = (y - centerY);
-
-        // TODO temporary solution, generated starting speed should be modified in relation to the size of the screen
+    private ArrayList<Double> generateSpeed(int x, int y){
         double dx;
         double dy;
 
@@ -99,12 +90,6 @@ public class Laser extends Entity implements Moveable {
         }
 
        ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
-        
- 
-        /*ArrayList<Double> reArrayList = new ArrayList<Double>();
-
-        reArrayList.add(dx);
-        reArrayList.add(dy);*/
 
         return reArrayList;
     }
@@ -119,24 +104,7 @@ public class Laser extends Entity implements Moveable {
         return randomNumber;
     }
 
-  private Color generateColor() {
-
-        List<String> colors = new ArrayList<String>();
-        colors.add("#4deeea");
-        colors.add("#74ee15");
-        colors.add("#ffe700");
-        colors.add("#f000ff");
-        colors.add("#fc1723");
-        
-        Color randomColor = Color.decode(colors.get((int)randomDirFactor(0, 5)));
-        return randomColor;
-    }
-
-    public Color getColor() {
-        return this.laserColor;
-    }
-
-    private Point generateXYPoint(){
+    public Point generateXYPoint(){
 
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
         int side = (int) (Math.random() * 4);
@@ -166,18 +134,17 @@ public class Laser extends Entity implements Moveable {
         return new Point(randomX, randomY);
     }
 
-
-
     @Override
     public void setSpeed(double dx, double dy) {
         this.dx = dx;
         this.dy = dy;
     }
+    
     public Point getSpeed() {
         return new Point((int)dx, (int)dy);
     }
 
-        private ArrayList<Double> normalizeSpeed(double dx, double dy) {
+    private ArrayList<Double> normalizeSpeed(double dx, double dy) {
         double magnitude = Math.sqrt(dx * dx + dy * dy);
         if (magnitude != 0) {
             dx /= magnitude;
