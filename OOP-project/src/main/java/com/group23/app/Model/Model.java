@@ -89,7 +89,13 @@ public class Model {
 
     public void updateModel() {
         if (gameActive) {
+<<<<<<< Updated upstream
             updateObjects();
+=======
+            //System.out.println(nmrOfLasers);
+            tryToSpawnLaser(getElapsedTimeInSeconds());
+            //moveObjects();
+>>>>>>> Stashed changes
             handleCollisions();
             //revalidateLasers();
             System.out.println(player.getCollectibleScore());
