@@ -80,48 +80,6 @@ public class Sprite extends JLabel{
         setBackground(Color.white);
     }
 
-    // public Sprite(Laser laser) {
-    //     Color color = laser.getColor();
-    //     if (color.equals(Color.decode("#4deeea"))) {
-    //         setIcon(blueLaser);
-    //     } else if (color.equals(Color.decode("#74ee15"))) {
-    //         setIcon(greenLaser);
-    //     } else if (color.equals(Color.decode("#ffe700"))) {
-    //         setIcon(yellowIcon);
-    //     } else if (color.equals(Color.decode("#f000ff"))) {
-    //         setIcon(purpleIcon);
-    //     } else if (color.equals(Color.decode("#fc1723"))) {
-    //         setIcon(redIcon);
-    //     }
-    //     setBounds((int)laser.getX(), (int)laser.getY(), laser.getWidth(), laser.getHeight());
-    //     setHorizontalAlignment(SwingConstants.CENTER);
-    //     setVerticalAlignment(SwingConstants.CENTER);
-
-    //     setBackground(Color.white);
-    // }
-
-    // public Sprite(Player player) {
-    //     if (player.isIntangible()) {
-    //         setIcon(shieldedPlayerIcon);
-    //     } else {
-    //         setIcon(playerIcon);
-    //     }
-    //     setBounds((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
-    //     setHorizontalAlignment(SwingConstants.CENTER);
-    //     setVerticalAlignment(SwingConstants.CENTER);
-
-    //     setBackground(Color.white);
-    // }
-
-    // public Sprite(PowerUp powerUp) {
-    //     setIcon(shieldIcon);
-    //     setBounds((int)powerUp.getX(), (int)powerUp.getY(), powerUp.getWidth(), powerUp.getHeight());
-    //     setHorizontalAlignment(SwingConstants.CENTER);
-    //     setVerticalAlignment(SwingConstants.CENTER);
-
-    //     setBackground(Color.white);
-    // }
-
     public void remake(Sprite sprite) {
         setLocation(sprite.getLocation());
         setIcon(sprite.getIcon());
