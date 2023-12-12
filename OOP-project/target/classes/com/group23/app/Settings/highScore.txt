@@ -13,3 +13,4 @@
 6 points; ej
 4 points;nej
 1 points;hejsan
+1 points;hej

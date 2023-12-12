@@ -199,7 +199,7 @@ public class PlayingMenu extends JPanel {
                 break;
             case JOptionPane.NO_OPTION:
                 System.out.println("User pressed Go to Menu");
-                // Perform actions for going to the menu
+                GameWindow.getGameWindow().moveToMenu();
                 break;
             default:
                 // User closed the dialog without making a choice
