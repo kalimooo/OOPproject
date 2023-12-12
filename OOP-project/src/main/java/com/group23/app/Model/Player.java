@@ -120,10 +120,12 @@ public class Player extends Entity implements Moveable, Visitor {
     }
 
     public void resolveLaserCollision(Laser laser) {
-        setInactive();
-        laser.setInactive();
-        for (StateListener stateListener : listeners) {
-            stateListener.onDeleted(this);
+        if (!isIntangible) {
+            setInactive();
+            laser.setInactive();
+            for (StateListener stateListener : listeners) {
+                stateListener.onDeleted(this);
+            }
         }
     }
     public void resolvePowerUpCollision(PowerUp powerUp) {
