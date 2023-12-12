@@ -2,3 +2,5 @@
 13 points;Leif
 19 points;olof
 7 points;hattifnatt
+7 points;HEJ
+16 points;NEJ

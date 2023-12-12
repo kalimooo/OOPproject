@@ -48,6 +48,7 @@ public class GameWindow extends JFrame {
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
         loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); 
+        setBackgroundMusicVolume(0.05);
         playBackgroundMusic();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -187,6 +188,14 @@ public class GameWindow extends JFrame {
     public void stopBackgroundMusic() {
         if (backgroundMusic != null && backgroundMusic.isRunning()) {
             backgroundMusic.stop();
+        }
+    }
+
+    public void setBackgroundMusicVolume(double volume) {
+        if (backgroundMusic != null) {
+            FloatControl gainControl = (FloatControl) backgroundMusic.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB);
         }
     }
 }
