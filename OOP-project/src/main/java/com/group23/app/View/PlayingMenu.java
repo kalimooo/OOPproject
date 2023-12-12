@@ -162,6 +162,23 @@ public class PlayingMenu extends JPanel {
     
         // Visa dialogrutan med highscore-meddelandet
         JOptionPane.showMessageDialog(this, highScoreMessage.toString(), "Highscores", JOptionPane.INFORMATION_MESSAGE);
+
+        // Låt användaren ange sitt namn
+        String playerName = JOptionPane.showInputDialog(this,
+                "<html><font color ='white'> Enter your name:</font></html>");
+    
+        // Kontrollera om spelarnamnet är null eller tomt
+        if (playerName != null && !playerName.trim().isEmpty()) {
+            // Skapa en sträng för att spara i filen
+            String scoreEntry = currentScore + ";" + playerName;
+    
+            // Spara poängen i filen
+            saveScoreToFile(scoreEntry);
+        } else {
+            // Användaren har inte angett ett giltigt namn, ge felmeddelande
+            JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     
         Object[] options = { "Restart Game", "Go to Menu" };
         int result = JOptionPane.showOptionDialog(
@@ -189,22 +206,6 @@ public class PlayingMenu extends JPanel {
                 break;
         }
     
-        // Låt användaren ange sitt namn
-        String playerName = JOptionPane.showInputDialog(this,
-                "<html><font color ='white'> Enter your name:</font></html>");
-    
-        // Kontrollera om spelarnamnet är null eller tomt
-        if (playerName != null && !playerName.trim().isEmpty()) {
-            // Skapa en sträng för att spara i filen
-            String scoreEntry = currentScore + ";" + playerName;
-    
-            // Spara poängen i filen
-            saveScoreToFile(scoreEntry);
-        } else {
-            // Användaren har inte angett ett giltigt namn, ge felmeddelande
-            JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
-                    JOptionPane.WARNING_MESSAGE);
-        }
     }
     
 

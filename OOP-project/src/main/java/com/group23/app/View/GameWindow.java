@@ -11,11 +11,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.awt.Color;
+import java.awt.Font;
 
 import javax.sound.sampled.*;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 
 import com.group23.app.Controller.PlayerController;
 import com.group23.app.Controller.StateController;
@@ -152,7 +155,16 @@ public class GameWindow extends JFrame {
 
     // Quit dialog
     private void confirmExit() {
-        int option = JOptionPane.showConfirmDialog(this, "Do you want to quit?", "Confirm Exit",
+        Color menuBackgroundColor = Color.decode("#4f504e");
+        Color buttonColor = Color.decode("#767675");
+        UIManager.put("OptionPane.background", menuBackgroundColor);
+        UIManager.put("Panel.background", menuBackgroundColor);
+        UIManager.put("OptionPane.messageFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        UIManager.put("Button.background", buttonColor);
+        UIManager.put("Button.foreground", Color.WHITE);
+
+        int option = JOptionPane.showConfirmDialog(this, "<html><font color='white'> Do you want to quit?<font></html>", "Confirm Exit",
                 JOptionPane.YES_NO_OPTION);
 
         if (option == JOptionPane.YES_OPTION) {
