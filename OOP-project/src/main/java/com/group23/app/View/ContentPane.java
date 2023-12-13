@@ -1,9 +1,10 @@
 package com.group23.app.View;
 
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.JPanel;
+
+import com.group23.app.Controller.StateController;
 
 public class ContentPane extends JPanel{
     public static int SCREEN_WIDTH = GameWindow.SCREEN_WIDTH;
@@ -82,5 +83,9 @@ public class ContentPane extends JPanel{
 
     public void updateState() {
         playingField.stateUpdate();
+    }
+
+    public void setStateController(StateController stateController) {
+        playingField.setStateController(stateController);
     }
 }

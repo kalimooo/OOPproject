@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.group23.app.Controller.StateController;
+
 
 public class PlayingField extends JPanel{
 
@@ -79,6 +81,10 @@ public class PlayingField extends JPanel{
     public void showDeathMessage() {
         deathMessage.setVisible(true);
         repaint();
+    }
+
+    public void setStateController(StateController stateController) {
+        pm.setStateController(stateController);
     }
 
     @Override

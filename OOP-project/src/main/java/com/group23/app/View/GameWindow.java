@@ -110,6 +110,7 @@ public class GameWindow extends JFrame {
 
     public void addStateController(StateController stateController) {
         stateControllerAdapter = new StateControllerAdapter(stateController);
+        contentPane.setStateController(stateController);
         addKeyListener(stateControllerAdapter);
     }
 

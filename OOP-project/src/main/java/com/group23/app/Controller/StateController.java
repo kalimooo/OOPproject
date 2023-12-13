@@ -35,4 +35,9 @@ public class StateController implements ChangeListener{
     public void onChanged() {
         view.showGameOverMessage();
     }
+
+    public void resetGame() {
+        model.resetGame();
+    }
+
 }
