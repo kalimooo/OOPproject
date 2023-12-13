@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.group23.app.Controller.StateController;
+
 
 public class PlayingField extends JPanel{
 
@@ -63,6 +65,10 @@ public class PlayingField extends JPanel{
             add(sprites.get(i));
             current.repaint();
         }
+    }
+
+    public void setStateController(StateController stateController) {
+        pm.setStateController(stateController);
     }
 
     @Override
