@@ -161,7 +161,7 @@ public class Laser extends Entity implements Moveable {
         if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             setInactive();
             for (StateListener stateListener : listeners) {
-                stateListener.onDeleted(this);
+                stateListener.onDeleted();
             }
         }
     }

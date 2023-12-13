@@ -21,7 +21,6 @@ public class Model implements StateListener, ChangeListener{
     private GameClock gameClock = new GameClock();
     private long finalTime = 0;
 
-
     private Timer lasTimer;
     private Timer powTimer;
     private Timer colTimer;
@@ -149,8 +148,8 @@ public class Model implements StateListener, ChangeListener{
     }
 
     @Override
-    public void onDeleted(Entity entity) {
-        entities.remove(entity);
+    public void onDeleted() { // onDeleted is called as a Laser is being inactivated. This means a new laser should take its place
+        entities.add(EntityFactory.spawnLaser(this));
     }
 
     @Override
