@@ -15,18 +15,13 @@ public class Model implements StateListener, ChangeListener{
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
 
-    private List<Entity> entities = new ArrayList<Entity>();
     private int boundX = SCREEN_WIDTH;
     private int boundY = SCREEN_HEIGHT;
-    private static boolean gameActive = false;
-    private GameClock gameClock = new GameClock();
     private long finalTime = 0;
 
     private Timer lasTimer;
     private Timer powTimer;
     private Timer colTimer;
-
-    private static Player player;
 
     private final double COLLECTIBLE_CHANCE = 0.05;
     private final double POWER_CHANCE = 0.1;
@@ -167,8 +162,10 @@ public class Model implements StateListener, ChangeListener{
     */
     public void startGame() {
         gameActive = true;
-        laserTimer.start();
-        collectibleTimer.start();
+        restartTimer();
+        lasTimer.start();
+        colTimer.start();
+        powTimer.start();
     }
 
     /**
@@ -176,14 +173,15 @@ public class Model implements StateListener, ChangeListener{
      * reinitializing the player and other entities, and restarting the timers.
      */ 
     public void resetGame() {
-        Model.gameActive = false;
+        finalTime = 0;
         entities.clear();
         player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
         entities.add(player);
         entities.add(EntityFactory.spawnLaser(this));
         gameClock.restartTimer();
-        laserTimer.restart();
-        collectibleTimer.restart();
+        lasTimer.restart();
+        colTimer.restart();
+        powTimer.restart();
         startGame();
     }
 
@@ -235,19 +233,6 @@ public class Model implements StateListener, ChangeListener{
     }
 
 
-    /**
-     * Handles the deletion of an entity from the game.
-     * If the deleted entity is a Laser, a new Laser is spawned.
-     * If the deleted entity is not a Laser, the game is ended.
-     * @param entity The entity that was deleted.
-     */
-    @Override
-    public void onDeleted(Entity entity) {
-        if (entity instanceof Laser) {
-            entities.add(EntityFactory.spawnLaser(this));
-        } else {
-            gameOver();
-        }
     @Override
     public void onDeleted() { // onDeleted is called as a Laser is being inactivated. This means a new laser should take its place
         entities.add(EntityFactory.spawnLaser(this));
@@ -257,26 +242,6 @@ public class Model implements StateListener, ChangeListener{
     public void onChanged(Entity entity) {
         gameOver();
     }
-
-    public void startGame() {
-        gameActive = true;
-        restartTimer();
-        lasTimer.start();
-        colTimer.start();
-        powTimer.start();
-    }
-
-    public void resetGame() {
-        finalTime = 0;
-        entities.clear();
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
-        entities.add(player);
-        entities.add(EntityFactory.spawnLaser(this));
-        gameClock.restartTimer();
-        lasTimer.restart();
-        colTimer.restart();
-        powTimer.restart();
-        startGame();
-    }
     
 }
+
