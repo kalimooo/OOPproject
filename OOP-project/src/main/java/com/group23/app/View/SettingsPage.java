@@ -28,6 +28,7 @@ public class SettingsPage extends JPanel {
     private SettingsPage() {
         setLayout(null);
         setBackground(Color.BLACK);
+
         // Export Button
         exportButton = new JButton("Export highscore");
         exportButton.setBounds(50, 50, 200, 30);
@@ -79,18 +80,15 @@ public class SettingsPage extends JPanel {
     }
 
     private void handleExportButtonClick() {
-        // Add your export highscore logic here
         System.out.println("Export highscore button clicked");
     }
 
     private void handleVolumeSliderChange() {
-        // Add your volume slider logic here
         int volumeValue = volumeSlider.getValue();
         System.out.println("Volume changed to: " + volumeValue);
     }
 
     private void handleMuteButtonClick() {
-        // Add your mute/unmute logic here
         System.out.println("Mute button clicked");
     }
 
