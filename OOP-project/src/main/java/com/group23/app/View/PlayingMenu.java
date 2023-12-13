@@ -28,12 +28,13 @@ import java.util.List;
 
 
 public class PlayingMenu extends JPanel {
-    Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 30);
+    Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 20);
     Color menuBackgroundColor = Color.decode("#4f504e");
     Color buttonColor = Color.decode("#767675");
     private JLabel scoreLabel;
     private JButton quitButton;
     private JButton tutorialButton;
+    private JButton settingsButton;
     public JButton muteButton;
 
     static PlayingMenu playingMenu;
@@ -76,6 +77,20 @@ public class PlayingMenu extends JPanel {
             }
         });
 
+        settingsButton = new JButton("[S] SETTINGS");
+        settingsButton.setFocusable(false);
+        settingsButton.setFont(menuFont);
+        settingsButton.setBackground(buttonColor);
+        settingsButton.setForeground(Color.WHITE);
+
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("USER PRESSED SETTINGS!");
+                GameWindow.getGameWindow().moveToSettingsPage();
+            }
+        });
+
         muteButton = new JButton("[M] MUTE");
         muteButton.setFocusable(false);
         muteButton.setFont(menuFont);
@@ -102,6 +117,7 @@ public class PlayingMenu extends JPanel {
         buttonPanel.add(muteButton);
         buttonPanel.add(tutorialButton);
         buttonPanel.add(quitButton);
+        buttonPanel.add(settingsButton);
         buttonPanel.setFocusable(false);
 
         add(buttonPanel, BorderLayout.EAST);

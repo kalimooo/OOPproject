@@ -20,7 +20,7 @@ public class SettingsPage extends JPanel {
     Color buttonColor = Color.decode("#767675");
     private JButton exportButton;
     private JSlider volumeSlider;
-    private JLabel volumeLabel;  // Added JLabel
+    private JLabel volumeLabel; 
     public String sourceFilePath = "OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt";
 
     static SettingsPage settingsPage;

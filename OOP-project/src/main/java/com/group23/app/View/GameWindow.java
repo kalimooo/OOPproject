@@ -194,13 +194,10 @@ public class GameWindow extends JFrame {
             File musicFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
 
-            // Get a Clip object
             backgroundMusic = AudioSystem.getClip();
 
-            // Open the AudioInputStream
             backgroundMusic.open(audioStream);
 
-            // Loop the background music
             backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
