@@ -1,5 +1,6 @@
 package com.group23.app.View;
 import com.group23.app.Model.Model;
+import com.group23.app.Model.saveScore;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -187,7 +188,8 @@ public class PlayingMenu extends JPanel {
             String scoreEntry = currentScore + ";" + playerName;
     
             // Spara poängen i filen
-            saveScoreToFile(scoreEntry);
+            saveScore.saveScoreToFile(scoreEntry);
+
         } else {
             // Användaren har inte angett ett giltigt namn, ge felmeddelande
             JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
@@ -244,17 +246,7 @@ public class PlayingMenu extends JPanel {
         return highScores;
     }
 
-    private void saveScoreToFile(String scoreEntry) {
-        try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt", true))) {
-            // Skriv poängen till filen
-            writer.write(scoreEntry);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+  
     // A nested static class representing a ScoreEntry. 
     // Implements Comparable to allow for sorting based on the score.
     private static class ScoreEntry implements Comparable<ScoreEntry> {
