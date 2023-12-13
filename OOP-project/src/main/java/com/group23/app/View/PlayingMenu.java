@@ -11,11 +11,9 @@ import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel; 
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.UIManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +21,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.group23.app.Model.Entity;
+
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;

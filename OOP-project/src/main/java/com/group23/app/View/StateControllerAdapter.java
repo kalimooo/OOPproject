@@ -20,6 +20,9 @@ public class StateControllerAdapter implements KeyListener{
         else if (code == KeyEvent.VK_T) {
             stateController.showTutorial();
         }
+        else if (code == KeyEvent.VK_S) {
+            stateController.showSettingsPage();
+        }
         else if (code == KeyEvent.VK_ESCAPE) {
             stateController.showMainScreen();
         }

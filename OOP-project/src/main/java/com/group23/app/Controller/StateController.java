@@ -25,4 +25,8 @@ public class StateController{
     public void showMainScreen() {
         view.moveToMenu();
     }
+
+    public void showSettingsPage() {
+        view.moveToSettingsPage();
+    }
 }

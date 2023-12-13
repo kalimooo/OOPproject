@@ -50,6 +50,10 @@ public class GameWindow extends JFrame {
         contentPane.add(TitleField.getTitleField());
         contentPane.add(PlayingField.getPlayingField());
         contentPane.add(Tutorial.getTutorial());
+        contentPane.add(SettingsPage.getSettingsPage());
+        
+        SettingsPage.getSettingsPage().copyFileToDesktop(SettingsPage.getSettingsPage().sourceFilePath);
+
         loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); 
         setBackgroundMusicVolume(0.05);
         playBackgroundMusic();
@@ -120,6 +124,7 @@ public class GameWindow extends JFrame {
             PlayingField.getPlayingField().setVisible(false);
             Tutorial.getTutorial().setVisible(false);
             TitleField.getTitleField().setVisible(false);
+            SettingsPage.getSettingsPage().setVisible(false);
             panelToShow.setVisible(true);
             repaint();
         }
@@ -129,6 +134,15 @@ public class GameWindow extends JFrame {
         PlayingField.getPlayingField().setVisible(false);
         Tutorial.getTutorial().setVisible(true);
         TitleField.getTitleField().setVisible(false);
+        SettingsPage.getSettingsPage().setVisible(false);
+        repaint();
+    }
+
+    public void moveToSettingsPage() {
+        PlayingField.getPlayingField().setVisible(false);
+        Tutorial.getTutorial().setVisible(false);
+        TitleField.getTitleField().setVisible(false);
+        SettingsPage.getSettingsPage().setVisible(true);
         repaint();
     }
 
@@ -136,6 +150,7 @@ public class GameWindow extends JFrame {
         PlayingField.getPlayingField().setVisible(false);
         Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(true);
+        SettingsPage.getSettingsPage().setVisible(false);
         repaint();
     }
 
@@ -143,6 +158,7 @@ public class GameWindow extends JFrame {
         PlayingField.getPlayingField().setVisible(true);
         Tutorial.getTutorial().setVisible(false);
         TitleField.getTitleField().setVisible(false);
+        SettingsPage.getSettingsPage().setVisible(false);
         timer.start();
         repaint();
     }
