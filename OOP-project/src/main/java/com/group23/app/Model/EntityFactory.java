@@ -6,14 +6,7 @@ import java.util.Random;
 
 public class EntityFactory {    
 
-    static public List<Laser> getLasers(int nmrOfLasers) {
-        List<Laser> lasers = new ArrayList<Laser>(nmrOfLasers);
-        for (int i = 0; i < nmrOfLasers; i++) {
-            lasers.add(new Laser());
-        }
-        return lasers;
-    }
-
+    // Spawns a given number of regular lasers
     static public List<Laser> spawnLasers(int nmrOfLasers) {
         List<Laser> lasers = new ArrayList<Laser>(nmrOfLasers);
         for (int i = 0; i < nmrOfLasers; i++) {
@@ -22,6 +15,7 @@ public class EntityFactory {
         return lasers;
     }
 
+    // Spawns a laser with a 10% chance of being a fast laser
     static public Laser spawnLaser(StateListener stateListener) {
         Random random = new Random();
         Laser newLaser;
@@ -32,5 +26,12 @@ public class EntityFactory {
         }
         newLaser.addStateListener(stateListener);
         return newLaser;
+    }
+
+    // Spawns a random power up (as of now only the shield power up exists)
+    static public PowerUp spawnPowerUp(int boundX, int boundY) {
+
+        // This can later be remade to spawn a random powerup instead of always spawning a shield power
+        return new ShieldPower(boundX, boundY);
     }
 }

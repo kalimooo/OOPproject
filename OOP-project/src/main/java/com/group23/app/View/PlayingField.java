@@ -34,11 +34,6 @@ public class PlayingField extends JPanel{
         for (Sprite sprite : sprites) {
             add(sprite);
         }
-        
-        // bgImage = new JLabel();
-        // bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
-        // bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
-        //add(bgImage);
 
         setBounds(0,0, fieldWidth, fieldHeight);
         setBackground(Color.black);

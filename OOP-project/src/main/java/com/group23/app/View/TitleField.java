@@ -16,6 +16,7 @@ public class TitleField extends JPanel{
     JLabel header;
     JLabel promptEnter;
     JLabel promptT;
+    JLabel promptS;
     Image bgImg;
 
     static TitleField titleField;
@@ -51,16 +52,24 @@ public class TitleField extends JPanel{
 
         promptT = new JLabel("Press T to to enter the tutorial!");
         promptT.setForeground(Color.WHITE);
-        promptT.setFont(new Font(promptT.getFont().getName(), Font.PLAIN, 40));
+        promptT.setFont(new Font(promptT.getFont().getName(), Font.PLAIN, 30));
         promptT.setHorizontalAlignment(SwingConstants.CENTER);
         promptT.setVerticalAlignment(SwingConstants.CENTER);
         promptT.setBounds(0,300, fieldWidth, fieldHeight - 100);
+
+        promptS = new JLabel("Press TAB to to enter the Settings!");
+        promptS.setForeground(Color.WHITE);
+        promptS.setFont(new Font(promptS.getFont().getName(), Font.PLAIN, 30));
+        promptS.setHorizontalAlignment(SwingConstants.CENTER);
+        promptS.setVerticalAlignment(SwingConstants.CENTER);
+        promptS.setBounds(0,350, fieldWidth, fieldHeight - 100);
 
         setBackground(Color.BLACK);
         setBounds(0, 0, fieldWidth, fieldHeight);
         add(header);
         add(promptEnter);
         add(promptT);
+        add(promptS);
 
         this.bgImg = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/AlternativeBG2.jpg", fieldWidth, fieldWidth).getImage();
         Dimension size = new Dimension(bgImg.getWidth(null), bgImg.getHeight(null));

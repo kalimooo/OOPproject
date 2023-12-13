@@ -20,16 +20,17 @@ public class StateControllerAdapter implements KeyListener{
         else if (code == KeyEvent.VK_T) {
             stateController.showTutorial();
         }
+        else if (code == KeyEvent.VK_TAB) {
+            stateController.showSettingsPage();
+        }
         else if (code == KeyEvent.VK_ESCAPE) {
             stateController.showMainScreen();
         }
         else if (code == KeyEvent.VK_Q) {
-            // TODO: Show Quit dialog
             System.out.println("User pressed Q to show quit dialog!");
             PlayingMenu.getPlayingMenu().showQuitDialog();
         }
         else if (code == KeyEvent.VK_M) {
-            // TODO: Show Quit dialog
             System.out.println("User pressed key M to mute/unmute!");
             if(GameWindow.getGameWindow().backgroundMusic.isRunning()) {
                 GameWindow.getGameWindow().stopBackgroundMusic();

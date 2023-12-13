@@ -2,7 +2,7 @@ package com.group23.app.Model;
 
 import java.awt.Point;
 
-public class PowerUp extends Entity{
+public abstract class PowerUp extends Entity{
 
     private static final int STANDARD_WIDTH_HEIGHT = 40;
 
@@ -27,6 +27,8 @@ public class PowerUp extends Entity{
 
     @Override
     public void update() {}
+
+    public abstract void resolveCollision(Player player);
 
     @Override
     public void accept(Visitor v) {

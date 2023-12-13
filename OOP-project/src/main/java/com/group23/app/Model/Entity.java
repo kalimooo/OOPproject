@@ -1,14 +1,11 @@
 package com.group23.app.Model;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Entity {
     protected double x,y;
     protected int width,height;
     private boolean isActive = true;
-    protected List<StateListener> listeners = new ArrayList<StateListener>();
 
     Entity(double x, double y, int width, int height) {
         this.x = x;
@@ -42,11 +39,10 @@ public abstract class Entity {
 
     // If any corner of one Entity is within any corner of another Entity, they are colliding
     public boolean collides(Entity target) {
-        if (this.x < target.getX() + target.getWidth() && 
-            this.x + this.width > target.getX() &&
-            this.y < target.getY() + target.getHeight() &&
-            this.y + this.height > target.getY()) {
-
+        if (this.getX() < target.getX() + target.getWidth() && 
+            this.getX() + this.getWidth() > target.getX() &&
+            this.getY() < target.getY() + target.getHeight() &&
+            this.getY() + this.getHeight() > target.getY()) {
             return true;
         }
         return false;

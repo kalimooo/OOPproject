@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Timer;
 
@@ -25,6 +27,15 @@ public class Player extends Entity implements Moveable, Visitor {
     // Player speed
     private double dx, dy;
 
+    private final static int DEFAULT_X = 0;
+    private final static int DEFAULT_Y = 0;
+
+    private final int BOUNDX = Model.SCREEN_WIDTH;
+    private final int BOUNDY = Model.SCREEN_HEIGHT;
+
+    // An object that listens to changes in the state of the Player object
+    private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+
     private int collectibleScore;
 
     private Timer powerTimer;
@@ -39,10 +50,10 @@ public class Player extends Entity implements Moveable, Visitor {
      * @param height The height of the player.
      * @param stateListener The state listener for the player.
      */
-    public Player(int x, int y, int width, int height, StateListener stateListener) {
+    public Player(int x, int y, int width, int height, ChangeListener changeListener) {
         super(x, y, width, height);
         collectibleScore = 0;
-        listeners.add(stateListener);
+        changeListeners.add(changeListener);
         powerTimer = new Timer(5000, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 isIntangible = false;
@@ -53,6 +64,10 @@ public class Player extends Entity implements Moveable, Visitor {
 
     public Player(int width, int height) {
         this(DEFAULT_X, DEFAULT_Y, width, height,null);
+    }
+
+    public void addChangeListener(ChangeListener changeListener) {
+        changeListeners.add(changeListener);
     }
 
     public int getCollectibleScore() {
@@ -138,14 +153,16 @@ public class Player extends Entity implements Moveable, Visitor {
     }
 
     public void resolveLaserCollision(Laser laser) {
-        setInactive();
-        laser.setInactive();
-        for (StateListener stateListener : listeners) {
-            stateListener.onDeleted(this);
+        if (!isIntangible) {
+            setInactive();
+            laser.setInactive();
+            for (ChangeListener changeListener : changeListeners) {
+                changeListener.onChanged(this);
+            }
         }
     }
     public void resolvePowerUpCollision(PowerUp powerUp) {
-        powerUp.setInactive();
+        powerUp.resolveCollision(this);
     }
     public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
         collectibleItem.setInactive();

@@ -10,14 +10,26 @@ import javax.swing.Timer;
  * Facade class representing the model in its entirety. 
  * This class handles the Player, all entities and the collisions between them
  */
-public class Model implements StateListener{
-    public static final int GAME_WIDTH = 800;
-    public static final int GAME_HEIGHT = 700;
+public class Model implements StateListener, ChangeListener{
 
-    private int boundX = GAME_WIDTH;
-    private int boundY = GAME_HEIGHT;
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 700;
+
+    private List<Entity> entities = new ArrayList<Entity>();
+    private int boundX = SCREEN_WIDTH;
+    private int boundY = SCREEN_HEIGHT;
+    private static boolean gameActive = false;
+    private GameClock gameClock = new GameClock();
+    private long finalTime = 0;
+
+    private Timer lasTimer;
+    private Timer powTimer;
+    private Timer colTimer;
+
+    private static Player player;
 
     private final double COLLECTIBLE_CHANCE = 0.05;
+    private final double POWER_CHANCE = 0.1;
     private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
     private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
 
@@ -63,6 +75,16 @@ public class Model implements StateListener{
                 }  
             }
         });
+
+        // Timer for creating powerups. Every 15 seconds there is a 10% chance to create a power up (currently only Shield powers)
+        powTimer = new Timer(TIME_FOR_POWERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                double random = Math.random();
+                if (random < POWER_CHANCE) {
+                    entities.add(EntityFactory.spawnPowerUp(boundX, boundY));
+                }
+            }
+        });
         
 
         // This line is for Singleton pattern, there should only be ONE model object
@@ -93,6 +115,9 @@ public class Model implements StateListener{
      * @return The elapsed time in seconds.
      */
     public long getElapsedTimeInSeconds() {
+        if (finalTime != 0) {
+            return finalTime;
+        }
         return gameClock.getElapsedTimeInSeconds();
     }
 
@@ -206,6 +231,7 @@ public class Model implements StateListener{
      */
     private void gameOver() {
         gameActive = false;
+        finalTime = getElapsedTimeInSeconds();
     }
 
 
@@ -222,7 +248,35 @@ public class Model implements StateListener{
         } else {
             gameOver();
         }
+    @Override
+    public void onDeleted() { // onDeleted is called as a Laser is being inactivated. This means a new laser should take its place
+        entities.add(EntityFactory.spawnLaser(this));
     }
 
+    @Override
+    public void onChanged(Entity entity) {
+        gameOver();
+    }
+
+    public void startGame() {
+        gameActive = true;
+        restartTimer();
+        lasTimer.start();
+        colTimer.start();
+        powTimer.start();
+    }
+
+    public void resetGame() {
+        finalTime = 0;
+        entities.clear();
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        entities.add(player);
+        entities.add(EntityFactory.spawnLaser(this));
+        gameClock.restartTimer();
+        lasTimer.restart();
+        colTimer.restart();
+        powTimer.restart();
+        startGame();
+    }
     
 }
