@@ -23,13 +23,16 @@ public class Model implements StateListener{
 
 
     private Timer lasTimer;
+    private Timer powTimer;
     private Timer colTimer;
 
     private static Player player;
 
     private final double COLLECTIBLE_CHANCE = 0.05;
+    private final double POWER_CHANCE = 0.1;
     private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
     private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
+    private final int TIME_FOR_POWERS = 1500;      //          -||-
 
     private static Model model;
 
@@ -59,6 +62,16 @@ public class Model implements StateListener{
                 if (random < COLLECTIBLE_CHANCE) {
                     entities.add(new CollectibleItem());
                 }  
+            }
+        });
+
+        // Timer for creating powerups. Every 15 seconds there is a 10% chance to create a power up (currently only Shield powers)
+        powTimer = new Timer(TIME_FOR_POWERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                double random = Math.random();
+                if (random < POWER_CHANCE) {
+                    entities.add(EntityFactory.spawnPowerUp(boundX, boundY));
+                }
             }
         });
         
@@ -144,9 +157,10 @@ public class Model implements StateListener{
     }
 
     public void startGame() {
-        if (!gameActive) {
-            resetGame();
-        }
+        gameActive = true;
+        lasTimer.start();
+        colTimer.start();
+        powTimer.start();
     }
 
     public void resetGame() {
@@ -158,6 +172,7 @@ public class Model implements StateListener{
         gameClock.restartTimer();
         lasTimer.restart();
         colTimer.restart();
-        gameActive = true;
+        powTimer.restart();
+        startGame();
     }
 }

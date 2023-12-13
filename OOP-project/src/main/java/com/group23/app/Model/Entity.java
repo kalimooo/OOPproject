@@ -42,11 +42,10 @@ public abstract class Entity {
 
     // If any corner of one Entity is within any corner of another Entity, they are colliding
     public boolean collides(Entity target) {
-        if (this.x < target.getX() + target.getWidth() && 
-            this.x + this.width > target.getX() &&
-            this.y < target.getY() + target.getHeight() &&
-            this.y + this.height > target.getY()) {
-
+        if (this.getX() < target.getX() + target.getWidth() && 
+            this.getX() + this.getWidth() > target.getX() &&
+            this.getY() < target.getY() + target.getHeight() &&
+            this.getY() + this.getHeight() > target.getY()) {
             return true;
         }
         return false;
