@@ -16,25 +16,36 @@ import javax.swing.event.ChangeListener;
 public class SettingsPage extends JPanel {
     static final int SCREEN_WIDTH = GameWindow.SCREEN_WIDTH;
     static final int SCREEN_HEIGHT = GameWindow.SCREEN_HEIGHT;
-
+    Color menuBackgroundColor = Color.decode("#4f504e");
+    Color buttonColor = Color.decode("#767675");
     private JButton exportButton;
     private JSlider volumeSlider;
+    private JLabel volumeLabel;  // Added JLabel
     public String sourceFilePath = "OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt";
-
 
     static SettingsPage settingsPage;
 
     private SettingsPage() {
+        UIManager.put("OptionPane.background", menuBackgroundColor);
+        UIManager.put("Panel.background", menuBackgroundColor);
+        UIManager.put("OptionPane.messageFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        UIManager.put("Button.background", buttonColor);
+        UIManager.put("Button.foreground", Color.WHITE);
+
         setLayout(null);
         setBackground(Color.BLACK);
 
-        // Export Button
         exportButton = new JButton("Export highscore to desktop");
         exportButton.setBounds(50, 50, 200, 30);
         exportButton.setFocusable(false);
         add(exportButton);
 
-        // Volume Slider
+        volumeLabel = new JLabel("Music volume");
+        volumeLabel.setForeground(Color.WHITE);
+        volumeLabel.setBounds(50, 80, 200, 30);
+        add(volumeLabel);
+
         volumeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
         volumeSlider.setBounds(50, 100, 200, 30);
         volumeSlider.setMajorTickSpacing(10);
@@ -43,7 +54,6 @@ public class SettingsPage extends JPanel {
         volumeSlider.setFocusable(false);
         add(volumeSlider);
 
-        // Add action listeners
         exportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +66,7 @@ public class SettingsPage extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 handleVolumeSliderChange();
+                GameWindow.getGameWindow().setBackgroundMusicVolume((double) volumeSlider.getValue()/1000);
             }
         });
 
@@ -70,8 +81,8 @@ public class SettingsPage extends JPanel {
     }
 
     private void handleVolumeSliderChange() {
-        int volumeValue = volumeSlider.getValue();
-        System.out.println("Volume changed to: " + volumeValue);
+        double volumeValue = (double) volumeSlider.getValue();
+        System.out.println("Volume changed to: " + volumeValue/1000);
     }
 
     public static SettingsPage getSettingsPage() {
@@ -81,15 +92,13 @@ public class SettingsPage extends JPanel {
         return SettingsPage.settingsPage;
     }
 
-     public static void copyFileToDesktop(String sourceFilePath) {
-        // Hämta användarens skrivbordsmapp
+    public static void copyFileToDesktop(String sourceFilePath) {
         String desktopPath = System.getProperty("user.home") + "\\Desktop";
 
         try {
             Path sourcePath = Paths.get(sourceFilePath);
             Path destinationPath = Paths.get(desktopPath, sourcePath.getFileName().toString());
 
-            // Kopiera filen
             Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
 
             System.out.println("Filen har kopierats till skrivbordet: " + destinationPath.toString());
@@ -98,5 +107,4 @@ public class SettingsPage extends JPanel {
             System.err.println("Misslyckades med att kopiera filen.");
         }
     }
-
 }
