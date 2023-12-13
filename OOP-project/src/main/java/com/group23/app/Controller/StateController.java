@@ -29,4 +29,5 @@ public class StateController{
     public void showSettingsPage() {
         view.moveToSettingsPage();
     }
+
 }

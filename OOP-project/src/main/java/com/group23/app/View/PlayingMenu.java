@@ -2,6 +2,7 @@ package com.group23.app.View;
 import com.group23.app.Model.Model;
 import com.group23.app.Model.saveScore;
 
+import com.group23.app.Controller.StateController;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
@@ -211,10 +212,12 @@ public class PlayingMenu extends JPanel {
         switch (result) {
             case JOptionPane.YES_OPTION:
                 System.out.println("User pressed Restart Game");
+                // stateController.resetGame();
                 Model.getModel().resetGame();
                 break;
             case JOptionPane.NO_OPTION:
                 System.out.println("User pressed Go to Menu");
+                // stateController.moveToMenu();
                 GameWindow.getGameWindow().moveToMenu();
                 break;
             default:
