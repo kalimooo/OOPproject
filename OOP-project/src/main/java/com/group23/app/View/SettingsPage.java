@@ -22,6 +22,7 @@ public class SettingsPage extends JPanel {
     private JSlider volumeSlider;
     private JLabel volumeLabel; 
     public String sourceFilePath = "OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt";
+    JLabel header;
 
     static SettingsPage settingsPage;
 
@@ -36,22 +37,32 @@ public class SettingsPage extends JPanel {
         setLayout(null);
         setBackground(Color.BLACK);
 
+        header = new JLabel("Settings");
+        header.setForeground(Color.WHITE);
+        header.setFont(new Font(header.getFont().getName(), Font.PLAIN, 70));
+        header.setHorizontalAlignment(SwingConstants.CENTER);
+        header.setVerticalAlignment(SwingConstants.TOP);
+        header.setBounds(0, 30, SCREEN_WIDTH, SCREEN_HEIGHT -100);
+        add(header);
+
         exportButton = new JButton("Export highscore to desktop");
-        exportButton.setBounds(50, 50, 200, 30);
+        exportButton.setBounds(300, 300, 200, 30);
         exportButton.setFocusable(false);
         add(exportButton);
 
         volumeLabel = new JLabel("Music volume");
         volumeLabel.setForeground(Color.WHITE);
-        volumeLabel.setBounds(50, 80, 200, 30);
+        volumeLabel.setBounds(300, 170, 200, 30);
+        volumeLabel.setVerticalAlignment(SwingConstants.CENTER);
         add(volumeLabel);
 
         volumeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-        volumeSlider.setBounds(50, 100, 200, 30);
+        volumeSlider.setBounds(300, 200, 200, 30);
         volumeSlider.setMajorTickSpacing(10);
         volumeSlider.setPaintTicks(true);
         volumeSlider.setPaintLabels(true);
         volumeSlider.setFocusable(false);
+
         add(volumeSlider);
 
         exportButton.addActionListener(new ActionListener() {
