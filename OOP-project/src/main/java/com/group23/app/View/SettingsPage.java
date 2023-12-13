@@ -19,7 +19,6 @@ public class SettingsPage extends JPanel {
 
     private JButton exportButton;
     private JSlider volumeSlider;
-    private JButton muteButton;
     public String sourceFilePath = "OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt";
 
 
@@ -30,7 +29,7 @@ public class SettingsPage extends JPanel {
         setBackground(Color.BLACK);
 
         // Export Button
-        exportButton = new JButton("Export highscore");
+        exportButton = new JButton("Export highscore to desktop");
         exportButton.setBounds(50, 50, 200, 30);
         exportButton.setFocusable(false);
         add(exportButton);
@@ -43,12 +42,6 @@ public class SettingsPage extends JPanel {
         volumeSlider.setPaintLabels(true);
         volumeSlider.setFocusable(false);
         add(volumeSlider);
-
-        // Mute Button
-        muteButton = new JButton("Mute");
-        muteButton.setBounds(50, 150, 200, 30);
-        muteButton.setFocusable(false);
-        add(muteButton);
 
         // Add action listeners
         exportButton.addActionListener(new ActionListener() {
@@ -66,13 +59,6 @@ public class SettingsPage extends JPanel {
             }
         });
 
-        muteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleMuteButtonClick();
-            }
-        });
-
         setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         setBackground(Color.BLACK);
 
@@ -86,10 +72,6 @@ public class SettingsPage extends JPanel {
     private void handleVolumeSliderChange() {
         int volumeValue = volumeSlider.getValue();
         System.out.println("Volume changed to: " + volumeValue);
-    }
-
-    private void handleMuteButtonClick() {
-        System.out.println("Mute button clicked");
     }
 
     public static SettingsPage getSettingsPage() {
