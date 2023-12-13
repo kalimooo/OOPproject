@@ -1,7 +1,6 @@
 package com.group23.app;
 
 import com.group23.app.View.GameWindow;
-
 import com.group23.app.Controller.StateController;
 
 import com.group23.app.Controller.PlayerController;
@@ -22,7 +21,7 @@ public class App
         gameWindow = GameWindow.getGameWindow();
         gameWindow.addStateController(new StateController(model));
         gameWindow.addPlayerController(new PlayerController(model));
-        }
+    }
     public static void main( String[] args )
     {
         App myApp = new App();
