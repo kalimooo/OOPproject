@@ -8,8 +8,8 @@ public class FastLaser extends Laser {
 
     private int startBound;
 
-    final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
-    final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
+    final static int SCREEN_WIDTH = Model.GAME_WIDTH;
+    final static int SCREEN_HEIGHT = Model.GAME_HEIGHT;
 
     public FastLaser() {
         super();

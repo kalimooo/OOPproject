@@ -6,14 +6,24 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+
+/**
+ * This class represents a Player in the game. 
+ * It extends Entity and implements Moveable and Visitor interfaces.
+ * A Player has a position (x, y), dimensions (width, height), 
+ * speed (dx, dy), a score for collectibles, and a internal timer for powerups.
+ */
 public class Player extends Entity implements Moveable, Visitor {
+    // Boundaries of the game area
+    private final static int BOUNDX = Model.GAME_WIDTH;
+    private final static int BOUNDY = Model.GAME_HEIGHT;
+
+    // Default spawning positions for a Player
+    private final static int DEFAULT_X = BOUNDX/2;
+    private final static int DEFAULT_Y = BOUNDY/2;
+
+    // Player speed
     private double dx, dy;
-
-    private final static int DEFAULT_X = 0;
-    private final static int DEFAULT_Y = 0;
-
-    private final int BOUNDX = Model.SCREEN_WIDTH;
-    private final int BOUNDY = Model.SCREEN_HEIGHT;
 
     private int collectibleScore;
 
@@ -21,6 +31,14 @@ public class Player extends Entity implements Moveable, Visitor {
 
     private boolean isIntangible = false;
 
+    /**
+     * Constructor for the Player class.
+     * @param x The x-coordinate of the player.
+     * @param y The y-coordinate of the player.
+     * @param width The width of the player.
+     * @param height The height of the player.
+     * @param stateListener The state listener for the player.
+     */
     public Player(int x, int y, int width, int height, StateListener stateListener) {
         super(x, y, width, height);
         collectibleScore = 0;

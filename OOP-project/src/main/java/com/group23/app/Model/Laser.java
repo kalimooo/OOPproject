@@ -14,8 +14,8 @@ public class Laser extends Entity implements Moveable {
     private Color laserColor = generateColor();
     private List<StateListener> listeners = new ArrayList<StateListener>();
 
-    private final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
-    private final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
+    private final static int GAME_WIDTH = Model.GAME_WIDTH;
+    private final static int GAME_HEIGHT = Model.GAME_HEIGHT;
 
     public Laser() {
         super(0, 0, 40, 40);
@@ -146,20 +146,20 @@ public class Laser extends Entity implements Moveable {
 
         switch (side) {
             case 0: // Topp
-                randomX = (int) (Math.random() * SCREEN_WIDTH); // Tar random x-värde
+                randomX = (int) (Math.random() * GAME_WIDTH); // Tar random x-värde
                 randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
                 break;
             case 1: // Höger
-                randomX = SCREEN_WIDTH - this.getWidth() - 5; // Låser x så vi tittar längst bort på skärmen
-                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                randomX = GAME_WIDTH - this.getWidth() - 5; // Låser x så vi tittar längst bort på skärmen
+                randomY = (int) (Math.random() * GAME_HEIGHT);
                 break;
             case 2: // Botten
-                randomX = (int) (Math.random() * SCREEN_WIDTH);
-                randomY = SCREEN_HEIGHT - this.getHeight() - 5; // Låser y så vi alltid kollar längst ner
+                randomX = (int) (Math.random() * GAME_WIDTH);
+                randomY = GAME_HEIGHT - this.getHeight() - 5; // Låser y så vi alltid kollar längst ner
                 break;
             case 3: // Vänster
                 randomX = 0;
-                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                randomY = (int) (Math.random() * GAME_HEIGHT);
                 break;
         }
 
@@ -192,7 +192,7 @@ public class Laser extends Entity implements Moveable {
     @Override
     public void update() {
         move();
-        if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
+        if (isOutOfBounds(GAME_WIDTH, GAME_HEIGHT)) {
             setInactive();
             for (StateListener stateListener : listeners) {
                 stateListener.onDeleted(this);
