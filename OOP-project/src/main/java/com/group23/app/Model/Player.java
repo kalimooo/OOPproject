@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Timer;
 
@@ -15,16 +17,19 @@ public class Player extends Entity implements Moveable, Visitor {
     private final int BOUNDX = Model.SCREEN_WIDTH;
     private final int BOUNDY = Model.SCREEN_HEIGHT;
 
+    // An object that listens to changes in the state of the Player object
+    private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+
     private int collectibleScore;
 
     private Timer powerTimer;
 
     private boolean isIntangible = false;
 
-    public Player(int x, int y, int width, int height, StateListener stateListener) {
+    public Player(int x, int y, int width, int height, ChangeListener changeListener) {
         super(x, y, width, height);
         collectibleScore = 0;
-        listeners.add(stateListener);
+        changeListeners.add(changeListener);
         powerTimer = new Timer(5000, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 isIntangible = false;
@@ -35,6 +40,10 @@ public class Player extends Entity implements Moveable, Visitor {
 
     public Player(int width, int height) {
         this(DEFAULT_X, DEFAULT_Y, width, height,null);
+    }
+
+    public void addChangeListener(ChangeListener changeListener) {
+        changeListeners.add(changeListener);
     }
 
     public int getCollectibleScore() {
@@ -123,8 +132,8 @@ public class Player extends Entity implements Moveable, Visitor {
         if (!isIntangible) {
             setInactive();
             laser.setInactive();
-            for (StateListener stateListener : listeners) {
-                stateListener.onDeleted(this);
+            for (ChangeListener changeListener : changeListeners) {
+                changeListener.onChanged(this);
             }
         }
     }

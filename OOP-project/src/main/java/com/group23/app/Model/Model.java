@@ -9,7 +9,7 @@ import javax.swing.Timer;
 /*
  * Facade class representing the model in its entirety
  */
-public class Model implements StateListener{
+public class Model implements StateListener, ChangeListener{
 
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
@@ -148,12 +148,14 @@ public class Model implements StateListener{
         finalTime = getElapsedTimeInSeconds();
     }
 
+    @Override
     public void onDeleted(Entity entity) {
-        if (entity instanceof Laser) {
-            entities.add(EntityFactory.spawnLaser(this));
-        } else {
-            gameOver();
-        }
+        entities.remove(entity);
+    }
+
+    @Override
+    public void onChanged(Entity entity) {
+        gameOver();
     }
 
     public void startGame() {
