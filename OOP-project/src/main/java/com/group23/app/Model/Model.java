@@ -1,0 +1,160 @@
+package com.group23.app.Model;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Timer;
+/*
+ * Facade class representing the model in its entirety
+ */
+public class Model implements StateListener{
+
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 700;
+
+    private List<Entity> entities = new ArrayList<Entity>();
+    private int boundX = SCREEN_WIDTH;
+    private int boundY = SCREEN_HEIGHT;
+    private static boolean gameActive = false;
+    private GameClock gameClock = new GameClock();
+
+
+    private Timer lasTimer;
+    private Timer colTimer;
+
+    private static Player player;
+
+    private final double COLLECTIBLE_CHANCE = 0.05;
+    private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
+    private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
+
+    private static Model model;
+
+    private Model() {
+        // Adding the first laser to the model
+        entities.add(EntityFactory.spawnLaser(this));
+
+        // Creating and adding the player to the model
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40, this);
+        entities.add(player);
+
+        // The game clock which keeps track of the elapsed time in the game
+        gameClock = new GameClock();
+
+        // Timer for creating lasers. Once every TIME_FOR_LASERS milliseconds it creates a laser. As of now this means a new laser
+        // every ten seconds
+        lasTimer = new Timer(TIME_FOR_MORE_LASERS, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                entities.add(EntityFactory.spawnLaser(model));
+            }
+        });
+
+        // Timer for creating collectibles. Every 20 seconds it has a 5% chance to create a collectible
+        colTimer = new Timer(TIME_FOR_COLLECTIBLES, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                double random = Math.random();
+                if (random < COLLECTIBLE_CHANCE) {
+                    entities.add(new CollectibleItem());
+                }  
+            }
+        });
+        
+
+        // This line is for Singleton pattern, there should only be ONE model object
+        Model.model = this;
+    }
+
+    // Singleton pattern implemented for the Model class
+    public static Model getModel() {
+        if (model == null) {
+            return new Model();
+        }
+        return model;
+    }
+
+    public long getElapsedTimeInSeconds() {
+        return gameClock.getElapsedTimeInSeconds();
+    }
+
+    public void restartTimer() {
+        gameClock.restartTimer();
+    }
+
+    public void updatePlayerSpeed(double dx, double dy) {
+        player.setSpeed(dx, dy);
+    }
+
+    public void modifyPlayerDX(double dx) {
+        player.modifyDx(dx);
+    }
+
+    public void modifyPlayerDY(double dy) {
+        player.modifyDy(dy);
+    }
+
+    public void updateModel() {
+        if (gameActive) {
+            updateObjects();
+            handleCollisions();
+        }
+    }
+
+    private void updateObjects() {
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).update();
+        }
+
+        for (int i = entities.size() - 1; i >= 0; i--) {
+            if (!entities.get(i).isActive()) {
+                entities.remove(i);
+            }
+        }
+    }
+
+
+    // TODO Add CollisionHandler class that handles collisions
+    private void handleCollisions() {
+        for (int i = entities.size() - 1; i >= 0; i--) {
+            Entity curEntity = entities.get(i);
+            if (player.collides(curEntity)) {
+                curEntity.accept(player);
+            }
+        }
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    private void gameOver() {
+        gameActive = false;
+    }
+
+    public void onDeleted(Entity entity) {
+        if (entity instanceof Laser) {
+            entities.add(EntityFactory.spawnLaser(this));
+        } else {
+            gameOver();
+        }
+    }
+
+    public void startGame() {
+        gameActive = true;
+        lasTimer.start();
+        colTimer.start();
+    }
+
+    public void resetGame() {
+        Model.gameActive = false;
+        entities.clear();
+        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        entities.add(player);
+        entities.add(EntityFactory.spawnLaser(this));
+        gameClock.restartTimer();
+        lasTimer.restart();
+        colTimer.restart();
+        startGame();
+    }
+}

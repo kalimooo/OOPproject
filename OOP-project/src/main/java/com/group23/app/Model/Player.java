@@ -1,32 +1,53 @@
 package com.group23.app.Model;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Player implements Collidable, Moveable, Drawable {
-    private int x, y;
+import javax.swing.Timer;
+
+public class Player extends Entity implements Moveable, Visitor {
     private double dx, dy;
-
-    private Sprite sprite;
 
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
-    public Player(int x, int y, String imageName) {
-        this.x = x;
-        this.y = y;
-        this.sprite = new Sprite(imageName);
+    private final int BOUNDX = Model.SCREEN_WIDTH;
+    private final int BOUNDY = Model.SCREEN_HEIGHT;
+
+    private int collectibleScore;
+
+    private Timer powerTimer;
+
+    private boolean isIntangible = false;
+
+    public Player(int x, int y, int width, int height, StateListener stateListener) {
+        super(x, y, width, height);
+        collectibleScore = 0;
+        listeners.add(stateListener);
+        powerTimer = new Timer(5000, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                isIntangible = false;
+                powerTimer.stop();
+            }
+        });
     }
 
-    public Player(String imageName) {
-        this(DEFAULT_X, DEFAULT_Y, imageName);
-        
+    public Player(int width, int height) {
+        this(DEFAULT_X, DEFAULT_Y, width, height,null);
     }
 
-    @Override
-    public void draw(){
-
+    public int getCollectibleScore() {
+        return this.collectibleScore;
     }
-    
-    
+
+    public void incrementCollectibleScore() {
+        this.collectibleScore++;
+    }
+
+    public void resetColletibleScore() {
+        this.collectibleScore = 0;
+    }
 
     @Override
     public void move() {
@@ -34,19 +55,92 @@ public class Player implements Collidable, Moveable, Drawable {
         y += dy;
     }
 
+    public void setSpeed(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
+
+    public boolean isOutOfBounds(int boundX, int boundY) {
+        if (x>= 0 && x + width <= boundX) {
+            if (y >= 0 && y + height + 10 <= boundY) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void relocate(int boundX, int boundY) {
+
+        if (x < 0) {
+            x = 0;
+        }
+        else if (x + width > boundX) {
+            x = boundX - width;
+        }
+
+        if (y < 0) {
+            y = 0;
+        }
+        else if (y + height > boundY) {
+            y = boundY - height;
+        }
+    }
+
+    public void setIntangible() {
+        isIntangible = true;
+        powerTimer.start();
+    }
+
 
     // --------------------- Getters -----------------------
 
-    public int getX() {
-        return this.x;
+    public Rectangle getBounds() {
+        return new Rectangle((int)this.x, (int)this.y, this.getWidth(), this.getHeight());
     }
 
-    public int getY() {
-        return this.y;
+    public void modifyDx(double dx) {
+        this.dx += dx;
+    }
+
+    public boolean isIntangible() {
+        return isIntangible;
+    }
+
+    public void modifyDy(double dy) {
+        this.dy += dy;
+    }
+
+    public Point getSpeed() {
+        return new Point((int)this.dx, (int)this.dy);
     }
 
     @Override
-    public Rectangle getBounds() {
-        return new Rectangle(this.x, this.y, this.sprite.getWidth(), this.sprite.getHeight());
+    public void accept(Visitor v) {
+        v.resolvePlayerCollision(this);
     }
+
+    public void resolveLaserCollision(Laser laser) {
+        setInactive();
+        laser.setInactive();
+        for (StateListener stateListener : listeners) {
+            stateListener.onDeleted(this);
+        }
+    }
+    public void resolvePowerUpCollision(PowerUp powerUp) {
+        powerUp.setInactive();
+    }
+    public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
+        collectibleItem.setInactive();
+        this.incrementCollectibleScore();
+    }
+
+    @Override
+    public void update() {
+        move();
+        if (isOutOfBounds(BOUNDX, BOUNDY)) {
+            relocate(BOUNDX, BOUNDY);
+        }
+    }
+
+    public void resolvePlayerCollision(Player player) {}
 }

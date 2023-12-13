@@ -6,4 +6,5 @@ package com.group23.app.Model;
 public interface Moveable {
     // Is called every game cycle
     public void move();
+    public void setSpeed(double dx, double dy);
 }

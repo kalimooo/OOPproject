@@ -1,49 +1,47 @@
 package com.group23.app.View;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class PlayingField extends JPanel{
-     
+
     static final int fieldWidth = GameWindow.SCREEN_WIDTH;
     static final int fieldHeight = GameWindow.SCREEN_HEIGHT;
+
+    static PlayingMenu pm = PlayingMenu.getPlayingMenu();
+    private SpriteFactory spriteFactory = new SpriteFactory();
     
-    static JLabel playerChar;
-    static ArrayList<Laser> lasers = new ArrayList<Laser>();
+    JLabel playerChar;
     static boolean isVisible = false;
-    static JLabel bgImage;
+    List<Sprite> sprites = new ArrayList<Sprite>();
+    private static ImageIcon bgImage = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT);
 
     static PlayingField playingField;
 
     private PlayingField() {
         super(null);
-
-
-        playerChar = new JLabel();
-        playerChar.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png",40,40));
-        playerChar.setBounds(fieldWidth/2 - 30, fieldHeight/2 - 30, playerChar.getIcon().getIconWidth(), playerChar.getIcon().getIconHeight());
-        add(playerChar);
-
-        lasers.add(new Laser(60, 60, "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/Blue.png", Color.blue));
-        for (Laser laser : lasers) {
-            add(laser);
-        }
-
-        bgImage = new JLabel();
-        bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
-        bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
-        add(bgImage);
-
         
+        add(pm);
 
-        setBackground(new Color(0, 0, 0, 0));
+        sprites = spriteFactory.getSprites();
+        for (Sprite sprite : sprites) {
+            add(sprite);
+        }
+        
+        // bgImage = new JLabel();
+        // bgImage.setIcon(GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT));
+        // bgImage.setBounds(0,0,bgImage.getIcon().getIconWidth(), bgImage.getIcon().getIconHeight());
+        //add(bgImage);
+
         setBounds(0,0, fieldWidth, fieldHeight);
+        setBackground(Color.black);
         PlayingField.playingField = this;
     }
 
@@ -54,22 +52,27 @@ public class PlayingField extends JPanel{
         return PlayingField.playingField;
     }
 
-    public void move() {
-        if (isVisible) {
-            playerChar.setLocation((int)playerChar.getLocation().getX() + GameWindow.dx,(int) playerChar.getLocation().getY() + GameWindow.dy);
-            this.revalidate();
-            this.repaint();
+    public void stateUpdate() {
+        Sprite current;
+        for (int i = sprites.size() - 1; i >= 0 ; i--) {
+            current = sprites.get(i);
+            sprites.remove(current);
+            remove(current);
+            repaint();
+        }
+
+        ArrayList<Sprite> newSprites = spriteFactory.getSprites();
+        for (int i = 0; i < newSprites.size(); i++) {
+            current = newSprites.get(i);
+            sprites.add(current);
+            add(sprites.get(i));
+            current.repaint();
         }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        for (Laser laser : lasers) {
-            g2.setColor(laser.getColor());
-            g2.setStroke(new BasicStroke(7));
-            g2.drawLine(laser.getEX() - 80, laser.getEY() - 80, laser.getEX(), laser.getEY());
-        }
+        g.drawImage(bgImage.getImage(), 0, 0, null);
     }
 }
