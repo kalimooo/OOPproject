@@ -17,16 +17,16 @@ public class ControllerAdapter implements KeyListener{
         int code = e.getKeyCode();
 
         switch (code) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 playerController.moveRight();
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 playerController.moveLeft();
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 playerController.moveUp();
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 playerController.moveDown();
                 break;
         }
@@ -37,16 +37,16 @@ public class ControllerAdapter implements KeyListener{
         int code = e.getKeyCode();
 
         switch (code) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 playerController.stopRight();
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 playerController.stopLeft();
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 playerController.stopUp();
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 playerController.stopDown();
                 break;
         }

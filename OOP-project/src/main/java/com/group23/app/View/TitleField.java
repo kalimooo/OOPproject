@@ -57,7 +57,7 @@ public class TitleField extends JPanel{
         promptT.setVerticalAlignment(SwingConstants.CENTER);
         promptT.setBounds(0,300, fieldWidth, fieldHeight - 100);
 
-        promptS = new JLabel("Press S to to enter the Settings!");
+        promptS = new JLabel("Press TAB to to enter the Settings!");
         promptS.setForeground(Color.WHITE);
         promptS.setFont(new Font(promptS.getFont().getName(), Font.PLAIN, 30));
         promptS.setHorizontalAlignment(SwingConstants.CENTER);

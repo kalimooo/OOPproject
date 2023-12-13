@@ -18,22 +18,22 @@ public class Controller implements KeyListener{
         double dy = 0;
 
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 if(!KeysFired.arrowRight) {
                     dx += MOVEMENT_SPEED;
                     KeysFired.arrowRight = true;
                 }
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 if(!KeysFired.arrowLeft) {
                     dx -= MOVEMENT_SPEED;
                     KeysFired.arrowLeft = true;
                 }
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 if(!KeysFired.arrowUp) {
                     dy += MOVEMENT_SPEED;
                     KeysFired.arrowUp = true;
                 }
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
                 if(!KeysFired.arrowDown) {
                     dy -= MOVEMENT_SPEED;
                     KeysFired.arrowDown = true;
@@ -49,13 +49,13 @@ public class Controller implements KeyListener{
         double dy = 0;
 
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
                 dx -= MOVEMENT_SPEED;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
                 dx += MOVEMENT_SPEED;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
                 dy -= MOVEMENT_SPEED;
-            case KeyEvent.VK_DOWN:   
+            case KeyEvent.VK_S:   
                 dy += MOVEMENT_SPEED; 
         }
 
