@@ -152,6 +152,10 @@ public class Model implements StateListener, ChangeListener{
         gameActive = false;
         finalTime = getElapsedTimeInSeconds();
         changeListener.onChanged();
+
+        lasTimer.stop();
+        colTimer.stop();
+        powTimer.stop();
     }
 
     @Override

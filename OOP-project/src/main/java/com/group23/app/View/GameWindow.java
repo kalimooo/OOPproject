@@ -162,6 +162,10 @@ public class GameWindow extends JFrame {
         // contentPane.repaint();
     }
 
+    public void resetView() {
+        contentPane.resetState();
+    }
+
     // Quit dialog
     private void confirmExit() {
         Color menuBackgroundColor = Color.decode("#4f504e");

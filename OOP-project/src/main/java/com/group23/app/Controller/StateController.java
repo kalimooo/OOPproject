@@ -16,6 +16,7 @@ public class StateController implements ChangeListener{
     public void startGame() {
         view.moveToGame();
         view.updateView();
+        model.resetGame();
         model.startGame();
     }
 
@@ -38,6 +39,7 @@ public class StateController implements ChangeListener{
 
     public void resetGame() {
         model.resetGame();
+        view.resetView();
     }
 
 }

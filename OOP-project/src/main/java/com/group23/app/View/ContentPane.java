@@ -66,6 +66,7 @@ public class ContentPane extends JPanel{
 
     public void showMenu() {
         setAllInvisible();
+        playingField.resetState();
         titleField.setVisible(true);
     }
 
@@ -83,6 +84,10 @@ public class ContentPane extends JPanel{
 
     public void updateState() {
         playingField.stateUpdate();
+    }
+
+    public void resetState() {
+        playingField.resetState();
     }
 
     public void setStateController(StateController stateController) {

@@ -1,6 +1,7 @@
 package com.group23.app.View;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class PlayingField extends JPanel{
     static PlayingMenu pm = PlayingMenu.getPlayingMenu();
     private SpriteFactory spriteFactory = new SpriteFactory();
 
-    private JLabel deathMessage = new JLabel("You have died!");
+    private JLabel deathMessage = new JLabel("Game over!");
     
     JLabel playerChar;
     static boolean isVisible = false;
@@ -39,6 +40,8 @@ public class PlayingField extends JPanel{
         deathMessage.setVerticalAlignment(SwingConstants.CENTER);
         deathMessage.setForeground(Color.white);
         deathMessage.setBackground(Color.black);
+        deathMessage.setOpaque(true);
+        deathMessage.setFont(new Font(deathMessage.getFont().getName(), Font.PLAIN, 30));
         deathMessage.setBounds(fieldWidth/2 - 100, fieldHeight/2 - 50, 200, 100);
         deathMessage.setVisible(false);
         add(deathMessage);
@@ -85,6 +88,11 @@ public class PlayingField extends JPanel{
 
     public void setStateController(StateController stateController) {
         pm.setStateController(stateController);
+    }
+
+    public void resetState() {
+        deathMessage.setVisible(false);
+        repaint();
     }
 
     @Override
