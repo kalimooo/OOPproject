@@ -21,6 +21,8 @@ public class Model implements StateListener, ChangeListener{
     private GameClock gameClock = new GameClock();
     private long finalTime = 0;
 
+    private ChangeListener changeListener; // To be filled with a controller that can be notified when the game is no longer active
+
     private Timer lasTimer;
     private Timer powTimer;
     private Timer colTimer;
@@ -110,6 +112,10 @@ public class Model implements StateListener, ChangeListener{
         player.modifyDy(dy);
     }
 
+    public void setChangeListener(ChangeListener changeListener) {
+        this.changeListener = changeListener;
+    }
+
     public void updateModel() {
         if (gameActive) {
             updateObjects();
@@ -145,6 +151,7 @@ public class Model implements StateListener, ChangeListener{
     private void gameOver() {
         gameActive = false;
         finalTime = getElapsedTimeInSeconds();
+        changeListener.onChanged();
     }
 
     @Override
@@ -153,7 +160,7 @@ public class Model implements StateListener, ChangeListener{
     }
 
     @Override
-    public void onChanged(Entity entity) {
+    public void onChanged() {
         gameOver();
     }
 

@@ -18,9 +18,14 @@ public class App
     private App() {
         super();
         model = Model.getModel();
+
+        StateController stateController = new StateController(model);
+        PlayerController playerController = new PlayerController(model);
+        model.setChangeListener(stateController);
+        
         gameWindow = GameWindow.getGameWindow();
-        gameWindow.addStateController(new StateController(model));
-        gameWindow.addPlayerController(new PlayerController(model));
+        gameWindow.addStateController(stateController);
+        gameWindow.addPlayerController(playerController);
     }
     public static void main( String[] args )
     {

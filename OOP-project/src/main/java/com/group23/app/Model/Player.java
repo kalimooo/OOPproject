@@ -133,7 +133,7 @@ public class Player extends Entity implements Moveable, Visitor {
             setInactive();
             laser.setInactive();
             for (ChangeListener changeListener : changeListeners) {
-                changeListener.onChanged(this);
+                changeListener.onChanged();
             }
         }
     }

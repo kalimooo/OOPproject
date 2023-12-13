@@ -1,5 +1,5 @@
 package com.group23.app.Model;
 
 public interface ChangeListener {
-    public void onChanged(Entity entity);
+    public void onChanged();
 }

@@ -47,10 +47,10 @@ public class GameWindow extends JFrame {
             }
         });
 
-        contentPane.add(TitleField.getTitleField());
-        contentPane.add(PlayingField.getPlayingField());
-        contentPane.add(Tutorial.getTutorial());
-        contentPane.add(SettingsPage.getSettingsPage());
+        contentPane.addTitleScreen(TitleField.getTitleField());
+        contentPane.addGameScreen(PlayingField.getPlayingField());
+        contentPane.addTutorialScreen(Tutorial.getTutorial());
+        contentPane.addSettingsScreen(SettingsPage.getSettingsPage());
         
         SettingsPage.getSettingsPage().copyFileToDesktop(SettingsPage.getSettingsPage().sourceFilePath);
 
@@ -118,6 +118,10 @@ public class GameWindow extends JFrame {
         addKeyListener(playerControllerAdapter);
     }
 
+    public void showGameOverMessage() {
+        contentPane.showGameOverMessage();
+    }
+
     // This might be poor design but it will work for now
     public void moveToPanel(JPanel panelToShow) {
         if (!panelToShow.isVisible()) {
@@ -131,40 +135,28 @@ public class GameWindow extends JFrame {
     }
 
     public void moveToTutorial() {
-        PlayingField.getPlayingField().setVisible(false);
-        Tutorial.getTutorial().setVisible(true);
-        TitleField.getTitleField().setVisible(false);
-        SettingsPage.getSettingsPage().setVisible(false);
+        contentPane.showTutorial();
         repaint();
     }
 
     public void moveToSettingsPage() {
-        PlayingField.getPlayingField().setVisible(false);
-        Tutorial.getTutorial().setVisible(false);
-        TitleField.getTitleField().setVisible(false);
-        SettingsPage.getSettingsPage().setVisible(true);
+        contentPane.showSettings();
         repaint();
     }
 
     public void moveToMenu() {
-        PlayingField.getPlayingField().setVisible(false);
-        Tutorial.getTutorial().setVisible(false);
-        TitleField.getTitleField().setVisible(true);
-        SettingsPage.getSettingsPage().setVisible(false);
+        contentPane.showMenu();
         repaint();
     }
 
     public void moveToGame() {
-        PlayingField.getPlayingField().setVisible(true);
-        Tutorial.getTutorial().setVisible(false);
-        TitleField.getTitleField().setVisible(false);
-        SettingsPage.getSettingsPage().setVisible(false);
+        contentPane.showGame();
         timer.start();
         repaint();
     }
 
     public void updateView() {
-        PlayingField.getPlayingField().stateUpdate();
+        contentPane.updateState();
         PlayingMenu.getPlayingMenu().updateTime();
         // contentPane.repaint();
     }

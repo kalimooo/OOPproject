@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 
 public class PlayingField extends JPanel{
@@ -17,6 +18,8 @@ public class PlayingField extends JPanel{
 
     static PlayingMenu pm = PlayingMenu.getPlayingMenu();
     private SpriteFactory spriteFactory = new SpriteFactory();
+
+    private JLabel deathMessage = new JLabel("You have died!");
     
     JLabel playerChar;
     static boolean isVisible = false;
@@ -29,6 +32,14 @@ public class PlayingField extends JPanel{
         super(null);
         
         add(pm);
+
+        deathMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        deathMessage.setVerticalAlignment(SwingConstants.CENTER);
+        deathMessage.setForeground(Color.white);
+        deathMessage.setBackground(Color.black);
+        deathMessage.setBounds(fieldWidth/2 - 100, fieldHeight/2 - 50, 200, 100);
+        deathMessage.setVisible(false);
+        add(deathMessage);
 
         sprites = spriteFactory.getSprites();
         for (Sprite sprite : sprites) {
@@ -63,6 +74,11 @@ public class PlayingField extends JPanel{
             add(sprites.get(i));
             current.repaint();
         }
+    }
+
+    public void showDeathMessage() {
+        deathMessage.setVisible(true);
+        repaint();
     }
 
     @Override
