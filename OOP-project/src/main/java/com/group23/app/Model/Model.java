@@ -117,8 +117,6 @@ public class Model implements StateListener{
         }
     }
 
-
-    // TODO Add CollisionHandler class that handles collisions
     private void handleCollisions() {
         for (int i = entities.size() - 1; i >= 0; i--) {
             Entity curEntity = entities.get(i);
