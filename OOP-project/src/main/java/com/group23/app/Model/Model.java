@@ -158,6 +158,7 @@ public class Model implements StateListener{
 
     public void startGame() {
         gameActive = true;
+        restartTimer();
         lasTimer.start();
         colTimer.start();
         powTimer.start();
