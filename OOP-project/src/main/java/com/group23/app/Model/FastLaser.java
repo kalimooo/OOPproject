@@ -4,8 +4,6 @@ import java.util.Random;
 import java.awt.Point;
 
 public class FastLaser extends Laser {
-    private double dx, dy;
-
     private int startBound;
 
     final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
