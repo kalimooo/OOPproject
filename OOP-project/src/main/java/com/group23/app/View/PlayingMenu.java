@@ -41,6 +41,8 @@ public class PlayingMenu extends JPanel {
 
     static PlayingMenu playingMenu;
 
+    private StateController stateController = null;
+
     private PlayingMenu() {
         setLayout(new BorderLayout());
         setBackground(menuBackgroundColor);
@@ -140,6 +142,10 @@ public class PlayingMenu extends JPanel {
         long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed,
                                                                        // breaks MVC
         this.scoreLabel.setText(elapsedTime + " points"); // Update the score
+    }
+
+    public void setStateController(StateController stateController) {
+        this.stateController = stateController;
     }
 
     public void showQuitDialog() {

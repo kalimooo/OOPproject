@@ -18,6 +18,10 @@ public class StateController{
         model.startGame();
     }
 
+    public void restartGame() {
+        model.resetGame();
+    }
+
     public void showTutorial() {
         view.moveToTutorial();
     }
