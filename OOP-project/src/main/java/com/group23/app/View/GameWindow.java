@@ -52,8 +52,6 @@ public class GameWindow extends JFrame {
         contentPane.addTutorialScreen(Tutorial.getTutorial());
         contentPane.addSettingsScreen(SettingsPage.getSettingsPage());
         
-        SettingsPage.getSettingsPage().copyFileToDesktop(SettingsPage.getSettingsPage().sourceFilePath);
-
         loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); 
         setBackgroundMusicVolume(0.05);
         playBackgroundMusic();

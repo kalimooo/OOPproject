@@ -69,7 +69,6 @@ public class SettingsPage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 handleExportButtonClick();
-                copyFileToDesktop(sourceFilePath);
             }
         });
 
@@ -77,7 +76,6 @@ public class SettingsPage extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 handleVolumeSliderChange();
-                GameWindow.getGameWindow().setBackgroundMusicVolume((double) volumeSlider.getValue()/1000);
             }
         });
 
@@ -88,12 +86,12 @@ public class SettingsPage extends JPanel {
     }
 
     private void handleExportButtonClick() {
-        System.out.println("Export highscore button clicked");
+        copyFileToDesktop(sourceFilePath);
+
     }
 
     private void handleVolumeSliderChange() {
-        double volumeValue = (double) volumeSlider.getValue();
-        System.out.println("Volume changed to: " + volumeValue/1000);
+        GameWindow.getGameWindow().setBackgroundMusicVolume((double) volumeSlider.getValue()/1000);
     }
 
     public static SettingsPage getSettingsPage() {
@@ -112,10 +110,13 @@ public class SettingsPage extends JPanel {
 
             Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
 
-            System.out.println("Filen har kopierats till skrivbordet: " + destinationPath.toString());
+            String successMessage = "<html><font color='white'> The highscore list is now exported to your desktop.\n </font></html>";
+            JOptionPane.showMessageDialog(null, successMessage, "Export done", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Misslyckades med att kopiera filen.");
+            System.err.println("Failed to export highscore file.");
+            JOptionPane.showMessageDialog(null, "Failed to export highscore file.", "Export Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
