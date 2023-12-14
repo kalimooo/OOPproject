@@ -19,7 +19,7 @@ public class Tutorial extends JPanel{
     static final int SCREEN_WIDTH = GameWindow.SCREEN_WIDTH;
     static final int SCREEN_HEIGHT = GameWindow.SCREEN_HEIGHT;
 
-    JLabel text = new JLabel("<html>The goal is to avoid being hit by the laserbeams.<br> You move by using:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br> The amount of lasers will increase the longer you survive. <br><br> Press [ESC] for main menu <br> Press [ENTER] to start the game. <br> Press [M] to mute/unmute the music. <br> Press [Q] to quit.</html>");
+    JLabel text = new JLabel("<html>The goal is to avoid being hit by the laserbeams.<br> You move by using: <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br> The amount of lasers will increase the longer you survive. <br><br> Press [ESC] for main menu <br> Press [ENTER] to start the game. <br> Press [M] to mute/unmute the music. <br> Press [Q] to quit. <br> Press [Y] to enter settings.</html>");
 
     JLabel title = new JLabel("Tutorial");
 

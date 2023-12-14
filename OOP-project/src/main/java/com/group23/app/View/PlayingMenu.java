@@ -79,7 +79,7 @@ public class PlayingMenu extends JPanel {
             }
         });
 
-        settingsButton = new JButton("[S] SETTINGS");
+        settingsButton = new JButton("[Y] SETTINGS");
         settingsButton.setFocusable(false);
         settingsButton.setFont(menuFont);
         settingsButton.setBackground(buttonColor);
