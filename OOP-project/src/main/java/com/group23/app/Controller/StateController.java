@@ -34,4 +34,8 @@ public class StateController{
         view.moveToSettingsPage();
     }
 
+    public void resetGame() {
+        model.resetGame();
+    }
+
 }

@@ -41,7 +41,7 @@ public class PlayingMenu extends JPanel {
 
     static PlayingMenu playingMenu;
 
-    private StateController stateController = null;
+    private StateController stateController;
 
     private PlayingMenu() {
         setLayout(new BorderLayout());
@@ -218,13 +218,13 @@ public class PlayingMenu extends JPanel {
         switch (result) {
             case JOptionPane.YES_OPTION:
                 System.out.println("User pressed Restart Game");
-                // stateController.resetGame();
-                Model.getModel().resetGame();
+                stateController.resetGame();
+                //Model.getModel().resetGame();
                 break;
             case JOptionPane.NO_OPTION:
                 System.out.println("User pressed Go to Menu");
-                // stateController.moveToMenu();
-                GameWindow.getGameWindow().moveToMenu();
+                stateController.showMainScreen();;
+                //GameWindow.getGameWindow().moveToMenu();
                 break;
             default:
                 // User closed the dialog without making a choice
