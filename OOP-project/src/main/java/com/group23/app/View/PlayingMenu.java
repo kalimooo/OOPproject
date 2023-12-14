@@ -53,7 +53,7 @@ public class PlayingMenu extends JPanel {
 
         add(scoreLabel, BorderLayout.WEST);
 
-        quitButton = new JButton("[Q] QUIT");
+        quitButton = new JButton("[Q] End Game");
         quitButton.setFocusable(false);
         quitButton.setFont(menuFont);
         quitButton.setBackground(buttonColor);

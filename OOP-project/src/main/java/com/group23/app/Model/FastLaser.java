@@ -77,11 +77,12 @@ public class FastLaser extends Laser {
         if (magnitude != 0) {
             dx /= magnitude;
             dy /= magnitude;
-            
-            //set the speed to double
-            dx *= 2;
-            dy *= 2;
+
         }
+
+        //set the speed to double
+        dx *= 10;
+        dy *= 10;
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
         reArrayList.add(dx);
