@@ -17,3 +17,4 @@
 13 points;b
 3 points;b
 4 points;ke
+2 points;ad
