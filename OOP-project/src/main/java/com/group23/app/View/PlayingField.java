@@ -1,6 +1,7 @@
 package com.group23.app.View;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import com.group23.app.Controller.StateController;
 
 
 public class PlayingField extends JPanel{
@@ -17,6 +21,8 @@ public class PlayingField extends JPanel{
 
     static PlayingMenu pm = PlayingMenu.getPlayingMenu();
     private SpriteFactory spriteFactory = new SpriteFactory();
+
+    private JLabel deathMessage = new JLabel("Game over!");
     
     JLabel playerChar;
     static boolean isVisible = false;
@@ -29,6 +35,16 @@ public class PlayingField extends JPanel{
         super(null);
         
         add(pm);
+
+        deathMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        deathMessage.setVerticalAlignment(SwingConstants.CENTER);
+        deathMessage.setForeground(Color.white);
+        deathMessage.setBackground(Color.black);
+        deathMessage.setOpaque(true);
+        deathMessage.setFont(new Font(deathMessage.getFont().getName(), Font.PLAIN, 30));
+        deathMessage.setBounds(fieldWidth/2 - 100, fieldHeight/2 - 50, 200, 100);
+        deathMessage.setVisible(false);
+        add(deathMessage);
 
         sprites = spriteFactory.getSprites();
         for (Sprite sprite : sprites) {
@@ -63,6 +79,20 @@ public class PlayingField extends JPanel{
             add(sprites.get(i));
             current.repaint();
         }
+    }
+
+    public void showDeathMessage() {
+        deathMessage.setVisible(true);
+        repaint();
+    }
+
+    public void setStateController(StateController stateController) {
+        pm.setStateController(stateController);
+    }
+
+    public void resetState() {
+        deathMessage.setVisible(false);
+        repaint();
     }
 
     @Override

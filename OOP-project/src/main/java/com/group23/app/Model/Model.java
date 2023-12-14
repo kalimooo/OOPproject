@@ -9,7 +9,7 @@ import javax.swing.Timer;
 /*
  * Facade class representing the model in its entirety
  */
-public class Model implements StateListener{
+public class Model implements StateListener, ChangeListener{
 
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 700;
@@ -21,6 +21,7 @@ public class Model implements StateListener{
     private GameClock gameClock = new GameClock();
     private long finalTime = 0;
 
+    private ChangeListener changeListener; // To be filled with a controller that can be notified when the game is no longer active
 
     private Timer lasTimer;
     private Timer powTimer;
@@ -111,6 +112,10 @@ public class Model implements StateListener{
         player.modifyDy(dy);
     }
 
+    public void setChangeListener(ChangeListener changeListener) {
+        this.changeListener = changeListener;
+    }
+
     public void updateModel() {
         if (gameActive) {
             updateObjects();
@@ -146,14 +151,21 @@ public class Model implements StateListener{
     private void gameOver() {
         gameActive = false;
         finalTime = getElapsedTimeInSeconds();
+        changeListener.onChanged();
+
+        lasTimer.stop();
+        colTimer.stop();
+        powTimer.stop();
     }
 
-    public void onDeleted(Entity entity) {
-        if (entity instanceof Laser) {
-            entities.add(EntityFactory.spawnLaser(this));
-        } else {
-            gameOver();
-        }
+    @Override
+    public void onDeleted() { // onDeleted is called as a Laser is being inactivated. This means a new laser should take its place
+        entities.add(EntityFactory.spawnLaser(this));
+    }
+
+    @Override
+    public void onChanged() {
+        gameOver();
     }
 
     public void startGame() {

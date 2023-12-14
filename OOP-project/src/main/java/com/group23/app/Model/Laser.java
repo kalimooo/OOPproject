@@ -1,5 +1,4 @@
 package com.group23.app.Model;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -162,7 +161,7 @@ public class Laser extends Entity implements Moveable {
         if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
             setInactive();
             for (StateListener stateListener : listeners) {
-                stateListener.onDeleted(this);
+                stateListener.onDeleted();
             }
         }
     }

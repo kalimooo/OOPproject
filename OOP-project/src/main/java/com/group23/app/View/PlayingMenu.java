@@ -1,6 +1,8 @@
 package com.group23.app.View;
 import com.group23.app.Model.Model;
+import com.group23.app.Model.saveScore;
 
+import com.group23.app.Controller.StateController;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
@@ -16,9 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -38,6 +38,8 @@ public class PlayingMenu extends JPanel {
     public JButton muteButton;
 
     static PlayingMenu playingMenu;
+
+    private StateController stateController;
 
     private PlayingMenu() {
         setLayout(new BorderLayout());
@@ -140,6 +142,10 @@ public class PlayingMenu extends JPanel {
         this.scoreLabel.setText(elapsedTime + " points"); // Update the score
     }
 
+    public void setStateController(StateController stateController) {
+        this.stateController = stateController;
+    }
+
     public void showQuitDialog() {
         UIManager.put("OptionPane.background", menuBackgroundColor);
         UIManager.put("Panel.background", menuBackgroundColor);
@@ -187,7 +193,8 @@ public class PlayingMenu extends JPanel {
             String scoreEntry = currentScore + ";" + playerName;
     
             // Spara poängen i filen
-            saveScoreToFile(scoreEntry);
+            saveScore.saveScoreToFile(scoreEntry);
+
         } else {
             // Användaren har inte angett ett giltigt namn, ge felmeddelande
             JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
@@ -209,11 +216,13 @@ public class PlayingMenu extends JPanel {
         switch (result) {
             case JOptionPane.YES_OPTION:
                 System.out.println("User pressed Restart Game");
-                Model.getModel().resetGame();
+                stateController.resetGame();
+                //Model.getModel().resetGame();
                 break;
             case JOptionPane.NO_OPTION:
                 System.out.println("User pressed Go to Menu");
-                GameWindow.getGameWindow().moveToMenu();
+                stateController.showMainScreen();;
+                //GameWindow.getGameWindow().moveToMenu();
                 break;
             default:
                 // User closed the dialog without making a choice
@@ -244,17 +253,7 @@ public class PlayingMenu extends JPanel {
         return highScores;
     }
 
-    private void saveScoreToFile(String scoreEntry) {
-        try (BufferedWriter writer = new BufferedWriter(
-                new FileWriter("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt", true))) {
-            // Skriv poängen till filen
-            writer.write(scoreEntry);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+  
     // A nested static class representing a ScoreEntry. 
     // Implements Comparable to allow for sorting based on the score.
     private static class ScoreEntry implements Comparable<ScoreEntry> {

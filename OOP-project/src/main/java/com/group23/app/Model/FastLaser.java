@@ -83,7 +83,6 @@ public class FastLaser extends Laser {
             dy *= 2;
         }
 
-        System.out.println("dx: " + dx + " dy: " + dy);
         ArrayList<Double> reArrayList = new ArrayList<Double>();
         reArrayList.add(dx);
         reArrayList.add(dy);
