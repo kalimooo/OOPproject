@@ -29,8 +29,8 @@ import java.util.List;
 
 public class PlayingMenu extends JPanel {
     Font menuFont = new Font(Font.SANS_SERIF, Font.BOLD, 22);
-    Color menuBackgroundColor = Color.decode("#4f504e");
-    Color buttonColor = Color.decode("#767675");
+    Color menuBackgroundColor = Color.BLACK;
+    Color buttonColor = Color.decode("#595959");
     private JLabel scoreLabel;
     private JButton quitButton;
     private JButton tutorialButton;

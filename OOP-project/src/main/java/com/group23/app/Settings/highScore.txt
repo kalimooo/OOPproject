@@ -18,3 +18,4 @@
 3 points;b
 4 points;ke
 2 points;ad
+1 points;sebbe
