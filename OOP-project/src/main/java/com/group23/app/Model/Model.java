@@ -118,8 +118,9 @@ public class Model implements StateListener, ChangeListener{
 
     public void updateModel() {
         if (gameActive) {
-            updateObjects();
             handleCollisions();
+            updateObjects();
+            
         }
     }
 
