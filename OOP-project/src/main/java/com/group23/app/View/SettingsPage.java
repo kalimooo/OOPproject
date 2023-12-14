@@ -115,8 +115,8 @@ public class SettingsPage extends JPanel {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Failed to export highscore file.");
-            JOptionPane.showMessageDialog(null, "Failed to export highscore file.", "Export Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Failed to export highscore file. ");
+            JOptionPane.showMessageDialog(null, "<html><font color='white'> Failed to export highscore file.</font></html>", "Export Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
