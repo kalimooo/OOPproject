@@ -5,6 +5,7 @@ import java.awt.Point;
 
 public class FastLaser extends Laser {
     private int startBound;
+    private final double LASER_SPEED_MULTIPLIER = 1.6;
 
     public FastLaser() {
         super();
@@ -12,7 +13,6 @@ public class FastLaser extends Laser {
         Point point = generateXYPoint();
         this.x = point.x;
         this.y = point.y;
-        System.out.println(x + "," + y);
     
         ArrayList<Double> speed = generateSpeed((int)x,(int)y);
 
@@ -34,19 +34,19 @@ public class FastLaser extends Laser {
         double dy;
 
         switch (startBound) {
-            case 0: // Topp
+            case 0: // Top side
                 dx = randomDirFactor(-1, 1);
                 dy = randomDirFactor(1, 2);
                 break;
-            case 1: // Höger
+            case 1: // Right side
                 dx = randomDirFactor(-2, -1);
                 dy = randomDirFactor(-2, 2);
                 break;
-            case 2: // Botten
+            case 2: // Bottom side
                 dx = randomDirFactor(-2, 2);
                 dy = randomDirFactor(-2, -1);
                 break;
-            default: // Vänster
+            default: // Left side
                 dx = randomDirFactor(1, 2);
                 dy = randomDirFactor(-2, 2);
                 break;
@@ -75,9 +75,9 @@ public class FastLaser extends Laser {
 
         }
 
-        //set the speed to double
-        dx *= 2;
-        dy *= 2;
+        // make le laser le fast
+        dx *= LASER_SPEED_MULTIPLIER;
+        dy *= LASER_SPEED_MULTIPLIER;
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
         reArrayList.add(dx);

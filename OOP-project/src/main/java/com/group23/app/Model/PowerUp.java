@@ -3,11 +3,8 @@ package com.group23.app.Model;
 import java.awt.Point;
 
 public abstract class PowerUp extends Entity{
-
-    private static final int STANDARD_WIDTH_HEIGHT = 40;
-
     public PowerUp(int boundX, int boundY) {
-        super(0, 0, STANDARD_WIDTH_HEIGHT, STANDARD_WIDTH_HEIGHT);
+        super(0, 0, GameSettings.STANDARD_ENTITY_WIDTH, GameSettings.STANDARD_ENTITY_HEIGHT);
         Point spawnPoint = generateSpawn(boundX, boundY);
         this.x = spawnPoint.getX();
         this.y = spawnPoint.getY();
@@ -26,7 +23,6 @@ public abstract class PowerUp extends Entity{
     }
 
     
-
     @Override
     public void update() {}
 

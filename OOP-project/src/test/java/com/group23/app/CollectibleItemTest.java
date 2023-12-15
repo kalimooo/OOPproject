@@ -14,7 +14,7 @@ public class CollectibleItemTest {
     @Before
     public void setUp() {
         player = new Player(0, 0, 40, 40, null);
-        collectibleItem = new CollectibleItem(0, 0, 40, 40);
+        collectibleItem = EntityFactory.spawnCollectibleItem();
     }
 
     @Test
