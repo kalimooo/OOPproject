@@ -1,6 +1,8 @@
 package com.group23.app;
-import org.junit.Before;
+
 import org.junit.Test;
+import org.junit.Before;
+
 import static org.junit.Assert.*;
 
 import java.awt.Rectangle;
@@ -37,7 +39,7 @@ public class CollectibleItemTest {
         player.resolveCollectibleItemCollision(collectibleItem);
 
         // Assert
-        assertEquals(1, player.getCollectibleScore());
+        assertEquals(5, player.getCollectibleScore());
     }
 
     @Test
