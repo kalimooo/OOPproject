@@ -163,7 +163,6 @@ public class GameWindow extends JFrame {
     public void updateView() {
         contentPane.updateState();
         PlayingMenu.getPlayingMenu().updateScore();
-        // contentPane.repaint();
     }
 
     public void resetView() {
