@@ -5,7 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PlayerTest {
-
     @Test
     public void testPlayerScoreIncrement() {
         Player player = new Player(40, 40);
@@ -32,7 +31,7 @@ public class PlayerTest {
     @Test
     public void testPlayerRelocate() {
         Player player = new Player(40, 40);
-        player.setSpeed(10, 10);
+        player.setSpeed(-10, -10);
         player.move();
         player.relocate(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT);
         assertFalse(player.isOutOfBounds(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT));
