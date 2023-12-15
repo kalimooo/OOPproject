@@ -116,7 +116,7 @@ public class PlayingMenu extends JPanel {
             }
         });
 
-        // Use FlowLayout for the button panel
+        
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(menuBackgroundColor);
         buttonPanel.add(muteButton);
@@ -141,7 +141,7 @@ public class PlayingMenu extends JPanel {
 
     public void updateScore() {
         int score = model.getScore(); 
-        this.scoreLabel.setText(score + " points"); // Update the score
+        this.scoreLabel.setText(score + " points");
     }
 
     public void setStateController(StateController stateController) {
@@ -156,17 +156,16 @@ public class PlayingMenu extends JPanel {
         UIManager.put("Button.background", buttonColor);
         UIManager.put("Button.foreground", Color.WHITE);
     
-        // Hämta det aktuella poängen
         int score = model.getScore();
         String currentScore = score + " points";
     
-        // Skapar lista över highscores
+        
         List<ScoreEntry> highScores = getHighScoreData();
     
-        // Sortera i fallande ordning (Störst --> Minst)
+        // Sort Highest --> Smallest
         Collections.sort(highScores, Collections.reverseOrder());
     
-        // Visa de 10 bästa highscoren inklusive den aktuella poängen
+        // Show the 10 highest scores + current score
         StringBuilder highScoreMessage = new StringBuilder("<html><font color='white'>Top 10 Highscores:<br><br>");
     
         int count = 0;
@@ -174,29 +173,24 @@ public class PlayingMenu extends JPanel {
             if (count >= 10) {
                 break;
             }
-            // Lägger till highscore med radbrytning
+            // Add high score with row break
             highScoreMessage.append(entry.toString()).append("<br>");
             count++;
         }
     
-        // Lägg till den aktuella poängen i meddelandet
+        
         highScoreMessage.append("<br>Your score: ").append(currentScore).append("</font></html>");
     
-        // Visa dialogrutan med highscore-meddelandet
+        // Show dialog with highscore
         JOptionPane.showMessageDialog(this, highScoreMessage.toString(), "Highscores", JOptionPane.INFORMATION_MESSAGE);
 
-        // Låt användaren ange sitt namn
+        // User adds its name
         String playerName = JOptionPane.showInputDialog(this,
                 "<html><font color ='white'> Enter your name:</font></html>");
     
-        // Kontrollera om spelarnamnet är null eller tomt
         if (playerName != null && !playerName.trim().isEmpty()) {
-            // Skapa en sträng för att spara i filen
-            String scoreEntry = currentScore + ";" + playerName;
-    
-            // Spara poängen i filen
+            String scoreEntry = currentScore + ";" + playerName;    
             saveScore.saveScoreToFile(scoreEntry);
-
         } else {
             // Användaren har inte angett ett giltigt namn, ge felmeddelande
             JOptionPane.showMessageDialog(this, "<html><font color ='white'> Invalid name. Score not saved.</font></html>", "Warning",
