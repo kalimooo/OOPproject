@@ -18,7 +18,7 @@ public class LaserTest {
     @Test
     public void testLaserMoveX() {
         Laser laser = new Laser();
-        int tempX = laser.getX();
+        double tempX = laser.getX();
         laser.move();
         laser.move();
         assertNotEquals(tempX, laser.getX());
@@ -26,7 +26,7 @@ public class LaserTest {
         @Test
     public void testLaserMoveY() {
         Laser laser = new Laser();
-        int tempY = laser.getY();
+        double tempY = laser.getY();
         laser.move();
         laser.move();
         assertNotEquals(tempY, laser.getY());

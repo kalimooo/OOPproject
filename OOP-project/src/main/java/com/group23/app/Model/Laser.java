@@ -5,7 +5,7 @@ import java.util.Random;
 import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
-    private double dx, dy;
+    protected double dx, dy;
     //private double centerX = Model.SCREEN_WIDTH/2;
     //private double centerY = Model.SCREEN_HEIGHT/2;
 
