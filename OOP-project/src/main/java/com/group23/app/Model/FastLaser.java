@@ -6,9 +6,6 @@ import java.awt.Point;
 public class FastLaser extends Laser {
     private int startBound;
 
-    final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
-    final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
-
     public FastLaser() {
         super();
         startBound = (int) (Math.random() * 4);
@@ -79,8 +76,8 @@ public class FastLaser extends Laser {
         }
 
         //set the speed to double
-        dx *= 10;
-        dy *= 10;
+        dx *= 2;
+        dy *= 2;
 
         ArrayList<Double> reArrayList = new ArrayList<Double>();
         reArrayList.add(dx);

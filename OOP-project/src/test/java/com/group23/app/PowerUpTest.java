@@ -12,16 +12,16 @@ public class PowerUpTest {
 
     @Before
     public void setUp() {
-        powerUp = EntityFactory.spawnPowerUp(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT);
+        powerUp = EntityFactory.spawnPowerUp();
         player = new Player((int) powerUp.getX(), (int) powerUp.getY(), 40, 40, null);
     }
 
     @Test
     public void testPowerUpSpawnWithinBounds() {
         for (int i = 0; i < 100; i++) {
-            powerUp = EntityFactory.spawnPowerUp(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT);
-            assertTrue(powerUp.getX() >= 0 && powerUp.getX() < Model.SCREEN_WIDTH);
-            assertTrue(powerUp.getY() >= 0 && powerUp.getY() < Model.SCREEN_HEIGHT);
+            powerUp = EntityFactory.spawnPowerUp();
+            assertTrue(powerUp.getX() >= 0 && powerUp.getX() < GameSettings.GAME_WIDTH);
+            assertTrue(powerUp.getY() >= 0 && powerUp.getY() < GameSettings.GAME_HEIGHT);
         }
     }
 

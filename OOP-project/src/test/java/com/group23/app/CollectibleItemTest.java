@@ -5,9 +5,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Rectangle;
 
-import com.group23.app.Model.CollectibleItem;
-import com.group23.app.Model.Model;
-import com.group23.app.Model.Player;
+import com.group23.app.Model.*;
 
 public class CollectibleItemTest {
     private Player player;
@@ -22,8 +20,8 @@ public class CollectibleItemTest {
     @Test
     public void testDefaultConstructor() {
         CollectibleItem item = new CollectibleItem();
-        assertTrue(item.getX() >= 0 && item.getX() < Model.SCREEN_WIDTH);
-        assertTrue(item.getY() >= 0 && item.getY() < Model.SCREEN_HEIGHT);
+        assertTrue(item.getX() >= 0 && item.getX() < GameSettings.GAME_WIDTH);
+        assertTrue(item.getY() >= 0 && item.getY() < GameSettings.GAME_HEIGHT);
     }
 
     @Test

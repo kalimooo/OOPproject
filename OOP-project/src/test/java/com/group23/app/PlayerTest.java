@@ -25,7 +25,7 @@ public class PlayerTest {
         Player player = new Player(40, 40);
         player.setSpeed(-10, -10);
         player.move();
-        assertTrue(player.isOutOfBounds(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT));
+        assertTrue(player.isOutOfBounds());
     }
 
     @Test
@@ -33,8 +33,8 @@ public class PlayerTest {
         Player player = new Player(40, 40);
         player.setSpeed(-10, -10);
         player.move();
-        player.relocate(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT);
-        assertFalse(player.isOutOfBounds(Model.SCREEN_WIDTH, Model.SCREEN_HEIGHT));
+        player.relocate();
+        assertFalse(player.isOutOfBounds());
     }
 
     @Test

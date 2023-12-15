@@ -17,8 +17,8 @@ public class CollectibleItem extends Entity{
     }
 
     private Point generateXYPoint() {
-        int x = (int) (Math.random() * Model.SCREEN_WIDTH);
-        int y = (int) (Math.random() * Model.SCREEN_HEIGHT);
+        int x = (int) (Math.random() * GameSettings.GAME_WIDTH);
+        int y = (int) (Math.random() * GameSettings.GAME_HEIGHT);
         return new Point(x, y);
     }
 

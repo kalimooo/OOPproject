@@ -6,14 +6,11 @@ import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
     protected double dx, dy;
-    //private double centerX = Model.SCREEN_WIDTH/2;
-    //private double centerY = Model.SCREEN_HEIGHT/2;
+    //private double centerX = Model.GameSettings.GAME_WIDTH/2;
+    //private double centerY = Model.GameSettings.GAME_HEIGHT/2;
 
     private int startBound;
     private List<StateListener> listeners = new ArrayList<StateListener>();
-
-    private final static int SCREEN_WIDTH = Model.SCREEN_WIDTH;
-    private final static int SCREEN_HEIGHT = Model.SCREEN_HEIGHT;
 
     public Laser() {
         super(0, 0, 40, 40);
@@ -41,9 +38,9 @@ public class Laser extends Entity implements Moveable {
     }
 
 
-    public boolean isOutOfBounds(int boundX, int boundY) {
-        if (this.x + this.width >= 0 && this.x <= boundX) {
-            if (this.y + this.height >= 0 && this.y <= boundY) {
+    public boolean isOutOfBounds() {
+        if (this.x + this.width >= 0 && this.x <= GameSettings.GAME_WIDTH) {
+            if (this.y + this.height >= 0 && this.y <= GameSettings.GAME_HEIGHT) {
                 return false;
             }
         }
@@ -113,20 +110,20 @@ public class Laser extends Entity implements Moveable {
 
         switch (side) {
             case 0: // Topp
-                randomX = (int) (Math.random() * SCREEN_WIDTH); // Tar random x-värde
+                randomX = (int) (Math.random() * GameSettings.GAME_WIDTH); // Tar random x-värde
                 randomY = 0; // Låser y-koordinat då vi vill vara längst upp på skrämen
                 break;
             case 1: // Höger
-                randomX = SCREEN_WIDTH - this.getWidth() - 5; // Låser x så vi tittar längst bort på skärmen
-                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                randomX = GameSettings.GAME_WIDTH - this.getWidth() - 5; // Låser x så vi tittar längst bort på skärmen
+                randomY = (int) (Math.random() * GameSettings.GAME_HEIGHT);
                 break;
             case 2: // Botten
-                randomX = (int) (Math.random() * SCREEN_WIDTH);
-                randomY = SCREEN_HEIGHT - this.getHeight() - 5; // Låser y så vi alltid kollar längst ner
+                randomX = (int) (Math.random() * GameSettings.GAME_WIDTH);
+                randomY = GameSettings.GAME_HEIGHT - this.getHeight() - 5; // Låser y så vi alltid kollar längst ner
                 break;
             case 3: // Vänster
                 randomX = 0;
-                randomY = (int) (Math.random() * SCREEN_HEIGHT);
+                randomY = (int) (Math.random() * GameSettings.GAME_HEIGHT);
                 break;
         }
 
@@ -158,7 +155,7 @@ public class Laser extends Entity implements Moveable {
     @Override
     public void update() {
         move();
-        if (isOutOfBounds(SCREEN_WIDTH, SCREEN_HEIGHT)) {
+        if (isOutOfBounds()) {
             setInactive();
             for (StateListener stateListener : listeners) {
                 stateListener.onDeleted();

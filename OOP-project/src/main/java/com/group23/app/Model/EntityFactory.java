@@ -29,9 +29,9 @@ public class EntityFactory {
     }
 
     // Spawns a random power up (as of now only the shield power up exists)
-    static public PowerUp spawnPowerUp(int boundX, int boundY) {
+    static public PowerUp spawnPowerUp() {
 
         // This can later be remade to spawn a random powerup instead of always spawning a shield power
-        return new ShieldPower(boundX, boundY);
+        return new ShieldPower(GameSettings.GAME_WIDTH, GameSettings.GAME_HEIGHT);
     }
 }

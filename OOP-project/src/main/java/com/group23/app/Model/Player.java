@@ -14,9 +14,6 @@ public class Player extends Entity implements Moveable, Visitor {
     private final static int DEFAULT_X = 0;
     private final static int DEFAULT_Y = 0;
 
-    private final int BOUNDX = Model.SCREEN_WIDTH;
-    private final int BOUNDY = Model.SCREEN_HEIGHT;
-
     // An object that listens to changes in the state of the Player object
     private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
 
@@ -63,29 +60,29 @@ public class Player extends Entity implements Moveable, Visitor {
         this.dy = dy;
     }
 
-    public boolean isOutOfBounds(int boundX, int boundY) {
-        if (x>= 0 && x + width <= boundX) {
-            if (y >= 0 && y + height + 10 <= boundY) {
+    public boolean isOutOfBounds() {
+        if (x>= 0 && x + width <= GameSettings.GAME_WIDTH) {
+            if (y >= 0 && y + height + 10 <= GameSettings.GAME_HEIGHT) {
                 return false;
             }
         }
         return true;
     }
 
-    public void relocate(int boundX, int boundY) {
+    public void relocate() {
 
         if (x < 0) {
             x = 0;
         }
-        else if (x + width > boundX) {
-            x = boundX - width;
+        else if (x + width > GameSettings.GAME_WIDTH) {
+            x = GameSettings.GAME_WIDTH - width;
         }
 
         if (y < 0) {
             y = 0;
         }
-        else if (y + height > boundY) {
-            y = boundY - height;
+        else if (y + height > GameSettings.GAME_HEIGHT) {
+            y = GameSettings.GAME_HEIGHT - height;
         }
     }
 
@@ -157,8 +154,8 @@ public class Player extends Entity implements Moveable, Visitor {
     @Override
     public void update() {
         move();
-        if (isOutOfBounds(BOUNDX, BOUNDY)) {
-            relocate(BOUNDX, BOUNDY);
+        if (isOutOfBounds()) {
+            relocate();
         }
     }
 

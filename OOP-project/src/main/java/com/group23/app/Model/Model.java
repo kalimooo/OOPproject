@@ -10,13 +10,9 @@ import javax.swing.Timer;
  * Facade class representing the model in its entirety
  */
 public class Model implements StateListener, ChangeListener{
-
-    public static final int SCREEN_WIDTH = 800;
-    public static final int SCREEN_HEIGHT = 700;
-
     private List<Entity> entities = new ArrayList<Entity>();
-    private int boundX = SCREEN_WIDTH;
-    private int boundY = SCREEN_HEIGHT;
+    private final int BOUND_X = GameSettings.GAME_WIDTH;
+    private final int BOUND_Y = GameSettings.GAME_HEIGHT;
     private static boolean gameActive = false;
     private GameClock gameClock = new GameClock();
     private long finalTime = 0;
@@ -42,7 +38,7 @@ public class Model implements StateListener, ChangeListener{
         entities.add(EntityFactory.spawnLaser(this));
 
         // Creating and adding the player to the model
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40, this);
+        player = new Player(BOUND_X/2 - 20, BOUND_Y/2 - 20, 40, 40, this);
         entities.add(player);
 
         // The game clock which keeps track of the elapsed time in the game
@@ -71,7 +67,7 @@ public class Model implements StateListener, ChangeListener{
             public void actionPerformed(ActionEvent event) {
                 double random = Math.random();
                 if (random < POWER_CHANCE) {
-                    entities.add(EntityFactory.spawnPowerUp(boundX, boundY));
+                    entities.add(EntityFactory.spawnPowerUp());
                 }
             }
         });
@@ -180,7 +176,7 @@ public class Model implements StateListener, ChangeListener{
     public void resetGame() {
         finalTime = 0;
         entities.clear();
-        player = new Player(boundX/2 - 20, boundY/2 - 20, 40, 40,this);
+        player = new Player(BOUND_X/2 - 20, BOUND_Y/2 - 20, 40, 40,this);
         entities.add(player);
         entities.add(EntityFactory.spawnLaser(this));
         gameClock.restartTimer();

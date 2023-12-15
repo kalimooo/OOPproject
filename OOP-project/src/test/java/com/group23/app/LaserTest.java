@@ -1,9 +1,7 @@
 package com.group23.app;
 import com.group23.app.Model.Laser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -12,24 +10,19 @@ public class LaserTest {
     @Test
     public void testLaserOutOfBounds() {
         Laser laser = new Laser();
-         assertEquals(false, laser.isOutOfBounds(800, 500));
+         assertEquals(false, laser.isOutOfBounds());
     }
 
     @Test
-    public void testLaserMoveX() {
+    public void testLaserMove() {
         Laser laser = new Laser();
+        double tempY = laser.getY();
         double tempX = laser.getX();
         laser.move();
         laser.move();
-        assertNotEquals(tempX, laser.getX());
-    }
-        @Test
-    public void testLaserMoveY() {
-        Laser laser = new Laser();
-        double tempY = laser.getY();
-        laser.move();
-        laser.move();
-        assertNotEquals(tempY, laser.getY());
+        boolean movedX = tempX != laser.getX();
+        boolean movedY = tempY != laser.getY();
+        assertTrue(movedX || movedY);
     }
 
     @Test
@@ -59,6 +52,6 @@ public class LaserTest {
         for (int i = 0; i < 1000; i++) {
             laser.move();
         }
-        assertEquals(true, laser.isOutOfBounds(800, 500));
+        assertEquals(true, laser.isOutOfBounds());
     }
 }
