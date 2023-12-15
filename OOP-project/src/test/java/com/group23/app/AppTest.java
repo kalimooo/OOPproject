@@ -1,5 +1,4 @@
 package com.group23.app;
-import com.group23.app.Model.Laser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

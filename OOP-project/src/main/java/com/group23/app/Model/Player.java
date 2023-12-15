@@ -30,12 +30,6 @@ public class Player extends Entity implements Moveable, Visitor {
         super(x, y, width, height);
         collectibleScore = 0;
         changeListeners.add(changeListener);
-        powerTimer = new Timer(5000, new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                isIntangible = false;
-                powerTimer.stop();
-            }
-        });
     }
 
     public Player(int width, int height) {
@@ -97,7 +91,6 @@ public class Player extends Entity implements Moveable, Visitor {
 
     public void setIntangible() {
         isIntangible = true;
-        powerTimer.start();
     }
 
 
@@ -137,9 +130,25 @@ public class Player extends Entity implements Moveable, Visitor {
             }
         }
     }
+
     public void resolvePowerUpCollision(PowerUp powerUp) {
+        powerDown();
+
+        powerTimer = new Timer(powerUp.getDuration(), new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                powerDown();
+                powerTimer.stop();
+            }
+        });
+        powerTimer.start();
+
         powerUp.resolveCollision(this);
     }
+
+    private void powerDown() {
+        isIntangible = false;
+    }
+
     public void resolveCollectibleItemCollision(CollectibleItem collectibleItem) {
         collectibleItem.setInactive();
         this.incrementCollectibleScore();

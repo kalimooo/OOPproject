@@ -25,10 +25,17 @@ public abstract class PowerUp extends Entity{
         return new Point((int)(innerBoundXMin + (randomX * innerBoundXMax)) , (int)(innerBoundYMin + (randomY * innerBoundYMax)));
     }
 
+    
+
     @Override
     public void update() {}
 
     public abstract void resolveCollision(Player player);
+
+    /**
+     * @return duration of powerup in milliseconds
+     */
+    public abstract int getDuration();
 
     @Override
     public void accept(Visitor v) {
