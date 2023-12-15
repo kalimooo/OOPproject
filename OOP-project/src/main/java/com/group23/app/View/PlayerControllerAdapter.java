@@ -52,8 +52,5 @@ public class PlayerControllerAdapter implements KeyListener{
         
     }
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void keyTyped(KeyEvent e) {}
 }
