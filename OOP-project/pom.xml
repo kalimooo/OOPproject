@@ -38,7 +38,7 @@
         <configuration>  
             <archive>  
                 <manifest>  
-                    <mainClass>com.javatpoint.AppMain</mainClass>  
+                    <mainClass>com.group23.app.App</mainClass>  
                 </manifest>  
             </archive>  
         </configuration>  
