@@ -1,21 +1,3 @@
-4 points;lISA
-13 points;Leif
-19 points;olof
-7 points;hattifnatt
-7 points;HEJ
-16 points;NEJ
-3 points;hej
-6 points; ej
-4 points;nej
-1 points;hejsan
-1 points;hej
-10 points;1613
-12 points;ad
-5 points;be
-3 points;Adam
-1 points;ad
-13 points;b
-3 points;b
-4 points;ke
-2 points;ad
-1 points;sebbe
+30 points;Watt
+13 points;hihi
+16 points;q
