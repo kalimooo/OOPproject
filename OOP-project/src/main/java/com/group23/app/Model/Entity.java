@@ -8,10 +8,10 @@ import java.awt.Rectangle;
  * To be an Entity you need the following:
  * - You need to implement the method 'public void accept(Visitor v)',
  *   The method does not need to have any functionality but it has to be there.
- *  <p>
+ * 
  * - When the attribute isActive is set to false the Entity is effectively considered "dead"
  *   and is soon about to be removed entirely
- *  <p>
+ * 
  * - Every Entity has an update function defined as 'public void update()', this function tells the program
  *   what things logic should be run continuously throughout the game. An example of this may be executing a 
  *   move() function. The method does not need to do anything but it has to be there

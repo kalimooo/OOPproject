@@ -128,7 +128,6 @@ public class GameWindow extends JFrame {
         contentPane.showGameOverMessage();
     }
 
-    // This might be poor design but it will work for now
     public void moveToPanel(JPanel panelToShow) {
         if (!panelToShow.isVisible()) {
             PlayingField.getPlayingField().setVisible(false);
