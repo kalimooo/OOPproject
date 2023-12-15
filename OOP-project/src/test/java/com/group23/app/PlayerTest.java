@@ -9,7 +9,7 @@ public class PlayerTest {
     public void testPlayerScoreIncrement() {
         Player player = new Player(40, 40);
         player.incrementCollectibleScore();
-        assertEquals(1, player.getCollectibleScore());
+        assertEquals(5, player.getCollectibleScore());
     }
 
     @Test

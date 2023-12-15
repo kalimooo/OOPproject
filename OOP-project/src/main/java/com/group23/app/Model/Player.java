@@ -42,7 +42,7 @@ public class Player extends Entity implements Moveable, Visitor {
     }
 
     public void incrementCollectibleScore() {
-        this.collectibleScore++;
+        this.collectibleScore += 5;
     }
 
     public void resetColletibleScore() {

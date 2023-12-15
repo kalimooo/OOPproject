@@ -40,8 +40,11 @@ public class PlayingMenu extends JPanel {
     static PlayingMenu playingMenu;
 
     private StateController stateController;
+    private Model model;
 
     private PlayingMenu() {
+        model = Model.getModel();
+
         setLayout(new BorderLayout());
         setBackground(menuBackgroundColor);
 
@@ -136,10 +139,9 @@ public class PlayingMenu extends JPanel {
         return PlayingMenu.playingMenu;
     }
 
-    public void updateTime() {
-        long elapsedTime = Model.getModel().getElapsedTimeInSeconds(); // Get the elapsed time TODO needs to be changed,
-                                                                       // breaks MVC
-        this.scoreLabel.setText(elapsedTime + " points"); // Update the score
+    public void updateScore() {
+        int score = model.getScore(); 
+        this.scoreLabel.setText(score + " points"); // Update the score
     }
 
     public void setStateController(StateController stateController) {
@@ -155,8 +157,8 @@ public class PlayingMenu extends JPanel {
         UIManager.put("Button.foreground", Color.WHITE);
     
         // Hämta det aktuella poängen
-        long elapsedTime = Model.getModel().getElapsedTimeInSeconds();
-        String currentScore = elapsedTime + " points";
+        int score = model.getScore();
+        String currentScore = score + " points";
     
         // Skapar lista över highscores
         List<ScoreEntry> highScores = getHighScoreData();
@@ -242,7 +244,7 @@ public class PlayingMenu extends JPanel {
                 String[] parts = line.split(";");
                 if (parts.length == 2) {
                     String scoreString = parts[0].trim().replaceAll("[^\\d]", "");
-                    long score = Long.parseLong(scoreString);
+                    int score = Integer.parseInt(scoreString);
                     highScores.add(new ScoreEntry(score, parts[1].trim()));
                 }
             }
@@ -260,7 +262,7 @@ public class PlayingMenu extends JPanel {
         private final long score;
         private final String playerName;
 
-        public ScoreEntry(long score, String playerName) {
+        public ScoreEntry(int score, String playerName) {
             this.score = score;
             this.playerName = playerName;
         }

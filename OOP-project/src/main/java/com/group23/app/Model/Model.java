@@ -25,7 +25,7 @@ public class Model implements StateListener, ChangeListener{
 
     private static Player player;
 
-    private final double COLLECTIBLE_CHANCE = 0.05;
+    private final double COLLECTIBLE_CHANCE = 0.25;
     private final double POWER_CHANCE = 0.4;
     private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
     private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
@@ -90,6 +90,10 @@ public class Model implements StateListener, ChangeListener{
             return finalTime;
         }
         return gameClock.getElapsedTimeInSeconds();
+    }
+
+    public int getScore() {
+        return (int) getElapsedTimeInSeconds() + player.getCollectibleScore();
     }
 
     public void restartTimer() {
