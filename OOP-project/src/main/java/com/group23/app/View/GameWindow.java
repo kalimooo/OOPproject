@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.sound.sampled.*;
@@ -62,12 +63,13 @@ public class GameWindow extends JFrame {
         playBackgroundMusic();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        //setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
         setLocationRelativeTo(null);
 
         setResizable(false);
         setContentPane(contentPane);
         setLayout(null);
+        pack();
         setVisible(true);
 
         GameWindow.gameWindow = this;

@@ -1,6 +1,7 @@
 package com.group23.app.View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
@@ -20,6 +21,19 @@ public class ContentPane extends JPanel{
     private ContentPane() {
         super(null);
         setBackground(Color.BLACK);
+
+        this.addTitleScreen(TitleField.getTitleField());
+        this.addGameScreen(PlayingField.getPlayingField());
+        this.addTutorialScreen(Tutorial.getTutorial());
+        this.addSettingsScreen(SettingsPage.getSettingsPage());
+
+        PlayingField.getPlayingField().setVisible(false);
+        Tutorial.getTutorial().setVisible(false);
+        TitleField.getTitleField().setVisible(true);
+        SettingsPage.getSettingsPage().setVisible(false);
+
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
         ContentPane.contentPane = this;
     }
 
@@ -92,5 +106,10 @@ public class ContentPane extends JPanel{
 
     public void setStateController(StateController stateController) {
         playingField.setStateController(stateController);
+    }
+
+    @Override 
+    public Dimension getPreferredSize() {
+        return new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 }
