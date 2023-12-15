@@ -57,7 +57,7 @@ public class Model implements StateListener, ChangeListener{
             public void actionPerformed(ActionEvent event) {
                 double random = Math.random();
                 if (random < COLLECTIBLE_CHANCE) {
-                    entities.add(new CollectibleItem());
+                    entities.add(EntityFactory.spawnCollectibleItem());
                 }  
             }
         });
