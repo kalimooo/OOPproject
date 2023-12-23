@@ -1,6 +1,4 @@
 package com.group23.app.Model;
-import java.util.ArrayList;
-import java.util.Random;
 import java.awt.Point;
 
 public class FastLaser extends Laser {
@@ -10,79 +8,24 @@ public class FastLaser extends Laser {
     public FastLaser() {
         super();
         startBound = (int) (Math.random() * 4);
-        Point point = generateXYPoint();
+        Point point = generateXYPoint(startBound);
         this.x = point.x;
         this.y = point.y;
     
-        ArrayList<Double> speed = generateSpeed((int)x,(int)y);
-
-        this.dx = speed.get(0);
-        this.dy = speed.get(1);
+        this.speedVector = generateSpeed();
     }
 
     public FastLaser(int x, int y) {
-        super(60, 60);
-    
-        ArrayList<Double> speed = generateSpeed(x,y);
-
-        this.dx = speed.get(0);
-        this.dy = speed.get(1);
+        super(x, y);
     }
 
-    private ArrayList<Double> generateSpeed(int x, int y){
-        double dx;
-        double dy;
+    @Override
+    protected DoubleVector generateSpeed() {
+        DoubleVector returnVector = super.generateSpeed();
+        returnVector = returnVector.scalarMultiply(LASER_SPEED_MULTIPLIER);
 
-        switch (startBound) {
-            case 0: // Top side
-                dx = randomDirFactor(-1, 1);
-                dy = randomDirFactor(1, 2);
-                break;
-            case 1: // Right side
-                dx = randomDirFactor(-2, -1);
-                dy = randomDirFactor(-2, 2);
-                break;
-            case 2: // Bottom side
-                dx = randomDirFactor(-2, 2);
-                dy = randomDirFactor(-2, -1);
-                break;
-            default: // Left side
-                dx = randomDirFactor(1, 2);
-                dy = randomDirFactor(-2, 2);
-                break;
-        }
-
-        ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
-
-        return reArrayList;
+        return returnVector;
     }
 
-    private double randomDirFactor(int lowerBound, int upperBound){
-        
-                Random random = new Random();
-    
-                int randomNumber = random.nextInt(upperBound - lowerBound) + lowerBound;
-
-        return randomNumber;
-    }
-
-    private ArrayList<Double> normalizeSpeed(double dx, double dy) {
-        double magnitude = Math.sqrt(dx * dx + dy * dy);
-
-        if (magnitude != 0) {
-            dx /= magnitude;
-            dy /= magnitude;
-
-        }
-
-        // make le laser le fast
-        dx *= LASER_SPEED_MULTIPLIER;
-        dy *= LASER_SPEED_MULTIPLIER;
-
-        ArrayList<Double> reArrayList = new ArrayList<Double>();
-        reArrayList.add(dx);
-        reArrayList.add(dy);
-        return reArrayList;
-    }
 
 }

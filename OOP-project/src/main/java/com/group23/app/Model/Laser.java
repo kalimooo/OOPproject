@@ -2,12 +2,12 @@ package com.group23.app.Model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Point;
 
 public class Laser extends Entity implements Moveable {
-    protected double dx, dy;
-    //private double centerX = Model.GameSettings.GAME_WIDTH/2;
-    //private double centerY = Model.GameSettings.GAME_HEIGHT/2;
+    protected DoubleVector speedVector;
+    private final double SPAWN_OFFSET = Math.PI / 10; // Spawning offset in radians
 
     private int startBound;
     private List<StateListener> listeners = new ArrayList<StateListener>();
@@ -15,22 +15,17 @@ public class Laser extends Entity implements Moveable {
     public Laser() {
         super(0, 0, 40, 40);
         startBound = (int) (Math.random() * 4);
-        Point point = generateXYPoint();
+        Point point = generateXYPoint(startBound);
         this.x = point.x;
-        this.y = point.y;    
-        ArrayList<Double> speed = generateSpeed((int)x,(int)y);
-
-        this.dx = speed.get(0);
-        this.dy = speed.get(1);
+        this.y = point.y;
+        this.speedVector = generateSpeed();
     }
 
     public Laser(int x, int y) {
         super(x, y, 60, 60);
 
-        ArrayList<Double> speed = generateSpeed(x,y);
+        this.speedVector = generateSpeed();
 
-        this.dx = speed.get(0);
-        this.dy = speed.get(1);
     }
 
     public void addStateListener(StateListener stateListener) {
@@ -49,8 +44,8 @@ public class Laser extends Entity implements Moveable {
 
     @Override
     public void move() {
-        this.x += dx;
-        this.y += dy;
+        this.x += speedVector.getX();
+        this.y += speedVector.getY();
     }
 
     // -------------------------- Getters ----------------------
@@ -62,48 +57,20 @@ public class Laser extends Entity implements Moveable {
         return this.y;
     }
 
-    private ArrayList<Double> generateSpeed(int x, int y){
-        double dx;
-        double dy;
+    protected DoubleVector generateSpeed(){
+        DoubleVector returnSpeed = new DoubleVector(GameSettings.GAME_WIDTH/2 - this.x, GameSettings.GAME_HEIGHT/2 - this.y);
+        
+        double angleOffset = ThreadLocalRandom.current().nextDouble(-SPAWN_OFFSET, SPAWN_OFFSET);
+        
+        returnSpeed.rotate(angleOffset);
+        returnSpeed.normalize();
 
-        switch (startBound) {
-            case 0: // Topp
-                dx = randomDirFactor(-1, 1);
-                dy = randomDirFactor(1, 2);
-                break;
-            case 1: // Höger
-                dx = randomDirFactor(-2, -1);
-                dy = randomDirFactor(-2, 2);
-                break;
-            case 2: // Botten
-                dx = randomDirFactor(-2, 2);
-                dy = randomDirFactor(-2, -1);
-                break;
-            default: // Vänster
-                dx = randomDirFactor(1, 2);
-                dy = randomDirFactor(-2, 2);
-                break;
-        }
-
-       ArrayList<Double> reArrayList = normalizeSpeed(dx, dy);
-
-        return reArrayList;
+        return returnSpeed;
     }
 
-    private double randomDirFactor(int lowerBound, int upperBound){
-        
-                Random random = new Random();
-        
-                // Generate a random number within the interval [lowerBound, upperBound]
-                int randomNumber = random.nextInt(upperBound - lowerBound) + lowerBound;
-
-        return randomNumber;
-    }
-
-    public Point generateXYPoint(){
+    public Point generateXYPoint(int side){
 
          // Välj slumpmässigt en sida av ramen (0 = topp, 1 = höger, 2 = botten, 3 = vänster)
-        int side = (int) (Math.random() * 4);
 
         // Slumpmässiga koordinater på den valda sidan av ramen
         int randomX = 0, randomY = 0;
@@ -132,25 +99,13 @@ public class Laser extends Entity implements Moveable {
 
     @Override
     public void setSpeed(double dx, double dy) {
-        this.dx = dx;
-        this.dy = dy;
+        this.speedVector.set(dx, dy);
     }
     
     public Point getSpeed() {
-        return new Point((int)dx, (int)dy);
+        return new Point((int)speedVector.getX(), (int)speedVector.getY());
     }
 
-    private ArrayList<Double> normalizeSpeed(double dx, double dy) {
-        double magnitude = Math.sqrt(dx * dx + dy * dy);
-        if (magnitude != 0) {
-            dx /= magnitude;
-            dy /= magnitude;
-        }
-        ArrayList<Double> reArrayList = new ArrayList<Double>();
-        reArrayList.add(dx);
-        reArrayList.add(dy);
-        return reArrayList;
-    }
 
     @Override
     public void update() {

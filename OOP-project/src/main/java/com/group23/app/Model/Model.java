@@ -25,8 +25,8 @@ public class Model implements StateListener, ChangeListener{
 
     private static Player player;
 
-    private final double COLLECTIBLE_CHANCE = 0.25;
-    private final double POWER_CHANCE = 0.4;
+    private final double COLLECTIBLE_CHANCE = 0.4;
+    private final double POWER_CHANCE = 0.1;
     private final int TIME_FOR_COLLECTIBLES = 2000; // The time is "amount of milliseconds"
     private final int TIME_FOR_MORE_LASERS = 10000; //The time is "amount of milliseconds" 
     private final int TIME_FOR_POWERS = 1500;      //          -||-
