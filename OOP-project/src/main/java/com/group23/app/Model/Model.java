@@ -19,6 +19,7 @@ public class Model implements StateListener, ChangeListener{
 
     private ChangeListener changeListener; // To be filled with a controller that can be notified when the game is no longer active
 
+    private Timer startDelayTimer;
     private Timer lasTimer;
     private Timer powTimer;
     private Timer colTimer;
@@ -170,11 +171,18 @@ public class Model implements StateListener, ChangeListener{
     }
 
     public void startGame() {
-        gameActive = true;
         restartTimer();
-        lasTimer.start();
-        colTimer.start();
-        powTimer.start();
+        startDelayTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                gameActive = true;
+                entities.add(EntityFactory.spawnLaser(model));
+                lasTimer.start();
+                colTimer.start();
+                powTimer.start();
+            }
+        });
+        startDelayTimer.setRepeats(false);
+        startDelayTimer.start();
     }
 
     public void resetGame() {
@@ -182,11 +190,9 @@ public class Model implements StateListener, ChangeListener{
         entities.clear();
         player = new Player(BOUND_X/2 - 20, BOUND_Y/2 - 20, 40, 40,this);
         entities.add(player);
-        entities.add(EntityFactory.spawnLaser(this));
-        gameClock.restartTimer();
-        lasTimer.restart();
-        colTimer.restart();
-        powTimer.restart();
+        lasTimer.stop();
+        colTimer.stop();
+        powTimer.stop();
         startGame();
     }
 }

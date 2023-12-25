@@ -17,7 +17,6 @@ public class StateController implements ChangeListener{
         view.moveToGame();
         view.updateView();
         model.resetGame();
-        model.startGame();
     }
 
     public void showTutorial() {
