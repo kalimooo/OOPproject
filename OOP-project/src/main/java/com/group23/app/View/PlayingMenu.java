@@ -232,7 +232,7 @@ public class PlayingMenu extends JPanel {
         List<ScoreEntry> highScores = new ArrayList<>();
     
         // Läs av högsta poäng och spelarnamn från filen
-        try (BufferedReader reader = new BufferedReader(new FileReader("OOP-project\\src\\main\\java\\com\\group23\\app\\Settings\\highScore.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/group23/app/Settings/highScore.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");

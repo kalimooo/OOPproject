@@ -58,7 +58,7 @@ public class GameWindow extends JFrame {
         TitleField.getTitleField().setVisible(true);
         SettingsPage.getSettingsPage().setVisible(false);
         
-        loadBackgroundMusic("OOP-project/src/main/java/com/group23/app/View/music/track1.wav"); 
+        loadBackgroundMusic("src/main/java/com/group23/app/View/music/track1.wav"); 
         setBackgroundMusicVolume(0.05);
         playBackgroundMusic();
 

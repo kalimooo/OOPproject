@@ -27,7 +27,7 @@ public class PlayingField extends JPanel{
     JLabel playerChar;
     static boolean isVisible = false;
     List<Sprite> sprites = new ArrayList<Sprite>();
-    private static ImageIcon bgImage = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT);
+    private static ImageIcon bgImage = GameWindow.loadScaledImage("src/main/java/com/group23/app/View/Images/Images/Background-grid.png", GameWindow.SCREEN_WIDTH, GameWindow.SCREEN_HEIGHT);
 
     static PlayingField playingField;
 

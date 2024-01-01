@@ -34,7 +34,6 @@ public class App
     }
 
     public void gameLoop() {
-        model.resetGame();
         long timeSinceLastUpdate = System.currentTimeMillis();
         while (true) {
             long time = System.currentTimeMillis();

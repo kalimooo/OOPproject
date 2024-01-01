@@ -52,6 +52,7 @@ public class Model implements StateListener, ChangeListener{
                 entities.add(EntityFactory.spawnLaser(model));
             }
         });
+        lasTimer.stop();
 
         // Timer for creating collectibles. Every 20 seconds it has a 5% chance to create a collectible
         colTimer = new Timer(TIME_FOR_COLLECTIBLES, new ActionListener() {
@@ -62,6 +63,7 @@ public class Model implements StateListener, ChangeListener{
                 }  
             }
         });
+        colTimer.stop();
 
         // Timer for creating powerups. Every 15 seconds there is a 10% chance to create a power up (currently only Shield powers)
         powTimer = new Timer(TIME_FOR_POWERS, new ActionListener() {
@@ -72,6 +74,7 @@ public class Model implements StateListener, ChangeListener{
                 }
             }
         });
+        powTimer.stop();
         
 
         // This line is for Singleton pattern, there should only be ONE model object

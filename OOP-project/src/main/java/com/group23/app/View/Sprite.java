@@ -15,7 +15,7 @@ import com.group23.app.Model.ShieldPower;
 
 public class Sprite extends JLabel{
     
-    private static String laserBasePath = "OOP-project/src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/";
+    private static String laserBasePath = "src/main/java/com/group23/app/View/Images/Images/Boll_laser_bild/";
 
     private static ImageIcon blueLaser = GameWindow.loadScaledImage(laserBasePath + "#4deeea.png", 40, 40);
     private static ImageIcon greenLaser = GameWindow.loadScaledImage(laserBasePath + "#74ee15.png", 40, 40);
@@ -23,11 +23,11 @@ public class Sprite extends JLabel{
     private static ImageIcon redIcon = GameWindow.loadScaledImage(laserBasePath + "#fc1723.png", 40, 40);
     private static ImageIcon yellowIcon = GameWindow.loadScaledImage(laserBasePath + "#ffe700.png", 40, 40);
 
-    private static ImageIcon collectibleIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/Coin1.png", 40, 40);
-    private static ImageIcon shieldIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/shield.png", 40, 40);
+    private static ImageIcon collectibleIcon = GameWindow.loadScaledImage("src/main/java/com/group23/app/View/Images/Images/Coin1.png", 40, 40);
+    private static ImageIcon shieldIcon = GameWindow.loadScaledImage("src/main/java/com/group23/app/View/Images/Images/shield.png", 40, 40);
 
-    private static ImageIcon playerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9Bresize.png", 40, 40);
-    private static ImageIcon shieldedPlayerIcon = GameWindow.loadScaledImage("OOP-project/src/main/java/com/group23/app/View/Images/Images/9BwithShield.png.png", 40, 40);
+    private static ImageIcon playerIcon = GameWindow.loadScaledImage("src/main/java/com/group23/app/View/Images/Images/9Bresize.png", 40, 40);
+    private static ImageIcon shieldedPlayerIcon = GameWindow.loadScaledImage("src/main/java/com/group23/app/View/Images/Images/9BwithShield.png.png", 40, 40);
 
     public Sprite(Entity modelObject) {
 
